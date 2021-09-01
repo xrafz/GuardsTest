@@ -25,14 +25,14 @@ public class CellGenerator : MonoBehaviour
             for (int currentColumn = 0; currentColumn < columns; currentColumn++)
             {
                 var cell = Instantiate(_cellPrefab, _position, Quaternion.Euler(90, 0, 0));
-                cell.gameObject.name = string.Format("{0}, {1}", currentRow, currentColumn);
+                cell.gameObject.name = string.Format("[{0}:{1}]", currentRow, currentColumn);
                 cell.transform.parent = _transform;
                 cell.SetRendererStatus(_isBlack);
                 _isBlack = !_isBlack;
                 _position.x += 2;
                 cells[currentRow, currentColumn] = cell;
             }
-            _position.z += 2;
+            _position.z -= 2;
         }
         return cells;
     }

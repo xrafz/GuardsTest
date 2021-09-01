@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bc47bc20e752374c9f9df237c7b94cf, type: 3}
-  m_Name: Warrior1
+  m_Name: Archer1
   m_EditorClassIdentifier: 
-  _name: Warrior1
-  _health: 80
-  _damage: 15
-  _attackRange: 1
+  _name: Archer1
+  _health: 40
+  _damage: 10
+  _attackRange: 3
   _abilities: []

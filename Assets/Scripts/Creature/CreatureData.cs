@@ -18,7 +18,7 @@ public abstract class CreatureData : ScriptableObject
     public int AttackRange => _attackRange;
 
     [SerializeField]
-    private Ability _abilities;
+    private Ability[] _abilities;
 
-    public Ability Abilities  => _abilities;
+    public Ability[] Abilities  => _abilities;
 }
