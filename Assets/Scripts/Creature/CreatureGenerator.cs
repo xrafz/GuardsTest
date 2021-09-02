@@ -10,6 +10,8 @@ public abstract class CreatureGenerator : MonoBehaviour
     private Creature _prefab;
     [SerializeField]
     private int _defaultQuantity = 4;
+    [SerializeField]
+    private Quaternion _creaturesRotation;
 
     [SerializeField]
     protected List<Creature> _createdCreatures = new List<Creature>();
@@ -30,6 +32,7 @@ public abstract class CreatureGenerator : MonoBehaviour
         for (int i = 0; i < _defaultQuantity; i++ )
         {
             var creature = Instantiate(_prefab, _transform);
+            creature.transform.rotation = _creaturesRotation;
             creature.SetData(_creatures[i]);
             _createdCreatures.Add(creature);
         }

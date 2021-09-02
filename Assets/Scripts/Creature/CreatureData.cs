@@ -21,4 +21,14 @@ public abstract class CreatureData : ScriptableObject
     private Ability[] _abilities;
 
     public Ability[] Abilities  => _abilities;
+
+    [SerializeField]
+    private Mesh _mesh;
+
+    public Mesh Mesh => _mesh;
+
+    [SerializeField]
+    private Material[] _materials;
+
+    public Material[] Materials => _materials;
 }

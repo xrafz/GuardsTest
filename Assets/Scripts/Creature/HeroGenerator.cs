@@ -16,7 +16,7 @@ public class HeroGenerator : CreatureGenerator
         for (int i = 0; i < _createdCreatures.Count; i++)
         {
             _createdCreatures[i].SetCell(startingCells[i]);
-            startingCells[i].SetContainedCreature(_createdCreatures[i]);
+            //startingCells[i].SetContainedCreature(_createdCreatures[i]);
         }
     }
 }

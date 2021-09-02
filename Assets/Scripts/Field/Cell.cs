@@ -30,5 +30,7 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         //проверка, если был выбран герой, то смена местами и смена хода
+        print(_containedCreature?.GetDataType());
+        GameplayState.SetSelectedCreature(_containedCreature);
     }
 }

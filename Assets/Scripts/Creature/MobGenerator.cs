@@ -22,10 +22,12 @@ public class MobGenerator : CreatureGenerator
             Cell randomCell;
             do
             {
-                randomCell = cells[Random.Range(0, cells.GetLength(0)), Random.Range(_minimalDistance, cells.GetLength(1))];
+                randomCell = cells[Random.Range(0, cells.GetLength(0)), Random.Range(_minimalDistance, cells.GetLength(1))]; //ставим моба на клетку, где никого нет
             } while(selectedCells.Contains(randomCell));
+
             selectedCells.Add(randomCell);
             _createdCreatures[i].SetCell(randomCell);
+            //randomCell.SetContainedCreature(_createdCreatures[i]);
         }
     }
 

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc47bc20e752374c9f9df237c7b94cf, type: 3}
   m_Name: Archer1
   m_EditorClassIdentifier: 
-  _name: Archer1
   _health: 40
   _damage: 10
   _attackRange: 3
   _abilities: []
+  _mesh: {fileID: 4300000, guid: 82c98e662ab0c0543827d3541e5690fb, type: 2}
+  _materials:
+  - {fileID: 2100000, guid: fa0b1c6340002e348b8176096c327f80, type: 2}

@@ -164,8 +164,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171925399}
+  - component: {fileID: 171925400}
   m_Layer: 0
-  m_Name: Pointer
+  m_Name: Gameplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,6 +186,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171925400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171925398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5581894c7dbd34f87d283235d86bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &399610713
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,11 +211,11 @@ GameObject:
   - component: {fileID: 399610716}
   - component: {fileID: 399610715}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &399610714
 Transform:
@@ -212,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399610713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.1238, y: -0.5, z: 4.77}
+  m_LocalPosition: {x: -7.1238, y: -0.01, z: 4.77}
   m_LocalScale: {x: 12.270107, y: 1, z: 7.434901}
   m_Children: []
   m_Father: {fileID: 58611040}
@@ -252,7 +265,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4f35a456d17d202488c923381d8e0f55, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,6 +375,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37e244e7f0923fa4db2bf061cd7bc05f, type: 2}
   _prefab: {fileID: 6689293354424465119, guid: 6a3d6dc05a6da8f439e7c79ec41526b0, type: 3}
   _defaultQuantity: 4
+  _creaturesRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   _createdCreatures: []
 --- !u!1 &990761141
 GameObject:
@@ -706,7 +720,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -767,5 +781,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5c828a8db03f394fb1af17037243662, type: 2}
   _prefab: {fileID: 6689293354424465119, guid: 6a3d6dc05a6da8f439e7c79ec41526b0, type: 3}
   _defaultQuantity: 4
+  _creaturesRotation: {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
   _createdCreatures: []
   _minimalDistance: 3
