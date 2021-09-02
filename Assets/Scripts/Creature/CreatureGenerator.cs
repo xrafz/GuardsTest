@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CreatureGenerator : MonoBehaviour
+public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
 {
     [SerializeField]
     protected CreatureData[] _creatures;
@@ -10,13 +10,11 @@ public abstract class CreatureGenerator : MonoBehaviour
     private GameObject _prefab;
     [SerializeField]
     private int _defaultQuantity = 4;
-    [SerializeField]
-    private Quaternion _creaturesRotation;
 
     [SerializeField]
-    protected List<Creature> _createdCreatures = new List<Creature>();
+    protected List<T> _createdCreatures = new List<T>();
 
-    public List<Creature> CreatedCreatures => _createdCreatures;
+    public List<T> CreatedCreatures => _createdCreatures;
 
     private Transform _transform;
     protected Field _field;
@@ -26,20 +24,18 @@ public abstract class CreatureGenerator : MonoBehaviour
         _transform = transform;
     }
 
-    public abstract void InitialGeneration();
-
-    public virtual void InitialGeneration<T>() where T : Creature
+    public virtual void InitialGeneration()
     {
         CheckQuantity();
         for (int i = 0; i < _defaultQuantity; i++ )
         {
             var creature = Instantiate(_prefab, _transform);
             var creatureComponent = creature.AddComponent<T>();
-            creature.transform.rotation = _creaturesRotation;
-            creatureComponent.SetData(_creatures[i]);
+            //creatureComponent.SetData(_creatures[i]);
             _createdCreatures.Add(creatureComponent);
         }
         ChangePositions();
+        SetData();
     }
 
     protected void CheckQuantity()
@@ -51,4 +47,6 @@ public abstract class CreatureGenerator : MonoBehaviour
     }
 
     protected abstract void ChangePositions();
+
+    protected abstract void SetData();
 }

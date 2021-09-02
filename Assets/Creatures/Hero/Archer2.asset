@@ -15,7 +15,8 @@ MonoBehaviour:
   _health: 100
   _damage: 5
   _attackRange: 5
-  _abilities: []
+  _abilities:
+  - {fileID: 11400000, guid: 6ea896b4d4597f84d96ed7242923e173, type: 2}
   _mesh: {fileID: 4300000, guid: a32619e9ef099474fb79a5b271727727, type: 2}
   _materials:
   - {fileID: 2100000, guid: fa0b1c6340002e348b8176096c327f80, type: 2}

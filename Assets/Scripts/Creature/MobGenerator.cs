@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobGenerator : CreatureGenerator
+public class MobGenerator : CreatureGenerator<Monster>
 {
     [SerializeField]
     private int _minimalDistance;
 
-    public override void InitialGeneration()
-    {
-        base.InitialGeneration<Monster>();
-        Reshuffle();
-    }
+    public static MobGenerator Instance;
 
     protected override void ChangePositions()
     {
@@ -30,11 +26,16 @@ public class MobGenerator : CreatureGenerator
         }
     }
 
-    private void Reshuffle()
+    protected override void SetData()
     {
         foreach (Creature creature in _createdCreatures)
         {
             creature.SetData(_creatures[Random.Range(0, _creatures.Length)]);
         }
+    }
+
+    private void Start()
+    {
+        Instance = this;
     }
 }

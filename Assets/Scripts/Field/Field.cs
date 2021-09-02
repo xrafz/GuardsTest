@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class Field : MonoBehaviour
 {
     [SerializeField]
@@ -12,7 +13,9 @@ public class Field : MonoBehaviour
     [SerializeField]
     private CellGenerator _cellGenerator;
     [SerializeField]
-    private CreatureGenerator _heroGenerator, _mobGenerator;
+    private HeroGenerator _heroGenerator;
+    [SerializeField]
+    private MobGenerator  _mobGenerator;
 
     [SerializeField]
     private Cell[,] _cells;

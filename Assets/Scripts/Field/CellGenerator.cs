@@ -28,6 +28,7 @@ public class CellGenerator : MonoBehaviour
                 cell.gameObject.name = string.Format("[{0}:{1}]", currentRow, currentColumn);
                 cell.transform.parent = _transform;
                 cell.SetRendererStatus(_isBlack);
+                cell.SetCellIndexes(new Vector2Int(currentColumn, currentRow));
                 _isBlack = !_isBlack;
                 _position.x += 2;
                 cells[currentRow, currentColumn] = cell;

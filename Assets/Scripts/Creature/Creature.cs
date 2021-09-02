@@ -8,6 +8,8 @@ public class Creature : MonoBehaviour
     [SerializeField]
     protected CreatureData _data;
 
+    public CreatureData Data => _data;
+
     [SerializeField]
     protected Cell _currentCell;
 
@@ -18,7 +20,18 @@ public class Creature : MonoBehaviour
 
     public Health Health => _health;
 
-    private Transform _transform;
+    protected Transform _transform;
+
+    public delegate void Blank();
+    public event Blank OnTurn;
+
+    private bool _ableToMove = true;
+
+    public bool AbleToMove => _ableToMove;
+
+    private bool _castingAbility = false;
+
+    public bool CastingAbility => _castingAbility;
 
     private void Awake()
     {
@@ -36,9 +49,11 @@ public class Creature : MonoBehaviour
         _health = GetComponent<Health>();
         _health.Init(_data.Health);
 
-        var abilites = _data.Abilities;
-        foreach (Ability ability in abilites)
+        var abilities = _data.Abilities;
+        for (int i = 0; i < abilities.Length; i++)
         {
+            var ability = abilities[i];
+            ability = Instantiate(ability);
             ability.Init(this);
         }
     }
@@ -54,5 +69,20 @@ public class Creature : MonoBehaviour
         _currentCell = cell;
         _transform.position = cell.transform.position;
         cell.SetContainedCreature(this);
+    }
+    
+    public virtual void CompleteTurn()
+    {
+        print(name + " started its turn");
+        if (_ableToMove)
+        {
+            OnTurn?.Invoke();
+        }
+        print(name + " completed turn");
+    }
+
+    public void SetAbilityToMove(bool isAble)
+    {
+        _ableToMove = isAble;
     }
 }

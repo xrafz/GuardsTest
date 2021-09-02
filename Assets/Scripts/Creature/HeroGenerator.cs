@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroGenerator : CreatureGenerator
+public class HeroGenerator : CreatureGenerator<Hero>
 {
-    public override void InitialGeneration()
-    {
-        base.InitialGeneration<Hero>();
-    }
     protected override void ChangePositions()
     {
         var cells = Field.Instance.Cells;
@@ -20,7 +16,14 @@ public class HeroGenerator : CreatureGenerator
         for (int i = 0; i < _createdCreatures.Count; i++)
         {
             _createdCreatures[i].SetCell(startingCells[i]);
-            //startingCells[i].SetContainedCreature(_createdCreatures[i]);
+        }
+    }
+
+    protected override void SetData()
+    {
+        for (int i = 0; i < _createdCreatures.Count; i++)
+        {
+            _createdCreatures[i].SetData(_creatures[i]);
         }
     }
 }

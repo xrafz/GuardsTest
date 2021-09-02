@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameplayState : MonoBehaviour
 {
     [SerializeField]
-    private static int _regenValue = 5;
+    private static int _regenValue = 10;
 
     private Cell[,] _cells;
 
@@ -48,6 +48,18 @@ public class GameplayState : MonoBehaviour
         var initialCell = _selectedCreature.CurrentCell;
         _selectedCreature.SetCell(creature.CurrentCell);
         creature.SetCell(initialCell);
+
+        if (creature.CurrentCell.CellIndexes.x > _selectedCreature.CurrentCell.CellIndexes.x)
+        {
+            creature.GetComponent<Hero>().UseSpecialAbility();
+            print(creature);
+        }
+        else if (_selectedCreature.CurrentCell.CellIndexes.x > creature.CurrentCell.CellIndexes.x)
+        {
+            _selectedCreature.GetComponent<Hero>().UseSpecialAbility();
+            print(_selectedCreature);
+        }
+
         _selectedCreature = null;
         SetInteractivityStatus(false);
         StartCoroutine(HeroesTurn());
@@ -61,6 +73,7 @@ public class GameplayState : MonoBehaviour
     private IEnumerator HeroesTurn()
     {
         HealBackLine();
+        //atk
         yield return new WaitForSeconds(1f);
         StartCoroutine(MonstersTurn());
     }
@@ -71,8 +84,13 @@ public class GameplayState : MonoBehaviour
         {
             for (int currentColumn = 2; currentColumn < _cells.GetLength(1); currentColumn++)
             {
-
-                yield return new WaitForSeconds(1f);
+                var monster = _cells[currentRow, currentColumn].ContainedCreature;
+                if (monster != null)
+                {
+                    monster.CompleteTurn();
+                    yield return new WaitForSeconds(1f);
+                }
+                
             }
         }
         SetInteractivityStatus(true);
