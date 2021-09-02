@@ -373,6 +373,8 @@ MonoBehaviour:
   _creatures:
   - {fileID: 11400000, guid: fc22ee14b50a2e349aef58631db17943, type: 2}
   - {fileID: 11400000, guid: 37e244e7f0923fa4db2bf061cd7bc05f, type: 2}
+  - {fileID: 11400000, guid: e8cace78684e72e409e8d633916cb021, type: 2}
+  - {fileID: 11400000, guid: e53f03c2571c38d47b892f97eb1167cc, type: 2}
   _prefab: {fileID: 6689293354424465119, guid: 6a3d6dc05a6da8f439e7c79ec41526b0, type: 3}
   _defaultQuantity: 4
   _creaturesRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}

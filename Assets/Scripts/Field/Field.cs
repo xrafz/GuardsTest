@@ -29,5 +29,6 @@ public class Field : MonoBehaviour
         _cells = _cellGenerator.Spawn(_rows, _columns);
         _heroGenerator.InitialGeneration();
         _mobGenerator.InitialGeneration();
+        GameplayState.Instance.SetCells(_cells);
     }
 }

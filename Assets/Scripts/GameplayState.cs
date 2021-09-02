@@ -4,16 +4,35 @@ using UnityEngine;
 
 public class GameplayState : MonoBehaviour
 {
-    private static Creature _selectedCreature;
+    [SerializeField]
+    private static int _regenValue = 5;
 
-    public static Creature SelectedCreature => _selectedCreature;
+    private Cell[,] _cells;
 
-    private static bool _selectedCreatureIsHero;
+    private Creature _selectedCreature;
 
-    public static void SetSelectedCreature(Creature creature)
+    public Creature SelectedCreature => _selectedCreature;
+
+    private bool _canMoveHeroes = true;
+
+    public bool CanMoveHeroes => _canMoveHeroes;
+
+    public static GameplayState Instance;
+
+    private void Awake()
     {
+        Instance = this;
+    }
 
-        if (_selectedCreature?.GetDataType() == typeof(HeroData) && creature?.GetDataType() == typeof(HeroData))
+    public void SetCells(Cell[,] cells)
+    {
+        _cells = cells;
+    }
+
+    public void SetSelectedCreature(Creature creature)
+    {
+        
+        if (_selectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && _canMoveHeroes && _selectedCreature != creature)
         {
             print("swappder");
             ChangePlaces(creature);
@@ -24,11 +43,50 @@ public class GameplayState : MonoBehaviour
         }
     }
 
-    public static void ChangePlaces(Creature creature)
+    public  void ChangePlaces(Creature creature)
     {
         var initialCell = _selectedCreature.CurrentCell;
         _selectedCreature.SetCell(creature.CurrentCell);
         creature.SetCell(initialCell);
         _selectedCreature = null;
+        SetInteractivityStatus(false);
+        StartCoroutine(HeroesTurn());
+    }
+
+    public void SetInteractivityStatus(bool canMoveHeroes)
+    {
+        _canMoveHeroes = canMoveHeroes;
+    }
+
+    private IEnumerator HeroesTurn()
+    {
+        HealBackLine();
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(MonstersTurn());
+    }
+
+    private IEnumerator MonstersTurn()
+    {
+        for (int currentRow = 0; currentRow < _cells.GetLength(0); currentRow++)
+        {
+            for (int currentColumn = 2; currentColumn < _cells.GetLength(1); currentColumn++)
+            {
+
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        SetInteractivityStatus(true);
+    }
+
+    private void HealBackLine()
+    {
+        for (int i = 0; i < _cells.GetLength(0); i++)
+        {
+            if (_cells[i, 0].ContainedCreature != null)
+            {
+                _cells[i, 0].ContainedCreature.Health.Change(_regenValue);
+                print(_cells[i, 0].ContainedCreature.name + " healed for " + _regenValue + " hp");
+            }
+        }
     }
 }

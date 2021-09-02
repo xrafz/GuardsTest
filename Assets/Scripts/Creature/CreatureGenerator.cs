@@ -7,7 +7,7 @@ public abstract class CreatureGenerator : MonoBehaviour
     [SerializeField]
     protected CreatureData[] _creatures;
     [SerializeField]
-    private Creature _prefab;
+    private GameObject _prefab;
     [SerializeField]
     private int _defaultQuantity = 4;
     [SerializeField]
@@ -26,15 +26,18 @@ public abstract class CreatureGenerator : MonoBehaviour
         _transform = transform;
     }
 
-    public virtual void InitialGeneration()
+    public abstract void InitialGeneration();
+
+    public virtual void InitialGeneration<T>() where T : Creature
     {
         CheckQuantity();
         for (int i = 0; i < _defaultQuantity; i++ )
         {
             var creature = Instantiate(_prefab, _transform);
+            var creatureComponent = creature.AddComponent<T>();
             creature.transform.rotation = _creaturesRotation;
-            creature.SetData(_creatures[i]);
-            _createdCreatures.Add(creature);
+            creatureComponent.SetData(_creatures[i]);
+            _createdCreatures.Add(creatureComponent);
         }
         ChangePositions();
     }

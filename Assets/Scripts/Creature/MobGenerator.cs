@@ -9,7 +9,7 @@ public class MobGenerator : CreatureGenerator
 
     public override void InitialGeneration()
     {
-        base.InitialGeneration();
+        base.InitialGeneration<Monster>();
         Reshuffle();
     }
 
@@ -27,7 +27,6 @@ public class MobGenerator : CreatureGenerator
 
             selectedCells.Add(randomCell);
             _createdCreatures[i].SetCell(randomCell);
-            //randomCell.SetContainedCreature(_createdCreatures[i]);
         }
     }
 
