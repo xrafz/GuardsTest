@@ -51,12 +51,12 @@ public class GameplayState : MonoBehaviour
 
         if (creature.CurrentCell.CellIndexes.x > _selectedCreature.CurrentCell.CellIndexes.x)
         {
-            creature.GetComponent<Hero>().UseSpecialAbility();
+            creature.GetComponent<Hero>().SetSpecialAbilityStatus(true);
             print(creature);
         }
         else if (_selectedCreature.CurrentCell.CellIndexes.x > creature.CurrentCell.CellIndexes.x)
         {
-            _selectedCreature.GetComponent<Hero>().UseSpecialAbility();
+            _selectedCreature.GetComponent<Hero>().SetSpecialAbilityStatus(true);
             print(_selectedCreature);
         }
 
@@ -73,8 +73,11 @@ public class GameplayState : MonoBehaviour
     private IEnumerator HeroesTurn()
     {
         HealBackLine();
-        //atk
-        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < _cells.GetLength(0); i++)
+        {
+            _cells[i, 1].ContainedCreature.CompleteTurn();
+            yield return new WaitForSeconds(1f);
+        }
         StartCoroutine(MonstersTurn());
     }
 

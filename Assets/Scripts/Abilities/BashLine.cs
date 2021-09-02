@@ -16,15 +16,18 @@ public class BashLine : Ability
     {
         _hero = mono.GetComponent<Hero>();
         _stunnedMonsters = new List<Creature>();
-        _hero.OnSpecialAbility += Action;
+        _hero.OnTurn += Action;
         _cells = Field.Instance.Cells;
-        MonoBehaviour.print(_cells.GetLength(1));
     }
 
     public override void Action()
     {
-        Stun();
-        _hero.OnTurn += UpdateStunDuration;
+        if (_hero.UsingSpecialAbility)
+        {
+            RemoveStun();
+            Stun();
+            _hero.OnTurn += UpdateStunDuration;
+        }
     }
 
     private void Stun()
@@ -44,6 +47,7 @@ public class BashLine : Ability
 
     private void UpdateStunDuration()
     {
+        _hero.SetSpecialAbilityStatus(false);
         if (_turnsAfterStun >= _stunDuration)
         {
             RemoveStun();

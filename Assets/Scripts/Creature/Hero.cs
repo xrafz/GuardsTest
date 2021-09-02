@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Hero : Creature
 {
-    public event Blank OnSpecialAbility;
-    
+    private bool _usingSpecialAbility = false;
+
+    public bool UsingSpecialAbility => _usingSpecialAbility;
+
     private void Start()
     {
         _transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
-    public void UseSpecialAbility()
+    public void SetSpecialAbilityStatus(bool status)
     {
-        OnSpecialAbility?.Invoke();
+        _usingSpecialAbility = status;
     }
 }

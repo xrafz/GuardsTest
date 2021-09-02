@@ -29,10 +29,6 @@ public class Creature : MonoBehaviour
 
     public bool AbleToMove => _ableToMove;
 
-    private bool _castingAbility = false;
-
-    public bool CastingAbility => _castingAbility;
-
     private void Awake()
     {
         _transform = transform;

@@ -25,13 +25,16 @@ public class MonsterMoveOrAttack : Ability
 
     public override void Action()
     {
-        if (EnemiesInAttackRange())
+        if (_monster.AbleToMove && !_monster.CastingAbility)
         {
-            Attack();
-        }
-        else
-        {
-            Move();
+            if (EnemiesInAttackRange())
+            {
+                Attack();
+            }
+            else
+            {
+                Move();
+            }
         }
     }
 
