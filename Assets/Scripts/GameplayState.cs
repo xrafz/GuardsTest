@@ -5,7 +5,12 @@ using UnityEngine;
 public class GameplayState : MonoBehaviour
 {
     [SerializeField]
-    private static int _regenValue = 10;
+    private int _regenValue = 10;
+
+    [SerializeField]
+    private int _enemiesToDefeat = 12;
+
+    private int _defeatedEnemies = 0;
 
     private Cell[,] _cells;
 
@@ -18,6 +23,8 @@ public class GameplayState : MonoBehaviour
     public bool CanMoveHeroes => _canMoveHeroes;
 
     public static GameplayState Instance;
+
+    private Coroutine _mobsTurn, _heroesTurn;
 
     private void Awake()
     {
@@ -62,7 +69,7 @@ public class GameplayState : MonoBehaviour
 
         _selectedCreature = null;
         SetInteractivityStatus(false);
-        StartCoroutine(HeroesTurn());
+        _heroesTurn = StartCoroutine(HeroesTurn());
     }
 
     public void SetInteractivityStatus(bool canMoveHeroes)
@@ -78,7 +85,7 @@ public class GameplayState : MonoBehaviour
             _cells[i, 1].ContainedCreature.CompleteTurn();
             yield return new WaitForSeconds(1f);
         }
-        StartCoroutine(MonstersTurn());
+        _mobsTurn = StartCoroutine(MonstersTurn());
     }
 
     private IEnumerator MonstersTurn()
@@ -97,6 +104,7 @@ public class GameplayState : MonoBehaviour
             }
         }
         SetInteractivityStatus(true);
+        print("turn ended");
     }
 
     private void HealBackLine()
@@ -108,6 +116,33 @@ public class GameplayState : MonoBehaviour
                 _cells[i, 0].ContainedCreature.Health.Change(_regenValue);
                 print(_cells[i, 0].ContainedCreature.name + " healed for " + _regenValue + " hp");
             }
+        }
+    }
+
+    public void HandleLose()
+    {
+        print("Lose");
+        StopAllCoroutines();
+        _selectedCreature = null;
+        _defeatedEnemies = 0;
+        SetInteractivityStatus(true);
+        Field.Instance.InitSpawners();
+    }
+
+    public void HandleWin()
+    {
+        print("Win");
+        StopAllCoroutines();
+        //?
+    }
+    
+    public void AddDefeatedEnemy()
+    {
+        _defeatedEnemies++;
+        print("defeated " + _defeatedEnemies + " enemies");
+        if (_defeatedEnemies >= _enemiesToDefeat)
+        {
+            HandleWin();
         }
     }
 }

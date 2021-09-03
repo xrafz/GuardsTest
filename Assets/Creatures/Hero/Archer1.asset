@@ -18,6 +18,7 @@ MonoBehaviour:
   _abilities:
   - {fileID: 11400000, guid: 6ea896b4d4597f84d96ed7242923e173, type: 2}
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
+  - {fileID: 11400000, guid: e8216bb17febfff4abb62d02d94c220c, type: 2}
   _mesh: {fileID: 4300000, guid: 82c98e662ab0c0543827d3541e5690fb, type: 2}
   _materials:
   - {fileID: 2100000, guid: fa0b1c6340002e348b8176096c327f80, type: 2}

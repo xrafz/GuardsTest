@@ -26,9 +26,9 @@ public class MobGenerator : CreatureGenerator<Monster>
         }
     }
 
-    protected override void SetData()
+    protected override void SetData(Creature creature)
     {
-        foreach (Creature creature in _createdCreatures)
+        //foreach (Creature creature in _createdCreatures)
         {
             creature.SetData(_creatures[Random.Range(0, _creatures.Length)]);
         }

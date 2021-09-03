@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeroGenerator : CreatureGenerator<Hero>
 {
+    private int _currentIndex = 0;
     protected override void ChangePositions()
     {
         var cells = Field.Instance.Cells;
@@ -17,13 +18,12 @@ public class HeroGenerator : CreatureGenerator<Hero>
         {
             _createdCreatures[i].SetCell(startingCells[i]);
         }
+        _currentIndex = 0;
     }
 
-    protected override void SetData()
+    protected override void SetData(Creature creature)
     {
-        for (int i = 0; i < _createdCreatures.Count; i++)
-        {
-            _createdCreatures[i].SetData(_creatures[i]);
-        }
+        creature.SetData(_creatures[_currentIndex]);
+        _currentIndex++;
     }
 }

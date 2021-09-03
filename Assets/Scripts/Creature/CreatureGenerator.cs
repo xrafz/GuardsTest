@@ -26,21 +26,39 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
 
     public virtual void InitialGeneration()
     {
+        /*
+        foreach(T creature in _createdCreatures)
+        {
+            Destroy(creature.gameObject);
+        }
+        */
+        for (int i = _createdCreatures.Count - 1; i >= 0; i--)
+        {
+            Destroy(_createdCreatures[i].gameObject);
+        }
+
+        _createdCreatures.Clear();
         CheckQuantity();
         for (int i = 0; i < _defaultQuantity; i++ )
         {
-            var creature = Instantiate(_prefab, _transform);
-            var creatureComponent = creature.AddComponent<T>();
-            //creatureComponent.SetData(_creatures[i]);
-            _createdCreatures.Add(creatureComponent);
+            GenerateCreature();
         }
         ChangePositions();
-        SetData();
+    }
+
+    public Creature GenerateCreature()
+    {
+        var creature = Instantiate(_prefab, _transform);
+        var creatureComponent = creature.AddComponent<T>();
+        //creatureComponent.SetData(_creatures[i]);
+        _createdCreatures.Add(creatureComponent);
+        SetData(creatureComponent);
+        return creatureComponent;
     }
 
     protected void CheckQuantity()
     {
-        if (_defaultQuantity > _creatures.Length || _defaultQuantity == 0)
+        if (_defaultQuantity == 0)
         {
             _defaultQuantity = _creatures.Length;
         }
@@ -48,5 +66,5 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
 
     protected abstract void ChangePositions();
 
-    protected abstract void SetData();
+    protected abstract void SetData(Creature creature);
 }
