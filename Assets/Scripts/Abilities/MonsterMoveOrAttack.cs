@@ -8,7 +8,6 @@ public class MonsterMoveOrAttack : Ability
 {
     private Monster _monster;
     private Cell[,] _cells;
-    private int _cellsX, _cellsY;
     private Hero _enemy;
 
     private int _currentCellX, _currentCellY;
@@ -17,8 +16,6 @@ public class MonsterMoveOrAttack : Ability
     {
         _monster = mono.GetComponent<Monster>();
         _cells = Field.Instance.Cells;
-        _cellsX = _cells.GetLength(1);
-        _cellsY = _cells.GetLength(0);
         _monster.OnTurn -= Action;
         _monster.OnTurn += Action;
     }
@@ -45,7 +42,8 @@ public class MonsterMoveOrAttack : Ability
             _monster.CurrentCell.SetContainedCreature(null);
             _monster.SetCell(_cells[_currentCellY, _currentCellX - 1]);
         }
-        MonoBehaviour.print(_monster.name + " cant get over teammate");
+        else 
+            MonoBehaviour.print(_monster.name + " cant get over teammate");
     }
 
     private void CalculateCurrentCell()

@@ -7,6 +7,8 @@ public class BashLine : Ability
 {
     [SerializeField]
     private int _stunDuration = 1;
+    [SerializeField]
+    private int _stunDamage = 10;
     Cell[,] _cells;
 
     private Hero _hero;
@@ -26,7 +28,9 @@ public class BashLine : Ability
         {
             RemoveStun();
             Stun();
+            _hero.OnTurn -= Action;
             _hero.OnTurn += UpdateStunDuration;
+            _hero.OnTurn += Action;
         }
     }
 
@@ -38,6 +42,7 @@ public class BashLine : Ability
             if (_cells[_hero.CurrentCell.CellIndexes.y, i].ContainedCreature != null)
             {
                 var newMonster = _cells[_hero.CurrentCell.CellIndexes.y, i].ContainedCreature;
+                newMonster.Health.Change(-_stunDamage);
                 MonoBehaviour.print(newMonster.name + " stunned");
                 newMonster.SetAbilityToMove(false);
                 _stunnedMonsters.Add(newMonster);
@@ -48,12 +53,12 @@ public class BashLine : Ability
     private void UpdateStunDuration()
     {
         _hero.SetSpecialAbilityStatus(false);
+        _turnsAfterStun++;
         if (_turnsAfterStun >= _stunDuration)
         {
             RemoveStun();
             return;
         }
-        _turnsAfterStun++;
     }
 
     private void RemoveStun()
