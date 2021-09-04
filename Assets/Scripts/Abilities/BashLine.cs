@@ -81,4 +81,9 @@ public class BashLine : Ability
         _turnsAfterStun = 0;
         GameplayState.Instance.OnTurn -= UpdateStunDuration;
     }
+
+    private void OnDestroy()
+    {
+        GameplayState.Instance.OnTurn -= UpdateStunDuration;
+    }
 }

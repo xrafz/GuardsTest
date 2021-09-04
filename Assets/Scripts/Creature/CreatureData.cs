@@ -31,4 +31,9 @@ public abstract class CreatureData : ScriptableObject
     private Material[] _materials;
 
     public Material[] Materials => _materials;
+
+    public void AddDamage(int value)
+    {
+        _damage += value;
+    }
 }

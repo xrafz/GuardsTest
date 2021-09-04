@@ -17,6 +17,9 @@ public class GameplayState : MonoBehaviour
     [SerializeField]
     private TextOutput _objective;
 
+    [SerializeField]
+    private YourTurnNotification _yourTurnNotifier;
+
     private int _defeatedEnemies = 0;
 
     private Cell[,] _cells;
@@ -118,6 +121,7 @@ public class GameplayState : MonoBehaviour
     private void EndTurn()
     {
         OnTurn?.Invoke();
+        _yourTurnNotifier.Notify();
         SetInteractivityStatus(true);
         print("turn ended");
     }

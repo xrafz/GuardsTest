@@ -35,7 +35,6 @@ public class HeroAttack : Ability
     {
         var currentCellY = _hero.CurrentCell.CellIndexes.y;
         _rightMostCellIndex = Mathf.Clamp(_attackRange + _hero.CurrentCell.CellIndexes.x, 0, _cells.GetLength(1) - 1);
-        Debug.Log(_hero.name + " " + _attackRange + " " + _hero.CurrentCell.CellIndexes.x + " " + (_attackRange + _hero.CurrentCell.CellIndexes.x));
         for (int x = 2; x <= _rightMostCellIndex; x++)
         {
             var enemy = _cells[currentCellY, x].ContainedCreature;
@@ -57,6 +56,5 @@ public class HeroAttack : Ability
             _hero.Transform.DOScale(1f, 0.3f);
         });
         _enemy.Health.Change(-_hero.Data.Damage);
-        Debug.Log(string.Format("{0} attacked {1}, dealing {2} damage", _hero, _enemy, _hero.Data.Damage));
     }
 }
