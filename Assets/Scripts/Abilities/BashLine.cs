@@ -29,9 +29,7 @@ public class BashLine : Ability
         {
             RemoveStun();
             Stun();
-            _hero.OnTurn -= Action;
-            _hero.OnTurn += UpdateStunDuration;
-            _hero.OnTurn += Action;
+            GameplayState.Instance.OnTurn += UpdateStunDuration;
         }
     }
 
@@ -81,6 +79,6 @@ public class BashLine : Ability
         }
         _stunnedMonsters.Clear();
         _turnsAfterStun = 0;
-        _hero.OnTurn -= UpdateStunDuration;
+        GameplayState.Instance.OnTurn -= UpdateStunDuration;
     }
 }

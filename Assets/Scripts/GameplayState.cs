@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameplayState : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class GameplayState : MonoBehaviour
     public bool CanMoveHeroes => _canMoveHeroes;
 
     public static GameplayState Instance;
+
+    public delegate void Blank();
+    public event Blank OnTurn;
 
     private void Awake()
     {
@@ -105,9 +109,15 @@ public class GameplayState : MonoBehaviour
                     monster.CompleteTurn();
                     yield return new WaitForSeconds(1f);
                 }
-                
+
             }
         }
+        EndTurn();
+    }
+
+    private void EndTurn()
+    {
+        OnTurn?.Invoke();
         SetInteractivityStatus(true);
         print("turn ended");
     }
@@ -134,11 +144,14 @@ public class GameplayState : MonoBehaviour
 
     private void Restart()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        /*
         _selectedCreature = null;
         _defeatedEnemies = 0;
         SetInteractivityStatus(true);
         _objective.Output(_enemiesToDefeat.ToString());
         Field.Instance.InitSpawners();
+        */
     }
 
     public void HandleWin()
