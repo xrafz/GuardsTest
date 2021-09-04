@@ -40,12 +40,12 @@ public class GameplayState : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _objective.Output(_enemiesToDefeat.ToString());
     }
 
     public void SetCells(Cell[,] cells)
     {
         _cells = cells;
+        _objective.Output(_enemiesToDefeat.ToString());
     }
 
     public void SetSelectedCreature(Creature creature)

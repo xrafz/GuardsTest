@@ -9,7 +9,7 @@ public class MonsterTeammateBuff : Ability
     [SerializeField]
     private int _damageBuff = 5;
     [SerializeField]
-    private int _turnsBeforeBuff = 2;
+    private int _turnsBeforeBuff = 2; //if =2, then buff every 3th turn
 
     private int _turnsAfterBuff;
     private Monster _monster;
@@ -17,7 +17,7 @@ public class MonsterTeammateBuff : Ability
     {
         _monster = mono.GetComponent<Monster>();
         _monster.OnTurn += Action;
-        _turnsAfterBuff = -1;
+        _turnsAfterBuff = 1;
         GameplayState.Instance.OnTurn += UpdateTurns;
     }
 
@@ -45,7 +45,7 @@ public class MonsterTeammateBuff : Ability
             selectedMonster.Transform.DOShakeScale(0.4f);
         });
 
-        _turnsAfterBuff = 0;
+        _turnsAfterBuff = -1;
         _monster.SetCastingStatus(false);
     }
 
