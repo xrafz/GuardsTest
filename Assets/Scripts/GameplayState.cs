@@ -10,6 +10,12 @@ public class GameplayState : MonoBehaviour
     [SerializeField]
     private int _enemiesToDefeat = 12;
 
+    [SerializeField]
+    private UnitSelector _unitSelector;
+
+    [SerializeField]
+    private TextOutput _objective;
+
     private int _defeatedEnemies = 0;
 
     private Cell[,] _cells;
@@ -24,11 +30,10 @@ public class GameplayState : MonoBehaviour
 
     public static GameplayState Instance;
 
-    private Coroutine _mobsTurn, _heroesTurn;
-
     private void Awake()
     {
         Instance = this;
+        _objective.Output(_enemiesToDefeat.ToString());
     }
 
     public void SetCells(Cell[,] cells)
@@ -38,10 +43,10 @@ public class GameplayState : MonoBehaviour
 
     public void SetSelectedCreature(Creature creature)
     {
-        
+        _unitSelector.Select(creature);
         if (_selectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && _canMoveHeroes && _selectedCreature != creature)
         {
-            print("swappder");
+            print("swapp");
             ChangePlaces(creature);
         }
         else
@@ -50,7 +55,7 @@ public class GameplayState : MonoBehaviour
         }
     }
 
-    public  void ChangePlaces(Creature creature)
+    public void ChangePlaces(Creature creature)
     {
         var initialCell = _selectedCreature.CurrentCell;
         _selectedCreature.SetCell(creature.CurrentCell);
@@ -69,7 +74,7 @@ public class GameplayState : MonoBehaviour
 
         _selectedCreature = null;
         SetInteractivityStatus(false);
-        _heroesTurn = StartCoroutine(HeroesTurn());
+        StartCoroutine(HeroesTurn());
     }
 
     public void SetInteractivityStatus(bool canMoveHeroes)
@@ -85,7 +90,7 @@ public class GameplayState : MonoBehaviour
             _cells[i, 1].ContainedCreature.CompleteTurn();
             yield return new WaitForSeconds(1f);
         }
-        _mobsTurn = StartCoroutine(MonstersTurn());
+        StartCoroutine(MonstersTurn());
     }
 
     private IEnumerator MonstersTurn()
@@ -121,18 +126,27 @@ public class GameplayState : MonoBehaviour
 
     public void HandleLose()
     {
-        print("Lose");
         StopAllCoroutines();
+        print("Lose");
+
+        Restart();
+    }
+
+    private void Restart()
+    {
         _selectedCreature = null;
         _defeatedEnemies = 0;
         SetInteractivityStatus(true);
+        _objective.Output(_enemiesToDefeat.ToString());
         Field.Instance.InitSpawners();
     }
 
     public void HandleWin()
     {
-        print("Win");
         StopAllCoroutines();
+        print("Win");
+
+        Restart();
         //?
     }
     
@@ -140,6 +154,9 @@ public class GameplayState : MonoBehaviour
     {
         _defeatedEnemies++;
         print("defeated " + _defeatedEnemies + " enemies");
+
+        _objective.Output((_enemiesToDefeat - _defeatedEnemies).ToString());
+
         if (_defeatedEnemies >= _enemiesToDefeat)
         {
             HandleWin();

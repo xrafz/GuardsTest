@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "Abilities/HeroAttack")]
 public class HeroAttack : Ability
@@ -50,6 +51,11 @@ public class HeroAttack : Ability
 
     private void Attack()
     {
+        _hero.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
+        {
+            _enemy.Transform.DOShakeScale(0.2f);
+            _hero.Transform.DOScale(1f, 0.3f);
+        });
         _enemy.Health.Change(-_hero.Data.Damage);
         Debug.Log(string.Format("{0} attacked {1}, dealing {2} damage", _hero, _enemy, _hero.Data.Damage));
     }

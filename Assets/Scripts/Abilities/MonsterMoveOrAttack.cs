@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "Abilities/MonsterMoveOrAttack")]
 public class MonsterMoveOrAttack : Ability
@@ -40,7 +38,7 @@ public class MonsterMoveOrAttack : Ability
         if (_cells[_currentCellY, _currentCellX - 1].ContainedCreature == null)
         {
             _monster.CurrentCell.SetContainedCreature(null);
-            _monster.SetCell(_cells[_currentCellY, _currentCellX - 1]);
+            _monster.SetCell(_cells[_currentCellY, _currentCellX - 1], 0.8f);
         }
         else 
             MonoBehaviour.print(_monster.name + " cant get over teammate");
@@ -74,6 +72,11 @@ public class MonsterMoveOrAttack : Ability
     private void Attack()
     {
         _enemy.Health.Change(-_monster.Data.Damage);
+        _monster.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
+        {
+            _enemy.Transform.DOShakeScale(0.2f);
+            _monster.Transform.DOScale(1f, 0.3f);
+        });
         MonoBehaviour.print(_monster.name + " attacked " + _enemy.name + ", dealing " + _monster.Data.Damage + " damage");
     }
 }

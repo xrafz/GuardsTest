@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "Abilities/HeroBashLine")]
 public class BashLine : Ability
@@ -48,6 +49,17 @@ public class BashLine : Ability
                 _stunnedMonsters.Add(newMonster);
             }
         }
+
+        _hero.Transform.DOMoveY(2f, 0.2f).OnComplete(() =>
+        {
+            _hero.Transform.DOMoveY(0f, 0.18f).OnComplete(() =>
+            {
+                foreach (Monster monster in _stunnedMonsters)
+                {
+                    monster.Transform.DOShakeScale(0.6f);
+                }
+            });
+        });
     }
 
     private void UpdateStunDuration()

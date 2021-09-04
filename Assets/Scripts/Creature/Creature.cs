@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Creature : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Creature : MonoBehaviour
     public Health Health => _health;
 
     protected Transform _transform;
+
+    public Transform Transform => _transform;
 
     public delegate void Blank();
     public event Blank OnTurn;
@@ -52,6 +55,11 @@ public class Creature : MonoBehaviour
             ability = Instantiate(ability);
             ability.Init(this);
         }
+
+        _transform.DOScale(0, 0).OnComplete(() =>
+        {
+            _transform.DOScale(1f, 0.5f);
+        });
     }
 
     public void SetData(CreatureData data)
@@ -64,6 +72,13 @@ public class Creature : MonoBehaviour
     {
         _currentCell = cell;
         _transform.position = cell.transform.position;
+        cell.SetContainedCreature(this);
+    }
+
+    public void SetCell(Cell cell, float time)
+    {
+        _currentCell = cell;
+        _transform.DOMove(cell.transform.position, time);
         cell.SetContainedCreature(this);
     }
     
