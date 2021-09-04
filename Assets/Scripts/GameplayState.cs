@@ -94,8 +94,7 @@ public class GameplayState : MonoBehaviour
         HealBackLine();
         for (int i = 0; i < _cells.GetLength(0); i++)
         {
-            _cells[i, 1].ContainedCreature.CompleteTurn();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_cells[i, 1].ContainedCreature.CompleteTurn());
         }
         StartCoroutine(MonstersTurn());
     }
@@ -109,8 +108,7 @@ public class GameplayState : MonoBehaviour
                 var monster = _cells[currentRow, currentColumn].ContainedCreature;
                 if (monster != null)
                 {
-                    monster.CompleteTurn();
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(monster.CompleteTurn());
                 }
 
             }

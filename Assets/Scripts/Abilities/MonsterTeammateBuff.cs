@@ -42,7 +42,8 @@ public class MonsterTeammateBuff : Ability
         _monster.Transform.DOScaleY(2f, 0.5f).OnComplete(() =>
         {
             _monster.Transform.DOScaleY(1f, 0.4f);
-            selectedMonster.Transform.DOShakeScale(0.4f);
+            //selectedMonster.Transform.DOShakeScale(0.4f);
+            selectedMonster.Transform.DOScale(1.2f, 0.4f);
         });
 
         _turnsAfterBuff = -1;

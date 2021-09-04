@@ -32,6 +32,11 @@ public abstract class CreatureData : ScriptableObject
 
     public Material[] Materials => _materials;
 
+    [SerializeField]
+    private GameObject _projectile;
+
+    public GameObject Projectile => _projectile;
+
     public void AddDamage(int value)
     {
         _damage += value;

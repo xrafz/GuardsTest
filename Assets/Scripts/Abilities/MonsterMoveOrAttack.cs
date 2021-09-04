@@ -7,12 +7,14 @@ public class MonsterMoveOrAttack : Ability
     private Monster _monster;
     private Cell[,] _cells;
     private Hero _enemy;
+    private Transform _projectile;
 
     private int _currentCellX, _currentCellY;
 
     public override void Init(MonoBehaviour mono)
     {
         _monster = mono.GetComponent<Monster>();
+        _projectile = _monster.Projectile?.transform;
         _cells = Field.Instance.Cells;
         _monster.OnTurn -= Action;
         _monster.OnTurn += Action;
@@ -41,7 +43,7 @@ public class MonsterMoveOrAttack : Ability
             _monster.SetCell(_cells[_currentCellY, _currentCellX - 1], 0.8f);
         }
         else 
-            MonoBehaviour.print(_monster.name + " cant get over teammate");
+            Debug.Log(_monster.name + " cant get over teammate");
     }
 
     private void CalculateCurrentCell()
@@ -74,9 +76,33 @@ public class MonsterMoveOrAttack : Ability
         _enemy.Health.Change(-_monster.Data.Damage);
         _monster.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
         {
-            _enemy.Transform.DOShakeScale(0.2f);
-            _monster.Transform.DOScale(1f, 0.3f);
+            if (_projectile)
+            {
+                Ranged();
+            }
+            else
+            {
+                Shake();
+            }
         });
         MonoBehaviour.print(_monster.name + " attacked " + _enemy.name + ", dealing " + _monster.Data.Damage + " damage");
+    }
+
+    private void Shake()
+    {
+        _enemy.Transform.DOShakeScale(0.2f);
+        _monster.Transform.DOScale(1f, 0.3f);
+    }
+
+    private void Ranged()
+    {
+        var position = _enemy.Transform.position;
+        _projectile.position = _monster.Transform.position + (Vector3.up / 2f);
+        _projectile.gameObject.SetActive(true);
+        _projectile.DOMove(position, 0.2f).OnComplete(() =>
+        {
+            _projectile.gameObject.SetActive(false);
+            Shake();
+        });
     }
 }

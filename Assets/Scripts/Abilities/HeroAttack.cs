@@ -11,10 +11,12 @@ public class HeroAttack : Ability
     private Monster _enemy;
     private int _rightMostCellIndex;
     private int _attackRange;
+    private Transform _projectile;
 
     public override void Init(MonoBehaviour mono)
     {
         _hero = mono.GetComponent<Hero>();
+        _projectile = _hero.Projectile?.transform;
         _hero.OnTurn += Action;
         _cells = Field.Instance.Cells;
         _attackRange = _hero.Data.AttackRange;
@@ -52,9 +54,33 @@ public class HeroAttack : Ability
     {
         _hero.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
         {
-            _enemy.Transform.DOShakeScale(0.2f);
-            _hero.Transform.DOScale(1f, 0.3f);
+            if (_projectile)
+            {
+                Ranged();
+            }
+            else
+            {
+                Shake();
+            }
         });
         _enemy.Health.Change(-_hero.Data.Damage);
+    }
+
+    private void Shake()
+    {
+        _enemy.Transform.DOShakeScale(0.2f);
+        _hero.Transform.DOScale(1f, 0.3f);
+    }
+
+    private void Ranged()
+    {
+        var position = _enemy.Transform.position;
+        _projectile.position = _hero.Transform.position + (Vector3.up / 2f);
+        _projectile.gameObject.SetActive(true);
+        _projectile.DOMove(position, 0.2f).OnComplete(() =>
+        {
+            _projectile.gameObject.SetActive(false);
+            Shake();
+        });
     }
 }

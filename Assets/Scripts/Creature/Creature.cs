@@ -21,6 +21,10 @@ public class Creature : MonoBehaviour
 
     public Health Health => _health;
 
+    private GameObject _projectile;
+
+    public GameObject Projectile => _projectile;
+
     protected Transform _transform;
 
     public Transform Transform => _transform;
@@ -47,6 +51,13 @@ public class Creature : MonoBehaviour
         
         _health = GetComponent<Health>();
         _health.Init(_data.Health);
+
+        if (_data.Projectile != null)
+        {
+            _projectile = Instantiate(_data.Projectile, _transform);
+            _projectile.transform.rotation = _transform.rotation;
+            _projectile.SetActive(false);
+        }
 
         var abilities = _data.Abilities;
         for (int i = 0; i < abilities.Length; i++)
@@ -82,14 +93,17 @@ public class Creature : MonoBehaviour
         cell.SetContainedCreature(this);
     }
     
-    public virtual void CompleteTurn()
+    public float CompleteTurn()
     {
+        var time = 0f;
         print(name + " started its turn");
         if (_ableToMove)
         {
             OnTurn?.Invoke();
+            time = 1f;
         }
         print(name + " completed turn");
+        return time;
     }
 
     public void SetAbilityToMove(bool isAble)

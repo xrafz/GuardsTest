@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private int _maximum;
+
+    public int Maximum => _maximum;
+
     [SerializeField]
     private int _current;
 
@@ -15,6 +18,7 @@ public class Health : MonoBehaviour
     public delegate void Blank();
     public event Blank OnHit;
     public event Blank OnDeath;
+    public event Blank OnChange;
 
     public void Init(int value)
     {
@@ -25,6 +29,7 @@ public class Health : MonoBehaviour
     public void Change(int value)
     {
         _current += value;
+        OnChange?.Invoke();
         if (value < 0)
         {
             OnHit?.Invoke();

@@ -22,3 +22,4 @@ MonoBehaviour:
   _mesh: {fileID: 4300000, guid: 82c98e662ab0c0543827d3541e5690fb, type: 2}
   _materials:
   - {fileID: 2100000, guid: fa0b1c6340002e348b8176096c327f80, type: 2}
+  _projectile: {fileID: 9205339350801317249, guid: 96b008892047d6c46b078fee02829502, type: 3}
