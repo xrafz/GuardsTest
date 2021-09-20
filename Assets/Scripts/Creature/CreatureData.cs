@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class CreatureData : ScriptableObject
 {
+    #region Stats
     [SerializeField]
     private int _health;
 
@@ -16,12 +17,14 @@ public abstract class CreatureData : ScriptableObject
     private int _attackRange;
 
     public int AttackRange => _attackRange;
+    #endregion
 
     [SerializeField]
     private Ability[] _abilities;
 
     public Ability[] Abilities  => _abilities;
 
+    #region Appearance
     [SerializeField]
     private Mesh _mesh;
 
@@ -31,6 +34,7 @@ public abstract class CreatureData : ScriptableObject
     private Material[] _materials;
 
     public Material[] Materials => _materials;
+    #endregion
 
     [SerializeField]
     private GameObject _projectile;

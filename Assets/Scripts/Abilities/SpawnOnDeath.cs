@@ -24,8 +24,6 @@ public class SpawnOnDeath : Ability
             creature.SetCell(desiredCell);
         }
 
-        GameplayState.Instance.AddDefeatedEnemy();
-
         MobGenerator.Instance.CreatedCreatures.Remove((Monster)_creature);
         Destroy(_creature.gameObject);
     }

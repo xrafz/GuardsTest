@@ -26,22 +26,27 @@ public class Field : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        //ToDo - поменять окружение в зависимости от текущей локи
     }
     private void Start()
     {
         Init();
+
+        print(GameSession.CurrentLocation);
     }
 
     private void Init()
     {
         _cells = _cellGenerator.Spawn(_rows, _columns);
         InitSpawners();
-        GameplayState.Instance.SetCells(_cells);
+        BattleState.Instance.SetCells(_cells);
     }
 
     public void InitSpawners()
     {
         _heroGenerator.InitialGeneration();
+        _mobGenerator.SetCreatures(GameSession.CurrentLocation.Mobs);
         _mobGenerator.InitialGeneration();
     }
 }

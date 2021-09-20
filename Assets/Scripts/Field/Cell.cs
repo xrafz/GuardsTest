@@ -43,6 +43,6 @@ public class Cell : MonoBehaviour
             print(string.Format("Clicked on {0}, hp: {1}, damage: {2}, atk range: {3}", _containedCreature.name, _containedCreature.Health.Current, 
                 _containedCreature.Data.Damage, _containedCreature.Data.AttackRange));
         }
-        GameplayState.Instance.SetSelectedCreature(_containedCreature);
+        BattleState.Instance.SetSelectedCreature(_containedCreature);
     }
 }

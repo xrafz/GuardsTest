@@ -12,6 +12,6 @@ public class LoseOnDeath : Ability
 
     public override void Action()
     {
-        GameplayState.Instance.HandleLose();
+        BattleState.Instance.HandleLose();
     }
 }

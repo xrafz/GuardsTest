@@ -64,6 +64,11 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
         }
     }
 
+    public void SetCreatures(CreatureData[] creatures)
+    {
+        _creatures = creatures;
+    }
+
     protected abstract void ChangePositions();
 
     protected abstract void SetData(Creature creature);
