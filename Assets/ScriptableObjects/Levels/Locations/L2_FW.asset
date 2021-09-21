@@ -15,5 +15,5 @@ MonoBehaviour:
   _mobs:
   - {fileID: 11400000, guid: ff99185e4983761409eea354b5066568, type: 2}
   - {fileID: 11400000, guid: 978e1f890504474419c5e94b293d8006, type: 2}
-  _environment: {fileID: 1562137881764545690, guid: 521fe4a92cea7ae44afee4346db006b4, type: 3}
+  _environment: {fileID: 6527568982333304491, guid: a56a6bf0e2a57894bbe140e34671ee3c, type: 3}
   _enemiesToKill: 2
