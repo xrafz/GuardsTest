@@ -9,6 +9,7 @@ public class MobGenerator : CreatureGenerator<Monster>
 
     public static MobGenerator Instance;
 
+    private int _currentMob;
     protected override void ChangePositions()
     {
         var cells = Field.Instance.Cells;
@@ -28,14 +29,14 @@ public class MobGenerator : CreatureGenerator<Monster>
 
     protected override void SetData(Creature creature)
     {
-        //foreach (Creature creature in _createdCreatures)
-        {
-            creature.SetData(_creatures[Random.Range(0, _creatures.Length)]);
-        }
+        creature.SetData(_creatures[_currentMob % _creatures.Length]);
+        print(_currentMob % _creatures.Length);
+        _currentMob++;
     }
 
     private void Start()
     {
         Instance = this;
+        _currentMob = _creatures.Length;
     }
 }

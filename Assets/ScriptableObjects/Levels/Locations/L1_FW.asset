@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mobs:
   - {fileID: 11400000, guid: 59c1abcf33a11d146998c1b06342da58, type: 2}
+  - {fileID: 11400000, guid: 1482f2f91798c6a41b25b60923839870, type: 2}
+  - {fileID: 11400000, guid: 9f4a78b9eee936746a9f5d0224c2aa0f, type: 2}
   _environment: {fileID: 1562137881764545690, guid: 521fe4a92cea7ae44afee4346db006b4, type: 3}
   _enemiesToKill: 1
