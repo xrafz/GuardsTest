@@ -158,13 +158,6 @@ public class BattleState : MonoBehaviour
     private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        /*
-        _selectedCreature = null;
-        _defeatedEnemies = 0;
-        SetInteractivityStatus(true);
-        _objective.Output(_enemiesToDefeat.ToString());
-        Field.Instance.InitSpawners();
-        */
     }
 
     public void HandleWin()
@@ -174,7 +167,7 @@ public class BattleState : MonoBehaviour
         print("cur: " + GameSession.CurrentLocationID);
         if(GameSession.CurrentLocationID == GameSession.CurrentLevel.Locations.Length - 1)
         {
-            //сохранить в файлик
+            GameSession.CompleteCurrentLevel();
             SceneManager.LoadScene(0);
         }
         else
@@ -182,7 +175,6 @@ public class BattleState : MonoBehaviour
             Restart();
             GameSession.SetNextLocation();
         }
-        //?
     }
     
     public void AddDefeatedEnemy()

@@ -39,7 +39,6 @@ public class Field : MonoBehaviour
     private void Init()
     {
         var field = Instantiate(GameSession.CurrentLocation.Environment);
-        //field.transform.position = new Vector3(-4f, -1.3f, 6.25f);
         _cells = _cellGenerator.Spawn(_rows, _columns);
         InitSpawners();
         BattleState.Instance.SetCells(_cells);
