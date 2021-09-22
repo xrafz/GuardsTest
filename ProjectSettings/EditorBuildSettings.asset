@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: f670c23498fca6443ac4ae9595bcd570
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 03b8372be17a6b24cbf43a0ec9295c86, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 50e8843b487141849b125eb728cc3fc4, type: 2}

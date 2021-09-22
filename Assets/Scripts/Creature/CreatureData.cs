@@ -34,6 +34,7 @@ public abstract class CreatureData : ScriptableObject
     private Material[] _materials;
 
     public Material[] Materials => _materials;
+
     #endregion
 
     [SerializeField]

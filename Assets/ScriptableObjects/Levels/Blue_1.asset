@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Blue_1
   m_EditorClassIdentifier: 
   _locations:
-  - {fileID: 11400000, guid: 412413ee9bccb104590d298faf6f6631, type: 2}
+  - {fileID: 11400000, guid: 71764f189ba79594cb7ca760ce7e266e, type: 2}
   _levelsToOpen:
   - {fileID: 11400000, guid: 712647ce60a056548a307eb5e99f181b, type: 2}
