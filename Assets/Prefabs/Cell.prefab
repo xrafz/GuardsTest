@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353d6cba8de87394b87b38b3bc92765e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _containedCreature: {fileID: 0}
   _renderer: {fileID: 1093017558421794144}
 --- !u!65 &1093017558421794150
 BoxCollider:
@@ -109,5 +110,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.0000005, z: 0.20000005}
+  m_Size: {x: 2, y: 2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}

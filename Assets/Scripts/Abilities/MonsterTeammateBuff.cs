@@ -37,7 +37,7 @@ public class MonsterTeammateBuff : Ability
         {
             selectedMonster = monsters[Random.Range(0, monsters.Count)];
         } while (selectedMonster == _monster);
-        selectedMonster.Data.AddDamage(_damageBuff);
+        selectedMonster.Data.ChangeDamage(_damageBuff);
         Debug.Log("Added damage to " + selectedMonster.name);
         _monster.Transform.DOScaleY(2f, 0.5f).OnComplete(() =>
         {

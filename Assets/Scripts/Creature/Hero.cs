@@ -10,7 +10,7 @@ public class Hero : Creature
 
     private void Start()
     {
-        _transform.rotation = Quaternion.Euler(0, 90, 0);
+        _transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     public void SetSpecialAbilityStatus(bool status)

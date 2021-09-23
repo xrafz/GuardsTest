@@ -50,7 +50,6 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
     {
         var creature = Instantiate(_prefab, _transform);
         var creatureComponent = creature.AddComponent<T>();
-        //creatureComponent.SetData(_creatures[i]);
         _createdCreatures.Add(creatureComponent);
         SetData(creatureComponent);
         return creatureComponent;

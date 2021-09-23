@@ -10,7 +10,7 @@ public class Monster : Creature
 
     private void Start()
     {
-        _transform.rotation = Quaternion.Euler(0, 270, 0);
+        _transform.rotation = Quaternion.Euler(0, 0, 0);
         Health.OnDeath += Die;
     }
 

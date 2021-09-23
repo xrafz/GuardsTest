@@ -1,10 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 [CreateAssetMenu(menuName = "Abilities/MonsterMoveOrAttack")]
 public class MonsterMoveOrAttack : Ability
 {
     private Monster _monster;
+    private Animator _animator;
     private Cell[,] _cells;
     private Hero _enemy;
     private Transform _projectile;
@@ -14,6 +16,7 @@ public class MonsterMoveOrAttack : Ability
     public override void Init(MonoBehaviour mono)
     {
         _monster = mono.GetComponent<Monster>();
+        _animator = _monster.Animator;
         _projectile = _monster.Projectile?.transform;
         _cells = Field.Instance.Cells;
         _monster.OnTurn -= Action;
@@ -73,8 +76,8 @@ public class MonsterMoveOrAttack : Ability
 
     private void Attack()
     {
-        _enemy.Health.Change(-_monster.Data.Damage);
-        _monster.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
+        _animator.Play("Attack");
+        _monster.Transform.DOScale(1f, _animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() =>
         {
             if (_projectile)
             {
@@ -90,8 +93,10 @@ public class MonsterMoveOrAttack : Ability
 
     private void Shake()
     {
-        _enemy.Transform.DOShakeScale(0.2f);
-        _monster.Transform.DOScale(1f, 0.3f);
+        //_enemy.Transform.DOShakeScale(0.2f);
+        //_monster.Transform.DOScale(1f, 0.3f);
+        _enemy.Animator.Play("Hit");
+        _enemy.Health.Change(-_monster.Data.Damage);
     }
 
     private void Ranged()

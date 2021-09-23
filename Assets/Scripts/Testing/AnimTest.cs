@@ -16,8 +16,11 @@ public class AnimTest : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _animator.runtimeAnimatorController = _animatorOverride;
+        /*
         var body = Instantiate(_body, gameObject.transform);
         _renderer = body.GetComponent<SkinnedMeshRenderer>();
+        */
+        _renderer = _body.GetComponent<SkinnedMeshRenderer>();
     }
     void Start()
     {

@@ -12,10 +12,12 @@ public class HeroAttack : Ability
     private int _rightMostCellIndex;
     private int _attackRange;
     private Transform _projectile;
+    private Animator _animator;
 
     public override void Init(MonoBehaviour mono)
     {
         _hero = mono.GetComponent<Hero>();
+        _animator = _hero.Animator;
         _projectile = _hero.Projectile?.transform;
         _hero.OnTurn += Action;
         _cells = Field.Instance.Cells;
@@ -52,7 +54,11 @@ public class HeroAttack : Ability
 
     private void Attack()
     {
-        _hero.Transform.DOScale(1.3f, 0.3f).OnComplete(() =>
+        _animator.Play("Attack");
+        //MonoBehaviour.print(_animator.GetCurrentAnimatorStateInfo(0).length);
+        var clips = _animator.runtimeAnimatorController.animationClips;
+        _animator.GetCurrentAnimatorStateInfo(0);
+        _hero.Transform.DOScale(1f, 0.3f).OnComplete(() =>
         {
             if (_projectile)
             {
@@ -63,13 +69,15 @@ public class HeroAttack : Ability
                 Shake();
             }
         });
-        _enemy.Health.Change(-_hero.Data.Damage);
+        
     }
 
     private void Shake()
     {
-        _enemy.Transform.DOShakeScale(0.2f);
-        _hero.Transform.DOScale(1f, 0.3f);
+        //_enemy.Transform.DOShakeScale(0.2f);
+        //_hero.Transform.DOScale(1f, 0.3f);
+        _enemy.Animator.Play("Hit");
+        _enemy.Health.Change(-_hero.Data.Damage);
     }
 
     private void Ranged()

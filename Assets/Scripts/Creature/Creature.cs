@@ -16,25 +16,22 @@ public class Creature : MonoBehaviour
 
     public Cell CurrentCell => _currentCell;
 
-    [SerializeField]
-    private Health _health;
+    public Health Health { get; private set; }
 
-    public Health Health => _health;
+    public GameObject Body { get; private set; }
 
-    private GameObject _projectile;
-
-    public GameObject Projectile => _projectile;
+    public GameObject Projectile { get; private set; }
 
     protected Transform _transform;
 
     public Transform Transform => _transform;
 
+    public Animator Animator { get; private set; }
+
+    public bool AbleToMove { get; private set; } = true;
+
     public delegate void Blank();
     public event Blank OnTurn;
-
-    private bool _ableToMove = true;
-
-    public bool AbleToMove => _ableToMove;
 
     private void Awake()
     {
@@ -45,18 +42,34 @@ public class Creature : MonoBehaviour
     {
         gameObject.name = _data.name;
         _data = Instantiate(_data);
+        Body = Instantiate(_data.Body, _transform);
+        Animator = Body.GetComponent<Animator>();
+        if (Animator == null)
+        {
+            Animator = Body.AddComponent<Animator>();
+        }
+        Animator.runtimeAnimatorController = _data.Animator;
 
+        var renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        renderer.sharedMaterial = renderer.material;
+        renderer.sharedMaterial.mainTexture = _data.Texture;
+
+        /*
         GetComponent<MeshRenderer>().materials = _data.Materials;
         GetComponent<MeshFilter>().sharedMesh = _data.Mesh;
-        
-        _health = GetComponent<Health>();
-        _health.Init(_data.Health);
+        */
+
+
+
+
+        Health = GetComponent<Health>();
+        Health.Init(_data.Health);
 
         if (_data.Projectile != null)
         {
-            _projectile = Instantiate(_data.Projectile, _transform);
-            _projectile.transform.rotation = _transform.rotation;
-            _projectile.SetActive(false);
+            Projectile = Instantiate(_data.Projectile, _transform);
+            Projectile.transform.rotation = _transform.rotation;
+            Projectile.SetActive(false);
         }
 
         var abilities = _data.Abilities;
@@ -97,7 +110,7 @@ public class Creature : MonoBehaviour
     {
         var time = 0f;
         print(name + " started its turn");
-        if (_ableToMove)
+        if (AbleToMove)
         {
             OnTurn?.Invoke();
             time = 1f;
@@ -108,6 +121,6 @@ public class Creature : MonoBehaviour
 
     public void SetAbilityToMove(bool isAble)
     {
-        _ableToMove = isAble;
+        AbleToMove = isAble;
     }
 }

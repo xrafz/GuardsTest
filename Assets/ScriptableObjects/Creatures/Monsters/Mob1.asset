@@ -19,6 +19,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 158ad1a06f817164fbffe4e04e3d106f, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
   - {fileID: 11400000, guid: 6a078793fdba1b141b4ab799eafce4b4, type: 2}
-  _mesh: {fileID: 4300000, guid: a32619e9ef099474fb79a5b271727727, type: 2}
-  _materials:
-  - {fileID: 2100000, guid: fa0b1c6340002e348b8176096c327f80, type: 2}
+  _body: {fileID: 100048, guid: 4623e8b42dd176342861a847916155d4, type: 3}
+  _root: {fileID: 100040, guid: 4623e8b42dd176342861a847916155d4, type: 3}
+  _material: {fileID: 2100000, guid: 38f69a07bb9136b4389453d30ea7b546, type: 2}
+  _texture: {fileID: 2800000, guid: e2b6ddf23a0e36c4a97b04dd2a914e0f, type: 3}
+  _animator: {fileID: 22100000, guid: 63bd9a050247a5345b1a31095f053f15, type: 2}
+  _projectile: {fileID: 0}

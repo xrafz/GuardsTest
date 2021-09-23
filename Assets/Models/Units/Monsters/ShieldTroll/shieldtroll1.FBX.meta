@@ -183,12 +183,20 @@ ModelImporter:
   - first:
       137: 13700000
     second: shield troll
-  externalObjects: {}
+  - first:
+      74: 5070568910744482447
+    second: AttackEnd
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 07 - Defa3245
+    second: {fileID: 2100000, guid: 38f69a07bb9136b4389453d30ea7b546, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -223,7 +231,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -316,7 +324,7 @@ ModelImporter:
       takeName: trolls13
       internalID: 0
       firstFrame: 200
-      lastFrame: 250
+      lastFrame: 219
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -523,7 +531,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -711,10 +719,110 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackEnd
+      takeName: trolls14
+      internalID: 0
+      firstFrame: 219
+      lastFrame: 250
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: little troll_spine05
+        weight: 1
+      - path: little troll_spine05/little troll_l_foot05
+        weight: 1
+      - path: little troll_spine05/little troll_l_foot05/little troll_l_foot06
+        weight: 1
+      - path: little troll_spine05/little troll_l_foot05/little troll_l_foot06/little
+          troll_l_foot07
+        weight: 1
+      - path: little troll_spine05/little troll_l_foot05/little troll_l_foot06/little
+          troll_l_foot07/little troll_l_foot08
+        weight: 1
+      - path: little troll_spine05/little troll_r_foot05
+        weight: 1
+      - path: little troll_spine05/little troll_r_foot05/little troll_r_foot06
+        weight: 1
+      - path: little troll_spine05/little troll_r_foot05/little troll_r_foot06/little
+          troll_r_foot07
+        weight: 1
+      - path: little troll_spine05/little troll_r_foot05/little troll_r_foot06/little
+          troll_r_foot07/little troll_r_foot08
+        weight: 1
+      - path: little troll_spine05/little troll_spine06
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_l_hand05
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_l_hand05/little troll_l_hand06
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_l_hand05/little troll_l_hand06/little troll_l_hand07
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_l_hand05/little troll_l_hand06/little troll_l_hand07/little troll_l_hand08
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_l_hand05/little troll_l_hand06/little troll_l_hand07/little troll_l_hand08/little
+          troll_l_hand09
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_r_hand05
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_r_hand05/little troll_r_hand06
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_r_hand05/little troll_r_hand06/little troll_r_hand07
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_r_hand05/little troll_r_hand06/little troll_r_hand07/little troll_r_hand08
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_r_hand05/little troll_r_hand06/little troll_r_hand07/little troll_r_hand08/little
+          troll_r_hand09
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_spine08
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_spine08/little troll_head05
+        weight: 1
+      - path: little troll_spine05/little troll_spine06/little troll_spine07/little
+          troll_spine08/little troll_head05/little troll_head06
+        weight: 1
+      - path: shield troll
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 0.03
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -765,7 +873,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 0.03
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
