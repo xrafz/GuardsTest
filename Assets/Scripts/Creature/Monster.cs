@@ -12,8 +12,16 @@ public class Monster : Creature
 
     private void Die()
     {
+        StartCoroutine(HandleDeath());
+    }
+
+    private IEnumerator HandleDeath()
+    {
+        SetAbilityToMove(false);
+        Animator.Play("Death");
         BattleState.Instance.AddDefeatedEnemy();
         MobGenerator.Instance.CreatedCreatures.Remove(this);
+        yield return new WaitForSeconds(0.8f);
         _currentCell.SetContainedCreature(null);
         Destroy(this.gameObject);
     }
