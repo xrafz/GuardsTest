@@ -5,27 +5,44 @@ using System.Collections;
 [CreateAssetMenu(menuName = "Abilities/MonsterMoveOrAttack")]
 public class MonsterMoveOrAttack : Ability
 {
-    private Monster _monster;
-    private Animator _animator;
+    [SerializeField]
+    private int _moveDistance = 1;
+
+    private Creature _creature;
+    private Creature _enemy;
     private Cell[,] _cells;
-    private Hero _enemy;
+    private int _furthestCellIndex;
     private Transform _projectile;
+    private Animator _animator;
+    private float _attackTime;
+    private int _passedSteps;
 
     private int _currentCellX, _currentCellY;
 
     public override void Init(MonoBehaviour mono)
     {
-        _monster = mono.GetComponent<Monster>();
-        _animator = _monster.Animator;
-        _projectile = _monster.Projectile?.transform;
+        _creature = mono.GetComponent<Monster>();
+        _animator = _creature.Animator;
+        _projectile = _creature.Projectile?.transform;
         _cells = Field.Instance.Cells;
-        _monster.OnTurn -= Action;
-        _monster.OnTurn += Action;
+        _moveDistance = ((MonsterData)_creature.Data).MovementDistance;
+  
+        _attackTime = 1f;
+        var clips = _animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name == "Attack")
+            {
+                _attackTime = clip.length;
+            }
+        }
+
+        _creature.OnTurn += Action;
     }
 
     public override void Action()
     {
-        if (_monster.AbleToMove && !_monster.CastingAbility)
+        if (_creature.AbleToMove && !_creature.CastingAbility)
         {
             if (EnemiesInAttackRange())
             {
@@ -33,40 +50,60 @@ public class MonsterMoveOrAttack : Ability
             }
             else
             {
-                Move();
+                _passedSteps = 0;
+                for (int currentSteps = 0; currentSteps < _moveDistance; currentSteps++)
+                {
+                    Move();
+                }
+                if (_passedSteps != 0)
+                {
+                    _creature.StartCoroutine(WaitForMovement());
+                }
             }
         }
     }
 
+    private IEnumerator WaitForMovement()
+    {
+        _creature.Animator.Play("Walk");
+        yield return new WaitForSeconds(_passedSteps * 0.8f);
+        _creature.Animator.Play("Idle");
+    }
+
     private void Move()
     {
+        Debug.Log(_cells[_currentCellY, _currentCellX - 1].name);
         if (_cells[_currentCellY, _currentCellX - 1].ContainedCreature == null)
         {
-            _monster.CurrentCell.SetContainedCreature(null);
-            _monster.SetCell(_cells[_currentCellY, _currentCellX - 1], 0.8f);
+            _passedSteps++;
+            _creature.CurrentCell.SetContainedCreature(null);
+            _creature.SetCell(_cells[_currentCellY, _currentCellX - 1], 0.8f * _passedSteps);
+            CalculateCurrentCell();
         }
-        else 
-            Debug.Log(_monster.name + " cant get over teammate");
+        else
+        {
+            Debug.Log(_creature.name + " cant get over teammate/enemy");
+        }
     }
 
     private void CalculateCurrentCell()
     {
-        _currentCellX = _monster.CurrentCell.CellIndexes.x;
-        _currentCellY = _monster.CurrentCell.CellIndexes.y;
+        _currentCellX = _creature.CurrentCell.CellIndexes.x;
+        _currentCellY = _creature.CurrentCell.CellIndexes.y;
     }
 
     private bool EnemiesInAttackRange()
     {
         CalculateCurrentCell();
-        var leftMostCellIndex = Mathf.Clamp(_currentCellX - _monster.Data.AttackRange, 0, _currentCellX);
-        for (int i = _currentCellX; i >= leftMostCellIndex; i--)
+        _furthestCellIndex = Mathf.Clamp(_currentCellX - _creature.Data.AttackRange, 0, _currentCellX);
+        for (int i = _currentCellX; i >= _furthestCellIndex; i--)
         {
             var creature = _cells[_currentCellY, i].ContainedCreature;
             if (creature != null)
             {
                 if (creature.GetType() == typeof(Hero))
                 {
-                    _enemy = (Hero)creature;
+                    _enemy = creature;
                     return true;
                 }
             }
@@ -76,8 +113,9 @@ public class MonsterMoveOrAttack : Ability
 
     private void Attack()
     {
+        _creature.SetTurnTime(_attackTime);
         _animator.Play("Attack");
-        _monster.Transform.DOScale(1f, _animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() =>
+        _creature.Transform.DOScale(1f, _attackTime).OnComplete(() =>
         {
             if (_projectile)
             {
@@ -88,21 +126,19 @@ public class MonsterMoveOrAttack : Ability
                 Shake();
             }
         });
-        MonoBehaviour.print(_monster.name + " attacked " + _enemy.name + ", dealing " + _monster.Data.Damage + " damage");
+        MonoBehaviour.print(_creature.name + " attacked " + _enemy.name + ", dealing " + _creature.Data.Damage + " damage");
     }
 
     private void Shake()
     {
-        //_enemy.Transform.DOShakeScale(0.2f);
-        //_monster.Transform.DOScale(1f, 0.3f);
         _enemy.Animator.Play("Hit");
-        _enemy.Health.Change(-_monster.Data.Damage);
+        _enemy.Health.Change(-_creature.Data.Damage);
     }
 
     private void Ranged()
     {
         var position = _enemy.Transform.position;
-        _projectile.position = _monster.Transform.position + (Vector3.up / 2f);
+        _projectile.position = _creature.Transform.position + (Vector3.up / 2f);
         _projectile.gameObject.SetActive(true);
         _projectile.DOMove(position, 0.2f).OnComplete(() =>
         {

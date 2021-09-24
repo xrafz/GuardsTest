@@ -164,19 +164,19 @@ ModelImporter:
     second: shield troll
   - first:
       74: 7400000
-    second: stay
+    second: Idle
   - first:
       74: 7400002
-    second: attack
+    second: Attack
   - first:
       74: 7400004
     second: dead
   - first:
       74: 7400006
-    second: walk
+    second: Walk
   - first:
       74: 7400008
-    second: pain
+    second: Hit
   - first:
       95: 9500000
     second: //RootNode
@@ -186,6 +186,9 @@ ModelImporter:
   - first:
       74: 5070568910744482447
     second: AttackEnd
+  - first:
+      74: 4348485665485846014
+    second: Death
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -220,7 +223,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: stay
+      name: Idle
       takeName: trolls13
       internalID: 0
       firstFrame: 151
@@ -320,7 +323,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: attack
+      name: Attack
       takeName: trolls13
       internalID: 0
       firstFrame: 200
@@ -420,7 +423,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: dead
+      name: Death
       takeName: trolls13
       internalID: 0
       firstFrame: 31
@@ -520,7 +523,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: walk
+      name: Walk
       takeName: trolls13
       internalID: 0
       firstFrame: 1
@@ -620,7 +623,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: pain
+      name: Hit
       takeName: trolls13
       internalID: 0
       firstFrame: 250

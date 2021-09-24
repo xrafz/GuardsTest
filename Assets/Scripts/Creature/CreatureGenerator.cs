@@ -26,12 +26,6 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
 
     public virtual void InitialGeneration()
     {
-        /*
-        foreach(T creature in _createdCreatures)
-        {
-            Destroy(creature.gameObject);
-        }
-        */
         for (int i = _createdCreatures.Count - 1; i >= 0; i--)
         {
             Destroy(_createdCreatures[i].gameObject);

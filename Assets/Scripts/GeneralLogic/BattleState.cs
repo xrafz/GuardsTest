@@ -67,12 +67,12 @@ public class BattleState : MonoBehaviour
 
         if (creature.CurrentCell.CellIndexes.x > SelectedCreature.CurrentCell.CellIndexes.x)
         {
-            creature.GetComponent<Hero>().SetSpecialAbilityStatus(true);
+            creature.GetComponent<Hero>().SetCastingStatus(true);
             print(creature);
         }
         else if (SelectedCreature.CurrentCell.CellIndexes.x > creature.CurrentCell.CellIndexes.x)
         {
-            SelectedCreature.GetComponent<Hero>().SetSpecialAbilityStatus(true);
+            SelectedCreature.GetComponent<Hero>().SetCastingStatus(true);
             print(SelectedCreature);
         }
 
@@ -114,9 +114,10 @@ public class BattleState : MonoBehaviour
                 {
                     yield return new WaitForSeconds(monster.CompleteTurn());
                 }
-
             }
         }
+
+        yield return new WaitForSeconds(0.5f);
         EndTurn();
     }
 
@@ -132,7 +133,6 @@ public class BattleState : MonoBehaviour
 
         _yourTurnNotifier.Notify();
         SetInteractivityStatus(true);
-        print("turn ended");
     }
 
     private void HealBackLine()

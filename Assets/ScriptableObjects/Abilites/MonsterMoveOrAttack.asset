@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440070a9664476b4bbb8a2b2773e944d, type: 3}
   m_Name: MonsterMoveOrAttack
   m_EditorClassIdentifier: 
+  _moveDistance: 1

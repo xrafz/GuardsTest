@@ -8,27 +8,34 @@ public class Creature : MonoBehaviour
 {
     [SerializeField]
     protected CreatureData _data;
-
     public CreatureData Data => _data;
 
     [SerializeField]
     protected Cell _currentCell;
-
     public Cell CurrentCell => _currentCell;
 
-    public Health Health { get; private set; }
+    private Health _health;
+    public Health Health => _health;
 
-    public GameObject Body { get; private set; }
+    private GameObject _body;
+    public GameObject Body => _body;
 
-    public GameObject Projectile { get; private set; }
+    private GameObject _projectile;
+    public GameObject Projectile => _projectile;
 
     protected Transform _transform;
-
     public Transform Transform => _transform;
 
-    public Animator Animator { get; private set; }
+    private Animator _animator;
+    public Animator Animator => _animator;
 
-    public bool AbleToMove { get; private set; } = true;
+    private bool _ableToMove = true;
+    public bool AbleToMove => _ableToMove;
+
+    private bool _castingAbility = false;
+    public bool CastingAbility => _castingAbility;
+
+    private float _turnTime;
 
     public delegate void Blank();
     public event Blank OnTurn;
@@ -42,34 +49,26 @@ public class Creature : MonoBehaviour
     {
         gameObject.name = _data.name;
         _data = Instantiate(_data);
-        Body = Instantiate(_data.Body, _transform);
-        Animator = Body.GetComponent<Animator>();
-        if (Animator == null)
+        _body = Instantiate(_data.Body, _transform);
+        _animator = _body.GetComponent<Animator>();
+        if (_animator == null)
         {
-            Animator = Body.AddComponent<Animator>();
+            _animator = _body.AddComponent<Animator>();
         }
-        Animator.runtimeAnimatorController = _data.Animator;
+        _animator.runtimeAnimatorController = _data.Animator;
 
         var renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         renderer.sharedMaterial = renderer.material;
         renderer.sharedMaterial.mainTexture = _data.Texture;
 
-        /*
-        GetComponent<MeshRenderer>().materials = _data.Materials;
-        GetComponent<MeshFilter>().sharedMesh = _data.Mesh;
-        */
-
-
-
-
-        Health = GetComponent<Health>();
-        Health.Init(_data.Health);
+        _health = GetComponent<Health>();
+        _health.Init(_data.Health);
 
         if (_data.Projectile != null)
         {
-            Projectile = Instantiate(_data.Projectile, _transform);
-            Projectile.transform.rotation = _transform.rotation;
-            Projectile.SetActive(false);
+            _projectile = Instantiate(_data.Projectile, _transform);
+            _projectile.transform.rotation = _transform.rotation;
+            _projectile.SetActive(false);
         }
 
         var abilities = _data.Abilities;
@@ -80,6 +79,11 @@ public class Creature : MonoBehaviour
             ability.Init(this);
         }
 
+        SpawnAnimation();
+    }
+
+    private void SpawnAnimation()
+    {
         _transform.DOScale(0, 0).OnComplete(() =>
         {
             _transform.DOScale(1f, 0.5f);
@@ -103,24 +107,41 @@ public class Creature : MonoBehaviour
     {
         _currentCell = cell;
         _transform.DOMove(cell.transform.position, time);
+        /*
+        _transform.DOMove(cell.transform.position, time).OnComplete(() =>
+        {
+            _animator.Play("Idle");
+        });
+        */
         cell.SetContainedCreature(this);
     }
     
     public float CompleteTurn()
     {
-        var time = 0f;
+        _turnTime = 0f;
         print(name + " started its turn");
-        if (AbleToMove)
+        if (_ableToMove)
         {
+            _turnTime = 0.5f;
             OnTurn?.Invoke();
-            time = 1f;
         }
+        print(_turnTime);
         print(name + " completed turn");
-        return time;
+        return _turnTime;
     }
 
     public void SetAbilityToMove(bool isAble)
     {
-        AbleToMove = isAble;
+        _ableToMove = isAble;
+    }
+
+    public void SetTurnTime(float time)
+    {
+        _turnTime = time;
+    }
+
+    public void SetCastingStatus(bool status)
+    {
+        _castingAbility = status;
     }
 }

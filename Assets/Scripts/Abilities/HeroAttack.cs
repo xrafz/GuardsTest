@@ -6,27 +6,37 @@ using DG.Tweening;
 [CreateAssetMenu(menuName = "Abilities/HeroAttack")]
 public class HeroAttack : Ability
 {
-    private Hero _hero;
+    private Creature _creature;
+    private Creature _enemy;
     private Cell[,] _cells;
-    private Monster _enemy;
-    private int _rightMostCellIndex;
-    private int _attackRange;
+    private int _furthestCellIndex;
     private Transform _projectile;
     private Animator _animator;
+    private float _attackTime;
 
     public override void Init(MonoBehaviour mono)
     {
-        _hero = mono.GetComponent<Hero>();
-        _animator = _hero.Animator;
-        _projectile = _hero.Projectile?.transform;
-        _hero.OnTurn += Action;
+        _creature = mono.GetComponent<Hero>();
+        _animator = _creature.Animator;
+        _projectile = _creature.Projectile?.transform;
         _cells = Field.Instance.Cells;
-        _attackRange = _hero.Data.AttackRange;
+
+        _attackTime = 1f;
+        var clips = _animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name == "Attack")
+            {
+                _attackTime = clip.length;
+            }
+        }
+
+        _creature.OnTurn += Action;
     }
 
     public override void Action()
     {
-        if (!_hero.UsingSpecialAbility && _hero.AbleToMove)
+        if (!_creature.CastingAbility && _creature.AbleToMove)
         {
             if (EnemiesInAttackRange())
             {
@@ -37,28 +47,26 @@ public class HeroAttack : Ability
 
     private bool EnemiesInAttackRange()
     {
-        var currentCellY = _hero.CurrentCell.CellIndexes.y;
-        _rightMostCellIndex = Mathf.Clamp(_attackRange + _hero.CurrentCell.CellIndexes.x, 0, _cells.GetLength(1) - 1);
-        for (int x = 2; x <= _rightMostCellIndex; x++)
+        var currentCellY = _creature.CurrentCell.CellIndexes.y;
+        _furthestCellIndex = Mathf.Clamp(_creature.Data.AttackRange + _creature.CurrentCell.CellIndexes.x, 0, _cells.GetLength(1) - 1);
+        for (int x = 2; x <= _furthestCellIndex; x++)
         {
             var enemy = _cells[currentCellY, x].ContainedCreature;
             if (enemy != null)
             {
-                _enemy = (Monster)enemy;
+                _enemy = enemy;
                 return true;
             }
         }
-        Debug.Log(_hero + " cant reach any enemies " + currentCellY + " " + _rightMostCellIndex);
+        Debug.Log(_creature + " cant reach any enemies " + currentCellY + " " + _furthestCellIndex);
         return false;
     }
 
     private void Attack()
     {
+        _creature.SetTurnTime(_attackTime);
         _animator.Play("Attack");
-        //MonoBehaviour.print(_animator.GetCurrentAnimatorStateInfo(0).length);
-        var clips = _animator.runtimeAnimatorController.animationClips;
-        _animator.GetCurrentAnimatorStateInfo(0);
-        _hero.Transform.DOScale(1f, 0.3f).OnComplete(() =>
+        _creature.Transform.DOScale(1f, _attackTime).OnComplete(() =>
         {
             if (_projectile)
             {
@@ -74,16 +82,14 @@ public class HeroAttack : Ability
 
     private void Shake()
     {
-        //_enemy.Transform.DOShakeScale(0.2f);
-        //_hero.Transform.DOScale(1f, 0.3f);
         _enemy.Animator.Play("Hit");
-        _enemy.Health.Change(-_hero.Data.Damage);
+        _enemy.Health.Change(-_creature.Data.Damage);
     }
 
     private void Ranged()
     {
         var position = _enemy.Transform.position;
-        _projectile.position = _hero.Transform.position + (Vector3.up / 2f);
+        _projectile.position = _creature.Transform.position + (Vector3.up / 2f);
         _projectile.gameObject.SetActive(true);
         _projectile.DOMove(position, 0.2f).OnComplete(() =>
         {

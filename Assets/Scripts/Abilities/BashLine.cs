@@ -25,7 +25,7 @@ public class BashLine : Ability
 
     public override void Action()
     {
-        if (_hero.UsingSpecialAbility)
+        if (_hero.CastingAbility)
         {
             RemoveStun();
             Stun();
@@ -54,7 +54,8 @@ public class BashLine : Ability
             {
                 foreach (Monster monster in _stunnedMonsters)
                 {
-                    monster.Transform.DOShakeScale(0.6f);
+                    monster.Animator.Play("Hit");
+                    //monster.Transform.DOShakeScale(0.6f);
                 }
             });
         });
@@ -62,7 +63,7 @@ public class BashLine : Ability
 
     private void UpdateStunDuration()
     {
-        _hero.SetSpecialAbilityStatus(false);
+        _hero.SetCastingStatus(false);
         _turnsAfterStun++;
         if (_turnsAfterStun >= _stunDuration)
         {
