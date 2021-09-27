@@ -33,10 +33,6 @@ public abstract class CreatureData : ScriptableObject
     public GameObject Body => _body;
 
     [SerializeField]
-    private Texture _texture;
-    public Texture Texture => _texture;
-
-    [SerializeField]
     private AnimatorOverrideController _animator;
     public AnimatorOverrideController Animator => _animator;
 

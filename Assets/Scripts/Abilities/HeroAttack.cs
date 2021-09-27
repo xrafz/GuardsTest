@@ -65,7 +65,7 @@ public class HeroAttack : Ability
     private void Attack()
     {
         _creature.SetTurnTime(_attackTime);
-        _animator.Play("Attack");
+        _animator.SetTrigger("Attack");
         _creature.Transform.DOScale(1f, _attackTime).OnComplete(() =>
         {
             if (_projectile)
@@ -82,7 +82,7 @@ public class HeroAttack : Ability
 
     private void Shake()
     {
-        _enemy.Animator.Play("Hit");
+        _enemy.Animator.SetTrigger("Hit");
         _enemy.Health.Change(-_creature.Data.Damage);
     }
 

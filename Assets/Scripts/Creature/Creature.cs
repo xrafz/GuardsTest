@@ -57,10 +57,6 @@ public class Creature : MonoBehaviour
         }
         _animator.runtimeAnimatorController = _data.Animator;
 
-        var renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        renderer.sharedMaterial = renderer.material;
-        renderer.sharedMaterial.mainTexture = _data.Texture;
-
         _health = GetComponent<Health>();
         _health.Init(_data.Health);
 
@@ -107,12 +103,6 @@ public class Creature : MonoBehaviour
     {
         _currentCell = cell;
         _transform.DOMove(cell.transform.position, time);
-        /*
-        _transform.DOMove(cell.transform.position, time).OnComplete(() =>
-        {
-            _animator.Play("Idle");
-        });
-        */
         cell.SetContainedCreature(this);
     }
     

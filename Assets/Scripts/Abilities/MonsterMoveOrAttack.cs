@@ -65,14 +65,15 @@ public class MonsterMoveOrAttack : Ability
 
     private IEnumerator WaitForMovement()
     {
-        _creature.Animator.Play("Walk");
-        yield return new WaitForSeconds(_passedSteps * 0.8f);
-        _creature.Animator.Play("Idle");
+        var timeToWait = _passedSteps * 0.8f;
+        _creature.Animator.SetTrigger("Walk");
+        _creature.SetTurnTime(timeToWait);
+        yield return new WaitForSeconds(timeToWait);
+        _creature.Animator.SetTrigger("StopWalking");
     }
 
     private void Move()
     {
-        Debug.Log(_cells[_currentCellY, _currentCellX - 1].name);
         if (_cells[_currentCellY, _currentCellX - 1].ContainedCreature == null)
         {
             _passedSteps++;
@@ -114,7 +115,7 @@ public class MonsterMoveOrAttack : Ability
     private void Attack()
     {
         _creature.SetTurnTime(_attackTime);
-        _animator.Play("Attack");
+        _animator.SetTrigger("Attack");
         _creature.Transform.DOScale(1f, _attackTime).OnComplete(() =>
         {
             if (_projectile)
@@ -131,7 +132,7 @@ public class MonsterMoveOrAttack : Ability
 
     private void Shake()
     {
-        _enemy.Animator.Play("Hit");
+        _enemy.Animator.SetTrigger("Hit");
         _enemy.Health.Change(-_creature.Data.Damage);
     }
 
