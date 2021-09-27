@@ -9,7 +9,7 @@ public class BashLine : Ability
     [SerializeField]
     private int _stunDuration = 1;
     [SerializeField]
-    private int _stunDamage = 10;
+    private int _stunDamage;
     Cell[,] _cells;
 
     private Hero _hero;
@@ -19,6 +19,7 @@ public class BashLine : Ability
     {
         _hero = mono.GetComponent<Hero>();
         _stunnedMonsters = new List<Creature>();
+        _stunDamage = _hero.Data.AbilityPower;
         _hero.OnTurn += Action;
         _cells = Field.Instance.Cells;
     }

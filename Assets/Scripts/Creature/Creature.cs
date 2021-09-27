@@ -40,7 +40,7 @@ public class Creature : MonoBehaviour
     public delegate void Blank();
     public event Blank OnTurn;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _transform = transform;
     }

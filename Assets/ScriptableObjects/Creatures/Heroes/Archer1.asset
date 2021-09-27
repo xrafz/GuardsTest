@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bc47bc20e752374c9f9df237c7b94cf, type: 3}
-  m_Name: Archer2
+  m_Name: Archer1
   m_EditorClassIdentifier: 
-  _health: 100
-  _damage: 5
-  _attackRange: 5
+  _health: 40
+  _damage: 10
+  _attackRange: 3
+  _abilityPower: 20
   _abilities:
   - {fileID: 11400000, guid: 6ea896b4d4597f84d96ed7242923e173, type: 2}
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   - {fileID: 11400000, guid: e8216bb17febfff4abb62d02d94c220c, type: 2}
-  _body: {fileID: 919132149155446097, guid: 84623c1626027e446af697c4fd430a73, type: 3}
-  _root: {fileID: -5694154564104819198, guid: 84623c1626027e446af697c4fd430a73, type: 3}
-  _material: {fileID: 2100000, guid: 38f69a07bb9136b4389453d30ea7b546, type: 2}
-  _texture: {fileID: 2800000, guid: 7487295eb5a69c945865666b4a7f030b, type: 3}
-  _animator: {fileID: 22100000, guid: ee6ea4a713a252d44ab374f1e80cbad7, type: 2}
-  _projectile: {fileID: 9205339350801317249, guid: 96b008892047d6c46b078fee02829502, type: 3}
+  _body: {fileID: 100050, guid: 4623e8b42dd176342861a847916155d4, type: 3}
+  _texture: {fileID: 2800000, guid: e2b6ddf23a0e36c4a97b04dd2a914e0f, type: 3}
+  _animator: {fileID: 22100000, guid: 63bd9a050247a5345b1a31095f053f15, type: 2}
+  _healthBarOffset: {x: 0, y: 2.2, z: 0}
+  _projectile: {fileID: 0}

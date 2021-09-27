@@ -5,7 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Creatures/Monster")]
 public class MonsterData : CreatureData
 {
-    [SerializeField] //TODO Вынести в MonsterData
+    [Header("Monster Specific Stats")]
+    [SerializeField]
     private int _movementDistance = 1;
     public int MovementDistance => _movementDistance;
+
+    [SerializeField]
+    private int _castTime = 2;
+    public int CastTime => _castTime;
 }

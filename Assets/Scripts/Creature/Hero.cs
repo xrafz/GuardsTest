@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Hero : Creature
 {
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 }

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Monster : Creature
 {
+    protected override void Awake()
+    {
+        base.Awake();
+        _transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     private void Start()
     {
-        _transform.rotation = Quaternion.Euler(0, 0, 0);
         Health.OnDeath += Die;
     }
 

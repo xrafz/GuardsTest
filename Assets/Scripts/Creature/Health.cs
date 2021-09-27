@@ -7,12 +7,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField]
     private int _maximum;
-
     public int Maximum => _maximum;
 
     [SerializeField]
     private int _current;
-
     public int Current => _current; //
 
     public delegate void Blank();

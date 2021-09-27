@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 20b07e5e224f4224b96d0addcfba2c34, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: fb8b7a133163d20458784e15fa16d6b5, type: 2}
+  - {fileID: 11400000, guid: 3cfa412a6683f9c47bf56f34031e65b4, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 1

@@ -7,7 +7,7 @@ using DG.Tweening;
 public class MonsterTeammateBuff : Ability
 {
     [SerializeField]
-    private int _damageBuff = 5;
+    private int _abilityPower;
     [SerializeField]
     private int _turnsBeforeBuff = 2; //if =2, then buff every 3rd turn
 
@@ -16,6 +16,8 @@ public class MonsterTeammateBuff : Ability
     public override void Init(MonoBehaviour mono)
     {
         _monster = mono.GetComponent<Monster>();
+        _abilityPower = _monster.Data.AbilityPower;
+        _turnsBeforeBuff = ((MonsterData)_monster.Data).CastTime;
         _monster.OnTurn += Action;
         _turnsAfterBuff = 1;
         BattleState.Instance.OnTurn += UpdateTurns;
@@ -37,7 +39,7 @@ public class MonsterTeammateBuff : Ability
         {
             selectedMonster = monsters[Random.Range(0, monsters.Count)];
         } while (selectedMonster == _monster);
-        selectedMonster.Data.ChangeDamage(_damageBuff);
+        selectedMonster.Data.ChangeDamage(_abilityPower);
         Debug.Log("Added damage to " + selectedMonster.name);
         _monster.Transform.DOScaleY(2f, 0.5f).OnComplete(() =>
         {

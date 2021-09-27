@@ -18,13 +18,13 @@ public class HealthBar : MonoBehaviour
         _health.OnChange += SetBar;
         _transform = transform;
         _camera = Camera.main.transform;
-        
+        _transform.rotation = Quaternion.Euler(50f, 0, 0);
     }
 
-    private void Update()
+    private void Start()
     {
-        _transform.LookAt(_camera);
-        _transform.rotation = Quaternion.Euler(_transform.rotation.x, 0, _transform.rotation.z);
+        _transform.localPosition = _health.GetComponent<Creature>().Data.HealthBarOffset;
+        _transform.rotation = Quaternion.Euler(50f, 0, 0);
     }
 
     public void SetBar()
