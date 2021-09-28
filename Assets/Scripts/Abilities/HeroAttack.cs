@@ -34,7 +34,7 @@ public class HeroAttack : Ability
         _creature.OnTurn += Action;
     }
 
-    public override void Action()
+    private void Action()
     {
         if (!_creature.CastingAbility && _creature.AbleToMove)
         {

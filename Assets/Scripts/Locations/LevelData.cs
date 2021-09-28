@@ -13,6 +13,10 @@ public class LevelData : ScriptableObject
     private LevelData[] _levelsToOpen;
     public LevelData[] LevelsToOpen => _levelsToOpen;
 
+    [SerializeField]
+    private int _budgetLimit;
+    public int BudgetLimit => _budgetLimit;
+
     [Header("Награды за уровень")]
     [SerializeField]
     private int _mithrilReward;

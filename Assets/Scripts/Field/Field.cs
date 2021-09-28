@@ -33,12 +33,12 @@ public class Field : MonoBehaviour
     {
         Init();
 
-        print(GameSession.CurrentLocation);
+        print(GameSession.Location);
     }
 
     private void Init()
     {
-        var field = Instantiate(GameSession.CurrentLocation.Environment);
+        var field = Instantiate(GameSession.Location.Environment);
         _cells = _cellGenerator.Spawn(_rows, _columns);
         InitSpawners();
         BattleState.Instance.SetCells(_cells);
@@ -47,7 +47,7 @@ public class Field : MonoBehaviour
     public void InitSpawners()
     {
         _heroGenerator.InitialGeneration();
-        _mobGenerator.SetCreatures(GameSession.CurrentLocation.Mobs);
+        _mobGenerator.SetCreatures(GameSession.Location.Mobs);
         _mobGenerator.InitialGeneration();
     }
 }

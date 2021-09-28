@@ -41,7 +41,7 @@ public class BattleState : MonoBehaviour
     public void SetCells(Cell[,] cells)
     {
         _cells = cells;
-        _enemiesToDefeat = GameSession.CurrentLocation.EnemiesToKill;
+        _enemiesToDefeat = GameSession.Location.EnemiesToKill;
         _objective.Output(_enemiesToDefeat.ToString());
     }
 
@@ -164,8 +164,8 @@ public class BattleState : MonoBehaviour
     {
         StopAllCoroutines();
         print("Win");
-        print("cur: " + GameSession.CurrentLocationID);
-        if(GameSession.CurrentLocationID == GameSession.CurrentLevel.Locations.Length - 1)
+        print("cur: " + GameSession.LocationID);
+        if(GameSession.LocationID == GameSession.Level.Locations.Length - 1)
         {
             GameSession.CompleteCurrentLevel();
             SceneManager.LoadScene(0);

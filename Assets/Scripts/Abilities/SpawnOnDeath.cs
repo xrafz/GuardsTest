@@ -15,7 +15,7 @@ public class SpawnOnDeath : Ability
         _creature.Health.OnDeath += Action;
     }
 
-    public override void Action()
+    private void Action()
     {
         Cell desiredCell = RandomCell();
         if (desiredCell != null)

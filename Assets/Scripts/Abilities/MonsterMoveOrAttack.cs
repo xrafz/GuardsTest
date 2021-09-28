@@ -40,7 +40,7 @@ public class MonsterMoveOrAttack : Ability
         _creature.OnTurn += Action;
     }
 
-    public override void Action()
+    private void Action()
     {
         if (_creature.AbleToMove && !_creature.CastingAbility)
         {

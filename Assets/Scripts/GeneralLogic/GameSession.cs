@@ -4,62 +4,65 @@ using UnityEngine;
 
 public class GameSession
 {
-    public static LevelData CurrentLevel { get; private set; }
+    public static LevelData Level { get; private set; }
 
-    public static LocationData CurrentLocation { get; private set; }
+    public static LocationData Location { get; private set; }
 
-    public static int CurrentLocationID { get; private set; }
-    
+    public static int LocationID { get; private set; }
+
+    //public Dictionary<ItemData, int> Items { get; private set; } = new Dictionary<ItemData, int>(); //   item | quantity
+    public List<ItemData> Items { get; private set; } = new List<ItemData>();
+
     [SerializeField]
-    public static SaveData CurrentSave { get; private set; }
+    public static SaveData Save { get; private set; }
 
     public static void SetCurrentLevel(LevelData data)
     {
-        CurrentLevel = data;
-        CurrentLocationID = 0;
-        CurrentLocation = CurrentLevel.Locations[CurrentLocationID];
+        Level = data;
+        LocationID = 0;
+        Location = Level.Locations[LocationID];
     }
 
     public static void SetNextLocation()
     {
-        CurrentLocationID++;
-        CurrentLocation = CurrentLevel.Locations[CurrentLocationID];
+        LocationID++;
+        Location = Level.Locations[LocationID];
     }
 
     public static void CompleteCurrentLevel()
     {
-        if (CurrentSave.CompletedLevels.ContainsKey(CurrentLevel.name))
+        if (Save.CompletedLevels.ContainsKey(Level.name))
         {
-            CurrentSave.CompletedLevels[CurrentLevel.name] = true;
+            Save.CompletedLevels[Level.name] = true;
         }
         else
         {
-            CurrentSave.CompletedLevels.Add(CurrentLevel.name, true);
+            Save.CompletedLevels.Add(Level.name, true);
+
+            Save.ChangeBudget(Level.BudgetReward); // один раз прошел - один раз получил награды
+            Save.ChangeMitrhril(Level.MithrilReward);
+            Save.ChangeStars(Level.StarsReward);
         }
 
-        foreach (LevelData level in CurrentLevel.LevelsToOpen)
+        foreach (LevelData level in Level.LevelsToOpen)
         {
-            if (CurrentSave.AvailableLevels.ContainsKey(level.name))
+            if (Save.AvailableLevels.ContainsKey(level.name))
             {
-                CurrentSave.AvailableLevels[level.name] = true;
+                Save.AvailableLevels[level.name] = true;
             }
             else
             {
-                CurrentSave.AvailableLevels.Add(level.name, true);
+                Save.AvailableLevels.Add(level.name, true);
             }
-            MonoBehaviour.print(CurrentSave.AvailableLevels[level.name]);
+            MonoBehaviour.print(Save.AvailableLevels[level.name]);
         }
 
-        CurrentSave.ChangeBudget(CurrentLevel.BudgetReward);
-        CurrentSave.ChangeMitrhril(CurrentLevel.MithrilReward);
-        CurrentSave.ChangeStars(CurrentLevel.StarsReward);
-
-        SaveLoader.Save(CurrentSave);
+        SaveLoader.Save(Save);
     }
 
     public static void LoadProgressData()
     {
-        CurrentSave = SaveLoader.LoadSave();
+        Save = SaveLoader.LoadSave();
     }
 }
 
@@ -97,4 +100,3 @@ public class SaveData
         AvailableLevels = new Dictionary<string, bool>();
     }
 }
-

@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : MonoBehaviour
+[CreateAssetMenu(menuName = "Items/Potion")]
+public class Potion : ItemData
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Use(MonoBehaviour mono)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < _actionValue.Length; i++)
+        {
+            var action = Instantiate(_actions[i]);
+            action.Init(mono, _actionValue[i]);
+        }
     }
 }

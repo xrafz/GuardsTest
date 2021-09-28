@@ -7,9 +7,15 @@ public class MapHandler : MonoBehaviour
     [SerializeField]
     private LevelHolder[] _levels;
 
+    [SerializeField]
+    private Shop _shop;
+
+    public static MapHandler Instance;
+
     private void Awake()
     {
         Init();
+        Instance = this;
     }
 
     private void Init()
@@ -20,9 +26,9 @@ public class MapHandler : MonoBehaviour
 
         foreach (LevelHolder level in _levels)  //включаем коллайдеры для каждого разблокированного уровня
         {
-            if (GameSession.CurrentSave.AvailableLevels.ContainsKey(level.Data.name))
+            if (GameSession.Save.AvailableLevels.ContainsKey(level.Data.name))
             {
-                level.SetColliderStatus(GameSession.CurrentSave.AvailableLevels[level.Data.name]);
+                level.SetColliderStatus(GameSession.Save.AvailableLevels[level.Data.name]);
             }
             else
             {
@@ -31,10 +37,17 @@ public class MapHandler : MonoBehaviour
         }
     }
 
+    public void LoadShop()
+    {
+        gameObject.SetActive(false);
+        _shop.gameObject.SetActive(true);
+        _shop.SetBudget();
+    }
+
     private void Debug()
     {
-        print($"Mithril: {GameSession.CurrentSave.Mithril}");
-        print($"Budget: {GameSession.CurrentSave.Budget}");
-        print($"Stars: {GameSession.CurrentSave.Stars}");
+        print($"Mithril: {GameSession.Save.Mithril}");
+        print($"Budget: {GameSession.Save.Budget}");
+        print($"Stars: {GameSession.Save.Stars}");
     }
 }

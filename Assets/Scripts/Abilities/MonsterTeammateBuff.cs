@@ -23,7 +23,7 @@ public class MonsterTeammateBuff : Ability
         BattleState.Instance.OnTurn += UpdateTurns;
     }
 
-    public override void Action()
+    private void Action()
     {
         if (_monster.CastingAbility)
         {

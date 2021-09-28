@@ -24,7 +24,7 @@ public class BashLine : Ability
         _cells = Field.Instance.Cells;
     }
 
-    public override void Action()
+    public void Action()
     {
         if (_hero.CastingAbility)
         {

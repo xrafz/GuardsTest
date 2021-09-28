@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemData : MonoBehaviour
+public class ItemData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int _cost;
+    public int Cost => _cost;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private Sprite _sprite;
+    public Sprite Sprite => _sprite;
+
+    [SerializeField]
+    protected int[] _actionValue;
+    public int[] ActionValue => _actionValue;
+
+    [SerializeField]
+    protected ItemAction[] _actions;
+    public ItemAction[] Actions => _actions;
 }

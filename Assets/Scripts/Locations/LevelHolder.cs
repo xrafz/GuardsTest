@@ -16,7 +16,10 @@ public class LevelHolder : MonoBehaviour
     public void ChooseLevel()
     {
         GameSession.SetCurrentLevel(_data);
-        SceneManager.LoadScene(1);
+        //shop
+
+        MapHandler.Instance.LoadShop();
+        //SceneManager.LoadScene(1);
     }
 
     private void OnMouseDown()

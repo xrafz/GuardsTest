@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Inventory 
 {
-    public Dictionary<Item, int> Items { get; private set; }
+    public Dictionary<ItemData, int> Items { get; private set; } = new Dictionary<ItemData, int>(); //   item | quantity
 
 }

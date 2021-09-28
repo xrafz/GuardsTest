@@ -20,10 +20,9 @@ public class LoseOnDeath : Ability
                 _deathAnimationTime = clip.length + 0.5f;
             }
         }
-
     }
 
-    public override void Action()
+    private void Action()
     {
         _creature.Animator.Play("Death"); 
         _creature.Transform.DOScale(1f, _deathAnimationTime).OnComplete(() =>
