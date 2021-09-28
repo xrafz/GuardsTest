@@ -49,6 +49,11 @@ public class GameSession
             }
             MonoBehaviour.print(CurrentSave.AvailableLevels[level.name]);
         }
+
+        CurrentSave.ChangeBudget(CurrentLevel.BudgetReward);
+        CurrentSave.ChangeMitrhril(CurrentLevel.MithrilReward);
+        CurrentSave.ChangeStars(CurrentLevel.StarsReward);
+
         SaveLoader.Save(CurrentSave);
     }
 
@@ -64,6 +69,27 @@ public class SaveData
     public Dictionary<string, bool> CompletedLevels { get; private set; }
 
     public Dictionary<string, bool> AvailableLevels { get; private set; }
+
+    public int Mithril { get; private set; } = 0; //изначальное значение
+
+    public int Budget { get; private set; } = 250; //изначальное значение
+
+    public int Stars { get; private set; } = 0;//изначальное значение
+
+    public void ChangeMitrhril(int quantity)
+    {
+        Mithril += quantity;
+    }
+
+    public void ChangeBudget(int quantity)
+    {
+        Budget += quantity;
+    }
+
+    public void ChangeStars(int quantity)
+    {
+        Stars += quantity;
+    }
 
     public SaveData()
     {

@@ -16,6 +16,8 @@ public class MapHandler : MonoBehaviour
     {
         GameSession.LoadProgressData();
 
+        Debug();
+
         foreach (LevelHolder level in _levels)  //включаем коллайдеры для каждого разблокированного уровня
         {
             if (GameSession.CurrentSave.AvailableLevels.ContainsKey(level.Data.name))
@@ -27,5 +29,12 @@ public class MapHandler : MonoBehaviour
                 level.SetColliderStatus(false);
             }
         }
+    }
+
+    private void Debug()
+    {
+        print($"Mithril: {GameSession.CurrentSave.Mithril}");
+        print($"Budget: {GameSession.CurrentSave.Budget}");
+        print($"Stars: {GameSession.CurrentSave.Stars}");
     }
 }
