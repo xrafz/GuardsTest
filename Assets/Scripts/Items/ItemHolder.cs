@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemHolder : MonoBehaviour
 {
@@ -8,19 +9,32 @@ public class ItemHolder : MonoBehaviour
     private ItemData _item;
     public ItemData Item => _item;
 
-    private Shop _shop;
+    [SerializeField]
+    private Image _image;
 
-    private void Start()
+    [SerializeField]
+    private Button _button;
+
+    public void Set(ItemData item)
     {
-        _shop = Shop.Instance;
+        Set(item, false);
+    }
+
+    public void Set(ItemData item, bool buying) //buying/selling bool
+    {
+        _item = item;
+        _image.sprite = _item.Sprite;
+
+        //_button.onClick.
+        //дописать разный функционал кнопок в зависимости от bool
     }
 
     public void Add()
     {
-        _shop.Add(_item);
+        Shop.Instance.Add(_item);
     }
     public void Remove()
     {
-        _shop.Remove(_item);
+        Shop.Instance.Remove(_item);
     }
 }

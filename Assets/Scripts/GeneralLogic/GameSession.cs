@@ -13,21 +13,7 @@ public class GameSession
     //public Dictionary<ItemData, int> Items { get; private set; } = new Dictionary<ItemData, int>(); //   item | quantity
     public static List<ItemData> Items { get; private set; } = new List<ItemData>();
 
-    [SerializeField]
     public static SaveData Save { get; private set; }
-
-    public static void SetCurrentLevel(LevelData data)
-    {
-        Level = data;
-        LocationID = 0;
-        Location = Level.Locations[LocationID];
-    }
-
-    public static void SetNextLocation()
-    {
-        LocationID++;
-        Location = Level.Locations[LocationID];
-    }
 
     public static void CompleteCurrentLevel()
     {
@@ -56,6 +42,24 @@ public class GameSession
     {
         Save = SaveLoader.LoadSave();
     }
+
+    public static void SetCurrentLevel(LevelData data)
+    {
+        Level = data;
+        LocationID = 0;
+        Location = Level.Locations[LocationID];
+    }
+
+    public static void SetNextLocation()
+    {
+        LocationID++;
+        Location = Level.Locations[LocationID];
+    }
+
+    public static void SetItems(List<ItemData> items)
+    {
+        Items = items;
+    }
 }
 
 [System.Serializable]
@@ -65,9 +69,9 @@ public class SaveData
 
     public List<string> AvailableLevels { get; private set; } = new List<string>();
 
-    public int Mithril { get; private set; } = 2; //изначальное значение
+    public int Mithril { get; private set; }
 
-    public int Stars { get; private set; } = 0;//изначальное значение
+    public int Stars { get; private set; }
 
     public void ChangeMitrhril(int quantity)
     {
@@ -83,5 +87,7 @@ public class SaveData
     {
         CompletedLevels = new List<string>();
         AvailableLevels = new List<string>();
+        Mithril = Constants.InitialMithril;
+        Stars = Constants.InitialStars;
     }
 }

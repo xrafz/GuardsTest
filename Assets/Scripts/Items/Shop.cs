@@ -14,6 +14,11 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private TMP_Text _budgetText;
 
+    [SerializeField]
+    private ItemHolder _itemPrefab;
+    [SerializeField]
+    private Transform _playerItems;
+
     private int _budget;
     private int _currentCost;
 
@@ -71,6 +76,8 @@ public class Shop : MonoBehaviour
         if (_currentCost + item.Cost <= _budget)
         {
             _selectedItems.Add(item);
+            var newItem = Instantiate(_itemPrefab, _playerItems);
+            newItem.Set(item);
             Refresh();
         }
     }
@@ -83,6 +90,7 @@ public class Shop : MonoBehaviour
 
     public void LoadBattle()
     {
+        GameSession.SetItems(_selectedItems);
         SceneManager.LoadScene(1);
     }
 }
