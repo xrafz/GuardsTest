@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Shop : MonoBehaviour
@@ -10,7 +9,7 @@ public class Shop : MonoBehaviour
     private List<ItemData> _itemSlots = new List<ItemData>(); //предметы для спавна // todo: брать с сейва
 
     [SerializeField]
-    public List<ItemData> SelectedItems { get; private set; } = new List<ItemData>();
+    private List<ItemData> _selectedItems = new List<ItemData>();
 
     [SerializeField]
     private TMP_Text _budgetText;
@@ -25,10 +24,29 @@ public class Shop : MonoBehaviour
         Instance = this;
     }
 
-    public void SetBudget()
+    public void CalculateBudget()
     {
-        _budget = GameSession.Save.Budget;
+        var budget = Constants.InitialBudget;
+        foreach (string s in GameSession.Save.CompletedLevels)
+        {
+            print(s);
+        }
+        foreach (LevelHolder level in MapHandler.Instance.Levels)
+        {
+            print(level.Data.name);
+            if (GameSession.Save.CompletedLevels.Contains(level.Data.name))
+            {
+                budget += level.Data.BudgetReward;
+            }
+        }
+        _budget = budget;
 
+        LimitBudget();
+        Refresh();
+    }
+
+    private void LimitBudget()
+    {
         var levelBudget = GameSession.Level.BudgetLimit;
         if (levelBudget != 0 && levelBudget < _budget)
         {
@@ -40,11 +58,11 @@ public class Shop : MonoBehaviour
     {
         print(_budget);
         _currentCost = 0;
-        foreach (ItemData item in SelectedItems)
+        foreach (ItemData item in _selectedItems)
         {
             _currentCost += item.Cost;
         }
-        _budgetText.text = _currentCost.ToString();
+        _budgetText.text = $"{_currentCost}/{_budget}";
     }
 
     public void Add(ItemData item)
@@ -52,14 +70,19 @@ public class Shop : MonoBehaviour
         print(_budget);
         if (_currentCost + item.Cost <= _budget)
         {
-            SelectedItems.Add(item);
+            _selectedItems.Add(item);
             Refresh();
         }
     }
 
     public void Remove(ItemData item)
     {
-        SelectedItems.Remove(item);
+        _selectedItems.Remove(item);
         Refresh();
+    }
+
+    public void LoadBattle()
+    {
+        SceneManager.LoadScene(1);
     }
 }

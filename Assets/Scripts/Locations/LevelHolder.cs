@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelHolder : MonoBehaviour
 {
@@ -16,10 +15,7 @@ public class LevelHolder : MonoBehaviour
     public void ChooseLevel()
     {
         GameSession.SetCurrentLevel(_data);
-        //shop
-
         MapHandler.Instance.LoadShop();
-        //SceneManager.LoadScene(1);
     }
 
     private void OnMouseDown()

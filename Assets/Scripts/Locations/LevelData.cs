@@ -14,6 +14,10 @@ public class LevelData : ScriptableObject
     public LevelData[] LevelsToOpen => _levelsToOpen;
 
     [SerializeField]
+    private bool _initiallyOpen;
+    public bool InitiallyOpen => _initiallyOpen;
+
+    [SerializeField]
     private int _budgetLimit;
     public int BudgetLimit => _budgetLimit;
 
