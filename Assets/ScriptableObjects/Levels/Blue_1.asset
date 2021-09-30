@@ -21,3 +21,4 @@ MonoBehaviour:
   _mithrilReward: 0
   _budgetReward: 40
   _starsReward: 0
+  _itemsReward: []

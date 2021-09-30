@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Items
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Items
   m_Data:
     m_SerializedData: []
-  m_GUID: 1049479524052ba41aafc6aeebb257ce
+  m_GUID: 4175f7cc777e33749b4bac28e93a148e
   m_SerializeEntries:
-  - m_GUID: 80be2b1c9ffb16d4e9d2a28ab755032f
-    m_Address: BigHealthPotion
+  - m_GUID: dda6785f3224f9a488df53067e36c2e4
+    m_Address: SmallHealthPotion
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3d5ca111e012adc4ea8137403c681a86, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 86ef655c6edf8594eaf14a2d145da34c, type: 2}
-    - {fileID: 11400000, guid: 7e192ed26f658d142979f54b6c7e60c5, type: 2}
+    - {fileID: 11400000, guid: be9930486a534644188a3a44680b2638, type: 2}
+    - {fileID: 11400000, guid: a545f0a6e5e21744d89c0f90bc3d3224, type: 2}

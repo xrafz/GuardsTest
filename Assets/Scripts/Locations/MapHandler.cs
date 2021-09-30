@@ -63,7 +63,7 @@ public class MapHandler : MonoBehaviour
     {
         gameObject.SetActive(false);
         _shop.gameObject.SetActive(true);
-        _shop.CalculateBudget();
+        _shop.Init();
     }
 
     private void Debug()

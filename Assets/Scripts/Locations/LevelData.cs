@@ -33,4 +33,8 @@ public class LevelData : ScriptableObject
     [SerializeField]
     private int _starsReward;
     public int StarsReward => _starsReward;
+
+    [SerializeField]
+    private string[] _itemsReward;
+    public string[] ItemsReward => _itemsReward;
 }

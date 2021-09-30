@@ -17,16 +17,32 @@ public class ItemHolder : MonoBehaviour
 
     public void Set(ItemData item)
     {
-        Set(item, false);
+        Set(item, Types.Buying);
     }
 
-    public void Set(ItemData item, bool buying) //buying/selling bool
+    public void Set(ItemData item, Types type)
     {
         _item = item;
         _image.sprite = _item.Sprite;
 
-        //_button.onClick.
-        //дописать разный функционал кнопок в зависимости от bool
+        switch (type)
+        {
+            case Types.Buying:
+                {
+                    _button.onClick.AddListener(Add);
+                    break;
+                }
+            case Types.Selling:
+                {
+                    _button.onClick.AddListener(Remove);
+                    break;
+                }
+            case Types.Using:
+                {
+                    _button.onClick.AddListener(Use);
+                    break;
+                }
+        }
     }
 
     public void Add()
@@ -36,5 +52,18 @@ public class ItemHolder : MonoBehaviour
     public void Remove()
     {
         Shop.Instance.Remove(_item);
+        Destroy(gameObject);
+    }
+
+    public void Use()
+    {
+
+    }
+
+    public enum Types
+    {
+        Buying,
+        Selling,
+        Using
     }
 }

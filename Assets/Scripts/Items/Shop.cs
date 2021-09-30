@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
 using TMPro;
 
 public class Shop : MonoBehaviour
@@ -17,10 +18,11 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private ItemHolder _itemPrefab;
     [SerializeField]
-    private Transform _playerItems;
+    private Transform _playerItems, _shopItems;
 
     private int _budget;
     private int _currentCost;
+    private List<string> _unlockedItems = new List<string>();
 
     public static Shop Instance;
 
@@ -29,25 +31,55 @@ public class Shop : MonoBehaviour
         Instance = this;
     }
 
-    public void CalculateBudget()
+    private void LoadItems()
+    {
+        List<string> itemsToLoad = new List<string>();
+        foreach (string item in Constants.InitialItems)
+        {
+            itemsToLoad.Add(item);
+        }
+        foreach (string item in _unlockedItems)
+        {
+            itemsToLoad.Add(item);
+        }
+
+        foreach (string item in itemsToLoad)
+        {
+            Addressables.LoadAssetAsync<ItemData>(item).Completed += handle =>
+            {
+                var newItem = Instantiate(_itemPrefab, _shopItems);
+                newItem.Set(handle.Result, ItemHolder.Types.Buying);
+                newItem.name = newItem.Item.name;
+                _itemSlots.Add(handle.Result);
+            };
+        }
+    }
+
+    public void Init()
+    {
+        GameSession.Items.Clear();
+        HandleLevelRewards();
+        LoadItems();
+        LimitBudget();
+        Refresh();
+    }
+
+    private void HandleLevelRewards()
     {
         var budget = Constants.InitialBudget;
-        foreach (string s in GameSession.Save.CompletedLevels)
+        var levels = MapHandler.Instance.Levels;
+        foreach (LevelHolder level in levels)
         {
-            print(s);
-        }
-        foreach (LevelHolder level in MapHandler.Instance.Levels)
-        {
-            print(level.Data.name);
             if (GameSession.Save.CompletedLevels.Contains(level.Data.name))
             {
                 budget += level.Data.BudgetReward;
+                foreach (string item in level.Data.ItemsReward)
+                {
+                    _unlockedItems.Add(item);
+                }
             }
         }
         _budget = budget;
-
-        LimitBudget();
-        Refresh();
     }
 
     private void LimitBudget()
@@ -61,7 +93,6 @@ public class Shop : MonoBehaviour
 
     public void Refresh()
     {
-        print(_budget);
         _currentCost = 0;
         foreach (ItemData item in _selectedItems)
         {

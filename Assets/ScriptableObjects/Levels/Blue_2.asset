@@ -15,3 +15,10 @@ MonoBehaviour:
   _locations:
   - {fileID: 11400000, guid: 71764f189ba79594cb7ca760ce7e266e, type: 2}
   - {fileID: 11400000, guid: 1ab46583ca21f764482ae973c1d39d47, type: 2}
+  _levelsToOpen: []
+  _initiallyOpen: 0
+  _budgetLimit: 0
+  _mithrilReward: 0
+  _budgetReward: 0
+  _starsReward: 0
+  _itemsReward: []
