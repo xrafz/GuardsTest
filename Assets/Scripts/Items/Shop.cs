@@ -57,6 +57,7 @@ public class Shop : MonoBehaviour
 
     public void Init()
     {
+        gameObject.SetActive(true);
         GameSession.Items.Clear();
         HandleLevelRewards();
         LoadItems();
@@ -108,7 +109,7 @@ public class Shop : MonoBehaviour
         {
             _selectedItems.Add(item);
             var newItem = Instantiate(_itemPrefab, _playerItems);
-            newItem.Set(item);
+            newItem.Set(item, ItemHolder.Types.Selling);
             Refresh();
         }
     }

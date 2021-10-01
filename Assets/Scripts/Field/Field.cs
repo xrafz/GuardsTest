@@ -26,8 +26,6 @@ public class Field : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        //ToDo - поменять окружение в зависимости от текущей локи
     }
     private void Start()
     {
@@ -46,6 +44,7 @@ public class Field : MonoBehaviour
 
     public void InitSpawners()
     {
+        _heroGenerator.SetCreatures(GameSession.Heroes);
         _heroGenerator.InitialGeneration();
         _mobGenerator.SetCreatures(GameSession.Location.Mobs);
         _mobGenerator.InitialGeneration();

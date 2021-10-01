@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class GameSession
 {
@@ -11,8 +10,9 @@ public class GameSession
 
     public static int LocationID { get; private set; }
 
-    //public Dictionary<ItemData, int> Items { get; private set; } = new Dictionary<ItemData, int>(); //   item | quantity
     public static List<ItemData> Items { get; private set; } = new List<ItemData>();
+
+    public static HeroData[] Heroes { get; private set; }
 
     public static SaveData Save { get; private set; }
 
@@ -60,6 +60,11 @@ public class GameSession
     public static void SetItems(List<ItemData> items)
     {
         Items = items;
+    }
+
+    public static void SetHeroes(List<HeroData> heroes)
+    {
+        Heroes = heroes.ToArray();
     }
 }
 

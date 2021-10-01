@@ -6,10 +6,9 @@ public class MapHandler : MonoBehaviour
 {
     [SerializeField]
     private LevelHolder[] _levels;
-    public LevelHolder[] Levels => _levels;
-
     [SerializeField]
-    private Shop _shop;
+    private CreatureShop _creatureShop;
+    public LevelHolder[] Levels => _levels;
 
     public static MapHandler Instance;
 
@@ -59,11 +58,10 @@ public class MapHandler : MonoBehaviour
         }
     }
 
-    public void LoadShop()
+    public void LoadCharacterSelection()
     {
         gameObject.SetActive(false);
-        _shop.gameObject.SetActive(true);
-        _shop.Init();
+        _creatureShop.gameObject.SetActive(true);
     }
 
     private void Debug()

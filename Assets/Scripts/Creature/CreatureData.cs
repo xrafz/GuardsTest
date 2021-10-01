@@ -33,6 +33,10 @@ public abstract class CreatureData : ScriptableObject
     public GameObject Body => _body;
 
     [SerializeField]
+    private Sprite _sprite;
+    public Sprite Sprite => _sprite;
+
+    [SerializeField]
     private AnimatorOverrideController _animator;
     public AnimatorOverrideController Animator => _animator;
 
@@ -48,5 +52,15 @@ public abstract class CreatureData : ScriptableObject
     public void ChangeDamage(int value)
     {
         _damage += value;
+    }
+
+    public void ChangeHealth(int value)
+    {
+        _health += value;
+    }
+
+    public void ChangeAbilityPower(int value)
+    {
+        _abilityPower += value;
     }
 }

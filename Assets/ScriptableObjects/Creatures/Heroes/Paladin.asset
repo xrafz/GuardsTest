@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   - {fileID: 11400000, guid: e8216bb17febfff4abb62d02d94c220c, type: 2}
   _body: {fileID: 919132149155446097, guid: 98888dd8e4dd0024eb82bf1e74d9b97b, type: 3}
+  _sprite: {fileID: -6704542678559317924, guid: 8d82bf4f2be4b0441934a2ad5f7d6b7a, type: 3}
   _animator: {fileID: 22100000, guid: 92bc8b37416e7eb4ea159d1210c0b6e4, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}

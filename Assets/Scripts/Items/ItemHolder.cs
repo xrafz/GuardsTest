@@ -15,11 +15,6 @@ public class ItemHolder : MonoBehaviour
     [SerializeField]
     private Button _button;
 
-    public void Set(ItemData item)
-    {
-        Set(item, Types.Buying);
-    }
-
     public void Set(ItemData item, Types type)
     {
         _item = item;
