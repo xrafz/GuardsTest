@@ -33,12 +33,17 @@ public class HeroHolder : MonoBehaviour
         }
     }
 
-    public void Remove()
+    private void Remove()
     {
         _selection.SetActive(false);
         _button.onClick.RemoveListener(Remove);
         _button.onClick.AddListener(Add);
 
         CreatureShop.Instance.Remove(_hero);
+    }
+
+    public void SetHero(HeroData hero)
+    {
+        _hero = hero;
     }
 }

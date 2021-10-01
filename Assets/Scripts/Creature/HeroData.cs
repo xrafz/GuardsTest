@@ -7,7 +7,12 @@ public class HeroData : CreatureData
 {
     [Header("Hero specific stats")]
     [SerializeField]
-    private int[] _upgradeValue;
+    private int[] _upgradeValues;
+    public int[] UpgradeValues => _upgradeValues;
+
+    [SerializeField]
+    private int[] _upgradeCosts;
+    public int[] UpgradeCosts => _upgradeCosts;
 
     public enum UpgradeTypes
     {
