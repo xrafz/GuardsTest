@@ -59,6 +59,7 @@ public class Shop : MonoBehaviour
     {
         gameObject.SetActive(true);
         GameSession.Items.Clear();
+        GameSession.SetGold(0);
         HandleLevelRewards();
         LoadItems();
         LimitBudget();

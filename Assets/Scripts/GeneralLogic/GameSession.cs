@@ -12,6 +12,8 @@ public class GameSession
 
     public static List<ItemData> Items { get; private set; } = new List<ItemData>();
 
+    public static int Gold { get; private set; }
+
     public static HeroData[] Heroes { get; private set; }
 
     public static SaveData Save { get; private set; }
@@ -60,6 +62,16 @@ public class GameSession
     public static void SetItems(List<ItemData> items)
     {
         Items = items;
+    }
+
+    public static void SetGold(int value)
+    {
+        Gold = value;
+    }
+
+    public static void AddGold(int value)
+    {
+        Gold += value;
     }
 
     public static void SetHeroes(List<HeroData> heroes)
