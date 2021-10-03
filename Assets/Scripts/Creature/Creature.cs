@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public class Creature : MonoBehaviour
@@ -37,8 +38,7 @@ public class Creature : MonoBehaviour
 
     private float _turnTime;
 
-    public delegate void Blank();
-    public event Blank OnTurn;
+    public event UnityAction OnTurn;
 
     protected virtual void Awake()
     {

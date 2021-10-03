@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleItems : MonoBehaviour
+public class ItemsBar : MonoBehaviour
 {
     [SerializeField]
     private ItemHolder _prefab;
@@ -11,7 +11,7 @@ public class BattleItems : MonoBehaviour
 
     public List<ItemData> Items { get; private set; }
 
-    public static BattleItems Instance;
+    public static ItemsBar Instance;
 
     private void Awake()
     {

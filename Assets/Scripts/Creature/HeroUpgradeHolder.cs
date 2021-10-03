@@ -11,22 +11,23 @@ public class HeroUpgradeHolder : MonoBehaviour
     [SerializeField]
     private Image _image;
 
-    private int _value, _cost;
-    private void OnEnable()
-    {
-        _image.sprite = _hero.Sprite;
-    }
+    private int _value, _cost, _statIndex;
 
     public void Init(HeroData hero)
     {
         _hero = hero;
-        var statIndex = Random.Range(0, _hero.UpgradeValues.Length);
-        _value = _hero.UpgradeValues[statIndex];
+        _statIndex = Random.Range(0, _hero.UpgradeValues.Length);
+        _value = _hero.UpgradeValues[_statIndex];
         _valueText.text = $"{_value}";
-        _cost = _hero.UpgradeCosts[statIndex];
+        _cost = _hero.UpgradeCosts[_statIndex];
         _costText.text = $"{_cost}";
         gameObject.SetActive(true);
+        _image.sprite = _hero.Sprite;
     }
 
-    //эвент для изменения суммы в сессии?
+    public void Upgrade()
+    {
+        _hero.Upgrade(_statIndex);
+        GameSession.ChangeGold(-_cost);
+    }
 }

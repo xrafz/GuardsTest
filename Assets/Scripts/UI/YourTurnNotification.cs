@@ -6,6 +6,11 @@ public class YourTurnNotification : MonoBehaviour
     [SerializeField]
     private Transform _notification;
 
+    private void Awake()
+    {
+        BattleState.Instance.OnTurn += Notify;
+    }
+
     private void Start()
     {
         _notification.DOScale(0f, 0f);

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class BattleState : MonoBehaviour
@@ -26,16 +28,39 @@ public class BattleState : MonoBehaviour
 
     public Creature SelectedCreature { get; private set; }
 
-    public bool CanMoveHeroes { get; private set; } = true;
+    public bool Interactable { get; private set; } = true;
 
     public static BattleState Instance;
 
-    public delegate void Blank();
-    public event Blank OnTurn;
+    public event UnityAction OnTurn;
+    public event UnityAction OnWin;
 
     private void Awake()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         Instance = this;
+        if (GameSession.LocationID == GameSession.Level.Locations.Length - 1)
+        {
+            OnWin += () =>
+            {
+                GameSession.CompleteCurrentLevel();
+                SceneManager.LoadScene(0);
+            };
+        }
+        else
+        {
+            OnWin += () =>
+            {
+                GameSession.ChangeGold(GameSession.Location.GoldReward);
+                GameSession.SetNextLocation();
+
+                //Restart();
+            };
+        }
     }
 
     public void SetCells(Cell[,] cells)
@@ -48,7 +73,7 @@ public class BattleState : MonoBehaviour
     public void SetSelectedCreature(Creature creature)
     {
         _unitSelector.Select(creature);
-        if (SelectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && CanMoveHeroes && SelectedCreature != creature)
+        if (SelectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && Interactable && SelectedCreature != creature)
         {
             print("swapp");
             ChangePlaces(creature);
@@ -81,9 +106,9 @@ public class BattleState : MonoBehaviour
         StartCoroutine(HeroesTurn());
     }
 
-    public void SetInteractivityStatus(bool canMoveHeroes)
+    public void SetInteractivityStatus(bool interactable)
     {
-        CanMoveHeroes = canMoveHeroes;
+        Interactable = interactable;
     }
 
     private IEnumerator HeroesTurn()
@@ -130,8 +155,6 @@ public class BattleState : MonoBehaviour
             HandleWin();
             return;
         }
-
-        _yourTurnNotifier.Notify();
         SetInteractivityStatus(true);
     }
 
@@ -155,7 +178,7 @@ public class BattleState : MonoBehaviour
         Restart();
     }
 
-    private void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -165,16 +188,7 @@ public class BattleState : MonoBehaviour
         StopAllCoroutines();
         print("Win");
         print("cur: " + GameSession.LocationID);
-        if(GameSession.LocationID == GameSession.Level.Locations.Length - 1)
-        {
-            GameSession.CompleteCurrentLevel();
-            SceneManager.LoadScene(0);
-        }
-        else
-        {
-            Restart();
-            GameSession.SetNextLocation();
-        }
+        OnWin?.Invoke();
     }
     
     public void AddDefeatedEnemy()

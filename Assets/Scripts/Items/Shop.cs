@@ -105,7 +105,6 @@ public class Shop : MonoBehaviour
 
     public void Add(ItemData item)
     {
-        print(_budget);
         if (_currentCost + item.Cost <= _budget)
         {
             _selectedItems.Add(item);

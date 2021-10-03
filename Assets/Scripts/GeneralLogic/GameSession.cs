@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameSession
 {
@@ -17,6 +18,8 @@ public class GameSession
     public static HeroData[] Heroes { get; private set; }
 
     public static SaveData Save { get; private set; }
+
+    public static UnityAction OnGoldChange;
 
     public static void CompleteCurrentLevel()
     {
@@ -51,6 +54,7 @@ public class GameSession
         Level = data;
         LocationID = 0;
         Location = Level.Locations[LocationID];
+        Gold = 0;
     }
 
     public static void SetNextLocation()
@@ -69,9 +73,10 @@ public class GameSession
         Gold = value;
     }
 
-    public static void AddGold(int value)
+    public static void ChangeGold(int value)
     {
         Gold += value;
+        OnGoldChange?.Invoke();
     }
 
     public static void SetHeroes(List<HeroData> heroes)

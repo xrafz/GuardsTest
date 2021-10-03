@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Health : MonoBehaviour
@@ -13,10 +14,9 @@ public class Health : MonoBehaviour
     private int _current;
     public int Current => _current; //
 
-    public delegate void Blank();
-    public event Blank OnHit;
-    public event Blank OnDeath;
-    public event Blank OnChange;
+    public event UnityAction OnHit;
+    public event UnityAction OnDeath;
+    public event UnityAction OnChange;
 
     public void Init(int value)
     {

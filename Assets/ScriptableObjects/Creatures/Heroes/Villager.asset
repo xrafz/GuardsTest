@@ -25,3 +25,5 @@ MonoBehaviour:
   _animator: {fileID: 22100000, guid: 9842f7741ba272b43a5fe143512ac460, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}
+  _upgradeValues: 0a0000000500000005000000
+  _upgradeCosts: 640000006400000064000000

@@ -16,3 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 978e1f890504474419c5e94b293d8006, type: 2}
   _environment: {fileID: 1562137881764545690, guid: 521fe4a92cea7ae44afee4346db006b4, type: 3}
   _enemiesToKill: 1
+  _goldReward: 200
