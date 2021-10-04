@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,10 @@ public class ItemsBar : MonoBehaviour
     [SerializeField]
     private Transform _container;
 
-    public List<ItemData> Items { get; private set; }
+    private List<Type> _usableTypes = new List<Type>
+    {
+        typeof(Potion)
+    };
 
     public static ItemsBar Instance;
 
@@ -17,12 +21,15 @@ public class ItemsBar : MonoBehaviour
     {
         Instance = this;
 
-        Items = GameSession.Items;
+        var items = GameSession.Items;
 
-        foreach(ItemData item in Items)
+        foreach(ItemData item in items)
         {
-            var newItem = Instantiate(_prefab, _container);
-            newItem.Set(item, ItemHolder.Types.Using);
+            if (_usableTypes.Contains(item.GetType()))
+            {
+                var newItem = Instantiate(_prefab, _container);
+                newItem.Set(item, ItemHolder.Types.SelectAndUse);
+            }
         }
     }
 }

@@ -28,7 +28,11 @@ public class BattleState : MonoBehaviour
 
     public Creature SelectedCreature { get; private set; }
 
+    public ItemHolder SelectedItem { get; private set; }
+
     public bool Interactable { get; private set; } = true;
+
+    public bool ItemUsed { get; private set; } = false;
 
     public static BattleState Instance;
 
@@ -61,6 +65,7 @@ public class BattleState : MonoBehaviour
                 //Restart();
             };
         }
+        ItemUsed = false;
     }
 
     public void SetCells(Cell[,] cells)
@@ -68,6 +73,16 @@ public class BattleState : MonoBehaviour
         _cells = cells;
         _enemiesToDefeat = GameSession.Location.EnemiesToKill;
         _objective.Output(_enemiesToDefeat.ToString());
+    }
+
+    public void SetItem(ItemHolder item)
+    {
+        SelectedItem = item;
+    }
+
+    public void SetItemUsed(bool value)
+    {
+        ItemUsed = value;
     }
 
     public void SetSelectedCreature(Creature creature)
@@ -103,6 +118,7 @@ public class BattleState : MonoBehaviour
 
         SelectedCreature = null;
         SetInteractivityStatus(false);
+        SetItemUsed(true);
         StartCoroutine(HeroesTurn());
     }
 
@@ -148,6 +164,7 @@ public class BattleState : MonoBehaviour
 
     private void EndTurn()
     {
+        ItemUsed = false;
         OnTurn?.Invoke();
 
         if (WinConditionFullfilled())

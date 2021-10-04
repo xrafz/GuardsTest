@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemData : ScriptableObject
+public abstract class ItemData : ScriptableObject
 {
     [SerializeField]
     private int _cost;
@@ -19,4 +19,6 @@ public class ItemData : ScriptableObject
     [SerializeField]
     protected ItemAction[] _actions;
     public ItemAction[] Actions => _actions;
+
+    public abstract void Use(MonoBehaviour mono);
 }

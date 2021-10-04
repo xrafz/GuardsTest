@@ -6,6 +6,7 @@ public class Constants
     public static readonly string[] InitialItems = 
     {
         "SmallHealthPotion",
-        "BigHealthPotion"
+        "BigHealthPotion",
+        "DamagePotionTest"
     };
 }

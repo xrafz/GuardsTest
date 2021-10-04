@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Potion")]
 public class Potion : ItemData
 {
-    public void Use(MonoBehaviour mono)
+    public override void Use(MonoBehaviour mono)
     {
         for (int i = 0; i < _actionValue.Length; i++)
         {

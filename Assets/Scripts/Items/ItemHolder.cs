@@ -32,9 +32,9 @@ public class ItemHolder : MonoBehaviour
                     _button.onClick.AddListener(Remove);
                     break;
                 }
-            case Types.Using:
+            case Types.SelectAndUse:
                 {
-                    _button.onClick.AddListener(Use);
+                    _button.onClick.AddListener(Select);
                     break;
                 }
         }
@@ -52,13 +52,28 @@ public class ItemHolder : MonoBehaviour
 
     public void Use()
     {
+        BattleState.Instance.SetSelectedCreature(null);
 
+    }
+
+    public void Select()
+    {
+        BattleState.Instance.SetItem(this);
+    }
+
+    public void TargetedUse(MonoBehaviour target)
+    {
+        _item.Use(target);
+        Destroy(gameObject);
+        BattleState.Instance.SetSelectedCreature(null);
+        BattleState.Instance.SetItemUsed(true);
     }
 
     public enum Types
     {
         Buying,
         Selling,
-        Using
+        SelectAndUse,
+        Use
     }
 }

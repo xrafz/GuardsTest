@@ -24,22 +24,27 @@ public class HeroData : CreatureData
 
     public void Upgrade(int index)
     {
+        Upgrade(index, _upgradeValues[index]);
+    }
+
+    public void Upgrade(int index, int value)
+    {
         var type = (UpgradeTypes)index;
         switch (type)
         {
             case UpgradeTypes.Health:
                 {
-                    ChangeHealth(_upgradeValues[index]);
+                    ChangeHealth(value);
                     break;
                 }
             case UpgradeTypes.Damage:
                 {
-                    ChangeDamage(_upgradeValues[index]);
+                    ChangeDamage(value);
                     break;
                 }
             case UpgradeTypes.AbilityPower:
                 {
-                    ChangeAbilityPower(_upgradeValues[index]);
+                    ChangeAbilityPower(value);
                     break;
                 }
         }
