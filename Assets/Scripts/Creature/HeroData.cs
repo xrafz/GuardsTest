@@ -7,6 +7,7 @@ public class HeroData : CreatureData
 {
     [Header("Hero specific stats")]
     [SerializeField]
+    [Tooltip("0 - хп, 1 - урон, 2 - сила способности")]
     private int[] _upgradeValues = { 0, 0, 0 };
     public int[] UpgradeValues => _upgradeValues;
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class ChangeStat : ItemAction
 {
     [SerializeField]
+    [Tooltip("0 - хп, 1 - урон, 2 - сила способности")]
     private int _statIndex;
     [SerializeField]
     private int _duration;
@@ -42,7 +43,7 @@ public class ChangeStat : ItemAction
 
     private void OnValidate()
     {
-        var maxLength = Enum.GetNames(typeof(HeroData.UpgradeTypes)).Length;
+        var maxLength = Enum.GetNames(typeof(HeroData.UpgradeTypes)).Length - 1;
         _statIndex = Mathf.Clamp(_statIndex, 1, maxLength);
     }
 }
