@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-1)]
+[DefaultExecutionOrder(200)]
 public class Field : MonoBehaviour
 {
     [SerializeField]
@@ -12,10 +12,14 @@ public class Field : MonoBehaviour
 
     [SerializeField]
     private CellGenerator _cellGenerator;
+
     [SerializeField]
     private HeroGenerator _heroGenerator;
+    public HeroGenerator HeroGenerator => _heroGenerator;
+
     [SerializeField]
     private MobGenerator  _mobGenerator;
+    public MobGenerator MobGenerator => _mobGenerator;
 
     [SerializeField]
     private Cell[,] _cells;
@@ -39,7 +43,7 @@ public class Field : MonoBehaviour
         var field = Instantiate(GameSession.Location.Environment);
         _cells = _cellGenerator.Spawn(_rows, _columns);
         InitSpawners();
-        BattleState.Instance.SetCells(_cells);
+        BattleHandler.Instance.SetCells(_cells);
     }
 
     public void InitSpawners()

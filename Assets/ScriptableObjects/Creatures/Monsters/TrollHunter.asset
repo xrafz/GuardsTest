@@ -18,9 +18,9 @@ MonoBehaviour:
   _abilityPower: 5
   _abilities:
   - {fileID: 11400000, guid: ae1d84bc9a31a414b91e87340b9fb66c, type: 2}
-  - {fileID: 11400000, guid: 6a078793fdba1b141b4ab799eafce4b4, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
   _body: {fileID: 919132149155446097, guid: 5d0ca16b0f7d6c44790970073a631025, type: 3}
+  _sprite: {fileID: 0}
   _animator: {fileID: 22100000, guid: 87e931b0ac0bfba44946e4b8abf8ca8a, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}

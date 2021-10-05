@@ -20,8 +20,8 @@ public class ChangeStat : ItemAction
         _hero = mono.GetComponent<Hero>();
         _buffValue = value;
         ((HeroData)_hero.Data).Upgrade(_statIndex, _buffValue);
-        BattleState.Instance.OnTurn += UpdateTurns;
-        BattleState.Instance.OnWin += Debuff;
+        BattleHandler.Instance.OnTurn += UpdateTurns;
+        BattleHandler.Instance.OnWin += Debuff;
         Debug.Log($"Buffed {_hero.name} for {_buffValue}");
     }
 
@@ -37,8 +37,8 @@ public class ChangeStat : ItemAction
     private void Debuff()
     {
         ((HeroData)_hero.Data).Upgrade(_statIndex, -_buffValue);
-        BattleState.Instance.OnWin -= Debuff;
-        BattleState.Instance.OnTurn -= UpdateTurns;
+        BattleHandler.Instance.OnWin -= Debuff;
+        BattleHandler.Instance.OnTurn -= UpdateTurns;
     }
 
     private void OnValidate()

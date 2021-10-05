@@ -20,5 +20,12 @@ public abstract class ItemData : ScriptableObject
     protected ItemAction[] _actions;
     public ItemAction[] Actions => _actions;
 
-    public abstract void Use(MonoBehaviour mono);
+    public virtual void Use(MonoBehaviour mono)
+    {
+        for (int i = 0; i < _actionValue.Length; i++)
+        {
+            var action = Instantiate(_actions[i]);
+            action.Init(mono, _actionValue[i]);
+        }
+    }
 }

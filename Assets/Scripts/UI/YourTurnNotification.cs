@@ -8,7 +8,7 @@ public class YourTurnNotification : MonoBehaviour
 
     private void Awake()
     {
-        BattleState.Instance.OnTurn += Notify;
+        BattleHandler.Instance.OnTurn += Notify;
     }
 
     private void Start()

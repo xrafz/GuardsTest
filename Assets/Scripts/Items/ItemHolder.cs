@@ -52,21 +52,21 @@ public class ItemHolder : MonoBehaviour
 
     public void Use()
     {
-        BattleState.Instance.SetSelectedCreature(null);
+        BattleHandler.Instance.SetSelectedCreature(null);
 
     }
 
     public void Select()
     {
-        BattleState.Instance.SetItem(this);
+        BattleHandler.Instance.SetItem(this);
     }
 
     public void TargetedUse(MonoBehaviour target)
     {
         _item.Use(target);
         Destroy(gameObject);
-        BattleState.Instance.SetSelectedCreature(null);
-        BattleState.Instance.SetItemUsed(true);
+        BattleHandler.Instance.SetSelectedCreature(null);
+        BattleHandler.Instance.SetItemUsed(true);
     }
 
     public enum Types

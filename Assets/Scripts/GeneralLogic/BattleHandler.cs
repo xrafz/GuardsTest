@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class BattleState : MonoBehaviour
+public class BattleHandler : MonoBehaviour
 {
     [SerializeField]
     private int _regenValue = 10;
@@ -34,10 +34,14 @@ public class BattleState : MonoBehaviour
 
     public bool ItemUsed { get; private set; } = false;
 
-    public static BattleState Instance;
+    public static BattleHandler Instance;
 
     public event UnityAction OnTurn;
     public event UnityAction OnWin;
+    public event UnityAction OnLose;
+
+    public delegate void DefeatedHero(Hero hero);
+    public event DefeatedHero OnHeroDefeat;
 
     private void Awake()
     {
@@ -59,13 +63,12 @@ public class BattleState : MonoBehaviour
         {
             OnWin += () =>
             {
-                GameSession.ChangeGold(GameSession.Location.GoldReward);
+                GameSession.ChangeGold(GameSession.Location.GoldReward, GameSession.Location.RewardRandomness);
                 GameSession.SetNextLocation();
-
-                //Restart();
             };
         }
         ItemUsed = false;
+        OnLose += Restart;
     }
 
     public void SetCells(Cell[,] cells)
@@ -91,7 +94,7 @@ public class BattleState : MonoBehaviour
         if (SelectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && Interactable && SelectedCreature != creature)
         {
             print("swapp");
-            ChangePlaces(creature);
+            Swap(creature);
         }
         else
         {
@@ -99,7 +102,7 @@ public class BattleState : MonoBehaviour
         }
     }
 
-    public void ChangePlaces(Creature creature)
+    public void Swap(Creature creature)
     {
         var initialCell = SelectedCreature.CurrentCell;
         SelectedCreature.SetCell(creature.CurrentCell);
@@ -190,9 +193,7 @@ public class BattleState : MonoBehaviour
     public void HandleLose()
     {
         StopAllCoroutines();
-        print("Lose");
-
-        Restart();
+        OnLose?.Invoke();
     }
 
     public void Restart()
@@ -220,6 +221,16 @@ public class BattleState : MonoBehaviour
         else
         {
             _objective.Output((_enemiesToDefeat - _defeatedEnemies).ToString());
+        }
+    }
+
+    public void DefeatHero(Hero hero)
+    {
+        StopAllCoroutines();
+        OnHeroDefeat?.Invoke(hero);
+        if (hero.Health.Current < 1)
+        {
+            OnLose?.Invoke();
         }
     }
 

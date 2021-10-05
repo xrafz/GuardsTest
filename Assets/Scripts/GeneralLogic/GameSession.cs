@@ -79,6 +79,12 @@ public class GameSession
         OnGoldChange?.Invoke();
     }
 
+    public static void ChangeGold(int value, int randomness)
+    {
+        value = Mathf.Clamp(value, value, value + Random.Range(-randomness, randomness));
+        ChangeGold(value);
+    }
+
     public static void SetHeroes(List<HeroData> heroes)
     {
         Heroes = heroes.ToArray();

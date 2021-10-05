@@ -25,9 +25,9 @@ public class LoseOnDeath : Ability
     private void Action()
     {
         _creature.Animator.Play("Death"); 
-        _creature.Transform.DOScale(1f, _deathAnimationTime).OnComplete(() =>
+        _creature.Transform.DOScale(1f, _deathAnimationTime + 0.3f).OnComplete(() =>
         {
-            BattleState.Instance.HandleLose();
+            BattleHandler.Instance.DefeatHero((Hero)_creature);
         });
     }
 }

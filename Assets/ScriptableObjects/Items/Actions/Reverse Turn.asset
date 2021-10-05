@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5279ac63d3e2024fa111b66cffeda8d, type: 3}
-  m_Name: Change Damage
+  m_Script: {fileID: 11500000, guid: af22717f65894024386bcea40e172d86, type: 3}
+  m_Name: Reverse Turn
   m_EditorClassIdentifier: 
-  _statIndex: 1
-  _turnsBeforeDebuff: 2

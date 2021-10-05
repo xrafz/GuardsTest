@@ -7,6 +7,7 @@ public class Constants
     {
         "SmallHealthPotion",
         "BigHealthPotion",
-        "DamagePotionTest"
+        "DamagePotionTest",
+        "Runes_Reverse"
     };
 }

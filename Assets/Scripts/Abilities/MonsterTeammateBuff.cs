@@ -20,7 +20,7 @@ public class MonsterTeammateBuff : Ability
         _turnsBeforeBuff = ((MonsterData)_monster.Data).CastTime;
         _monster.OnTurn += Action;
         _turnsAfterBuff = 1;
-        BattleState.Instance.OnTurn += UpdateTurns;
+        BattleHandler.Instance.OnTurn += UpdateTurns;
     }
 
     private void Action()
@@ -63,6 +63,6 @@ public class MonsterTeammateBuff : Ability
 
     private void OnDestroy()
     {
-        BattleState.Instance.OnTurn -= UpdateTurns;
+        BattleHandler.Instance.OnTurn -= UpdateTurns;
     }
 }

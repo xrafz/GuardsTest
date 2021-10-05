@@ -45,7 +45,7 @@ public class Creature : MonoBehaviour
         _transform = transform;
     }
 
-    private void Init()
+    public void Init()
     {
         gameObject.name = _data.name;
         _data = Instantiate(_data);

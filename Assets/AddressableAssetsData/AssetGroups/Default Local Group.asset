@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: DamagePotionTest
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 0c21952d80407ae40a8740e3602ec39c
+    m_Address: Runes_Reverse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3d5ca111e012adc4ea8137403c681a86, type: 2}
   m_SchemaSet:

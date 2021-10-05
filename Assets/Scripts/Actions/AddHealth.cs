@@ -15,7 +15,7 @@ public class AddHealth : ItemAction
         _hero = mono.GetComponent<Hero>();
         _buffValue = value;
         _hero.Health.Change(_buffValue, _buffValue);
-        BattleState.Instance.OnTurn += UpdateTurns;
+        BattleHandler.Instance.OnTurn += UpdateTurns;
         Debug.Log($"Buffed {_hero.name} for {_buffValue}");
     }
 
@@ -25,7 +25,7 @@ public class AddHealth : ItemAction
         if (_turnsAfterBuff >= _duration)
         {
             _hero.Health.Change(-_buffValue, -_buffValue);
-            BattleState.Instance.OnTurn -= UpdateTurns;
+            BattleHandler.Instance.OnTurn -= UpdateTurns;
         }
     }
 }

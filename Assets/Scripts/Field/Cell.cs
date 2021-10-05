@@ -40,14 +40,14 @@ public class Cell : MonoBehaviour
     {
         if (_containedCreature != null) //debug
         {
-            if (!BattleState.Instance.ItemUsed)
+            if (!BattleHandler.Instance.ItemUsed)
             {
-                BattleState.Instance.SelectedItem?.TargetedUse(_containedCreature);
+                BattleHandler.Instance.SelectedItem?.TargetedUse(_containedCreature);
             }
             print(string.Format("Clicked on {0}, hp: {1}, damage: {2}, atk range: {3}", _containedCreature.name, _containedCreature.Health.Current, 
                 _containedCreature.Data.Damage, _containedCreature.Data.AttackRange));
         }
-        BattleState.Instance.SetItem(null);
-        BattleState.Instance.SetSelectedCreature(_containedCreature);
+        BattleHandler.Instance.SetItem(null);
+        BattleHandler.Instance.SetSelectedCreature(_containedCreature);
     }
 }

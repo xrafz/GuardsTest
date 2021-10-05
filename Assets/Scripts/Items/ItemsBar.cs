@@ -15,6 +15,12 @@ public class ItemsBar : MonoBehaviour
         typeof(Potion)
     };
 
+    private List<Type> _passiveItems = new List<Type>
+    {
+        typeof(Rune),
+        typeof(Treasure)
+    };
+
     public static ItemsBar Instance;
 
     private void Awake()
@@ -29,6 +35,11 @@ public class ItemsBar : MonoBehaviour
             {
                 var newItem = Instantiate(_prefab, _container);
                 newItem.Set(item, ItemHolder.Types.SelectAndUse);
+            }
+            else if (_passiveItems.Contains(item.GetType()))
+            {
+                var newItem = Instantiate(item);
+                newItem.Use(this);
             }
         }
     }

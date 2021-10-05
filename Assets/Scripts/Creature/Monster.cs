@@ -24,7 +24,7 @@ public class Monster : Creature
     {
         SetAbilityToMove(false);
         Animator.Play("Death");
-        BattleState.Instance.AddDefeatedEnemy();
+        BattleHandler.Instance.AddDefeatedEnemy();
         MobGenerator.Instance.CreatedCreatures.Remove(this);
         yield return new WaitForSeconds(0.8f);
         _currentCell.SetContainedCreature(null);

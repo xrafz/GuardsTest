@@ -30,7 +30,7 @@ public class BashLine : Ability
         {
             RemoveStun();
             Stun();
-            BattleState.Instance.OnTurn += UpdateStunDuration;
+            BattleHandler.Instance.OnTurn += UpdateStunDuration;
         }
     }
 
@@ -81,11 +81,11 @@ public class BashLine : Ability
         }
         _stunnedMonsters.Clear();
         _turnsAfterStun = 0;
-        BattleState.Instance.OnTurn -= UpdateStunDuration;
+        BattleHandler.Instance.OnTurn -= UpdateStunDuration;
     }
 
     private void OnDestroy()
     {
-        BattleState.Instance.OnTurn -= UpdateStunDuration;
+        BattleHandler.Instance.OnTurn -= UpdateStunDuration;
     }
 }

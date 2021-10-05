@@ -20,4 +20,8 @@ public class LocationData : ScriptableObject
     [SerializeField]
     private int _goldReward;
     public int GoldReward => _goldReward;
+
+    [SerializeField]
+    private int _rewardRandomness = 0;
+    public int RewardRandomness => _rewardRandomness;
 }

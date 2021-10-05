@@ -23,7 +23,7 @@ public class UpgradeScreen : MonoBehaviour
             slot.Init(GameSession.Heroes[Random.Range(0, GameSession.Heroes.Length)]);
         }
 
-        BattleState.Instance.OnWin += () =>
+        BattleHandler.Instance.OnWin += () =>
         {
             gameObject.SetActive(true);
         };
