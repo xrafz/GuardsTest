@@ -239,13 +239,11 @@ public class BattleHandler : MonoBehaviour
     {
         OnHeroDefeat?.Invoke(hero);
         print(hero.Health.Current);
-        print("bruh");
         yield return new WaitForSeconds(0.3f);
         if (hero.Health.Current < 1)
         {
             StopAllCoroutines();
             OnLose?.Invoke();
-            Debug.Log("what");
         }
     }
 

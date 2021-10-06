@@ -8,6 +8,8 @@ public class Constants
         "SmallHealthPotion",
         "BigHealthPotion",
         "DamagePotionTest",
-        "Runes_Reverse"
+        "Runes_Reverse",
+        "Runes_Resurrect",
+        "Runes_Restart"
     };
 }

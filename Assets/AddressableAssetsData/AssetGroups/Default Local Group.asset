@@ -29,6 +29,14 @@ MonoBehaviour:
     m_Address: Runes_Reverse
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: d7bbca25243861a4d9f645f06e0c9278
+    m_Address: Runes_Restart
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: aca12661558589c44b2975bb13463561
+    m_Address: Runes_Resurrect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3d5ca111e012adc4ea8137403c681a86, type: 2}
   m_SchemaSet:

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f992495e987c7f49abcf3bfaf47b1db, type: 3}
-  m_Name: Reverse
+  m_Name: Restart
   m_EditorClassIdentifier: 
   _cost: 20
-  _sprite: {fileID: 718387858035624200, guid: 8d82bf4f2be4b0441934a2ad5f7d6b7a, type: 3}
+  _sprite: {fileID: 2164508047684578053, guid: 8d82bf4f2be4b0441934a2ad5f7d6b7a, type: 3}
   _actionValue: 00000000
   _actions:
   - {fileID: 11400000, guid: 55669e5d51a63a3488116f8ae6bbff08, type: 2}

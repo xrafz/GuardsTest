@@ -1,21 +1,22 @@
-using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = ("Item Action/RestartLocation"))]
-public class RestartLocation : ItemAction
+[CreateAssetMenu(menuName = ("Item Action/ResurrectHero"))]
+public class ResurrectHero : ItemAction
 {
     public override void Init(MonoBehaviour mono, int value)
     {
-        BattleHandler.Instance.OnLose -= BattleHandler.Instance.Restart;
-        BattleHandler.Instance.OnLose += Restart;
+        var manager = BattleHandler.Instance;
+        manager.OnHeroDefeat += Resurrect;
     }
 
-    public void Restart()
+    private void Resurrect(Hero hero)
     {
-        BattleHandler.Instance.OnLose += BattleHandler.Instance.Restart;
-        BattleHandler.Instance.OnLose -= Restart;
+        hero.Health.Set(hero.Health.Maximum);
+        hero.Play("Spawn");
+        BattleHandler.Instance.OnHeroDefeat -= Resurrect;
         RemoveItem();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void RemoveItem()
