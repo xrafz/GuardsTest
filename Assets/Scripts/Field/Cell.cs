@@ -44,7 +44,7 @@ public class Cell : MonoBehaviour
             {
                 BattleHandler.Instance.SelectedItem?.TargetedUse(_containedCreature);
             }
-            print(string.Format("Clicked on {0}, hp: {1}, damage: {2}, atk range: {3}", _containedCreature.name, _containedCreature.Health.Current, 
+            print(string.Format("Clicked on {0}, hp: {1}, damage: {2}, atk range: {3}", _containedCreature.name, _containedCreature.Health.Current,
                 _containedCreature.Data.Damage, _containedCreature.Data.AttackRange));
         }
         BattleHandler.Instance.SetItem(null);

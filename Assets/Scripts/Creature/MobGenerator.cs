@@ -30,6 +30,7 @@ public class MobGenerator : CreatureGenerator<Monster>
     protected override void SetData(Creature creature)
     {
         creature.SetData(_creatures[_currentMob % _creatures.Length]);
+        creature.Init();
         _currentMob++;
     }
 

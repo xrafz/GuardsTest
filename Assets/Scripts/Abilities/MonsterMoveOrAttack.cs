@@ -26,7 +26,7 @@ public class MonsterMoveOrAttack : Ability
         _projectile = _creature.Projectile?.transform;
         _cells = Field.Instance.Cells;
         _moveDistance = ((MonsterData)_creature.Data).MovementDistance;
-  
+
         _attackTime = 1f;
         var clips = _animator.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)

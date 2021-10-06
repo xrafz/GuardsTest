@@ -12,7 +12,12 @@ public class SpawnOnDeath : Ability
     public override void Init(MonoBehaviour mono)
     {
         _creature = mono.GetComponent<Creature>();
-        _creature.Health.OnDeath += Action;
+        _creature.Health.OnDeath += AddToTurn;
+    }
+
+    private void AddToTurn()
+    {
+        BattleHandler.Instance.OnTurn += Action;
     }
 
     private void Action()
@@ -25,6 +30,8 @@ public class SpawnOnDeath : Ability
         }
 
         MobGenerator.Instance.CreatedCreatures.Remove((Monster)_creature);
+        _creature.Health.OnDeath -= Action;
+        BattleHandler.Instance.OnTurn -= AddToTurn;
         Destroy(_creature.gameObject);
     }
 

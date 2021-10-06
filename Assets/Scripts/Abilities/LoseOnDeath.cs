@@ -24,10 +24,11 @@ public class LoseOnDeath : Ability
 
     private void Action()
     {
-        _creature.Animator.Play("Death"); 
+        _creature.Animator.Play("Death");
         _creature.Transform.DOScale(1f, _deathAnimationTime + 0.3f).OnComplete(() =>
         {
-            BattleHandler.Instance.DefeatHero((Hero)_creature);
+            var manager = BattleHandler.Instance;
+            manager.StartCoroutine(manager.DefeatHero((Hero)_creature));
         });
     }
 }

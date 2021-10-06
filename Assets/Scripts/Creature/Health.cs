@@ -35,6 +35,13 @@ public class Health : MonoBehaviour
         Check();
     }
 
+    public void Set(int value)
+    {
+        _current = value;
+        OnChange?.Invoke();
+        Check();
+    }
+
     public void Change(int value, int max)
     {
         _current += value;

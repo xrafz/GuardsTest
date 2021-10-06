@@ -24,6 +24,7 @@ public class HeroGenerator : CreatureGenerator<Hero>
     protected override void SetData(Creature creature)
     {
         creature.SetData(_creatures[_currentIndex]);
+        creature.Init();
         _currentIndex++;
     }
 }

@@ -1,72 +1,109 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = ("Item Action/ReverseTurn"))]
 public class ReverseTurn : ItemAction
 {
-    private List<GameObject> _creatures = new List<GameObject>();
-    [SerializeField]
-    private GameObject _prefab;
+    private TurnInfo _lastTurn;
+    private int _defeatedEnemies;
 
     public override void Init(MonoBehaviour mono, int value)
     {
         Debug.Log("Init");
         var manager = BattleHandler.Instance;
         manager.OnLose -= manager.Restart;
-        manager.OnLose += Reverse;
+        manager.OnHeroDefeat += Reverse;
         manager.OnTurn += UpdateData;
+        mono.StartCoroutine(InitialUpdate());
+    }
+
+    private IEnumerator<WaitForEndOfFrame> InitialUpdate()
+    {
+        yield return new WaitForEndOfFrame();
+        UpdateData();
+    }
+
+    public void Reverse(Hero hero)
+    {
+        Reverse();
     }
 
     private void Reverse()
     {
         var manager = BattleHandler.Instance;
-        var cells = Field.Instance.Cells;
-        foreach (Cell cell in cells)
+        manager.SetDefeatedEnemies(_defeatedEnemies);
+        manager.StopAllCoroutines();
+        var creatures = _lastTurn.Creatures;
+        for (int i = 0; i < creatures.Length; i++)
         {
-            if (cell.ContainedCreature != null)
+            creatures[i].Health.Set(_lastTurn.Health[i]);
+            creatures[i].Transform.DOKill();
+            creatures[i].SetCell(_lastTurn.Cells[i]);
+            creatures[i].Play("Idle");
+        }
+        manager.OnHeroDefeat -= Reverse;
+        manager.OnTurn -= UpdateData;
+        manager.OnLose += manager.Restart;
+        manager.SetInteractivityStatus(true);
+        RemoveItem();
+        Destroy(this);
+    }
+
+    private void RemoveItem()
+    {
+        var items = GameSession.Items;
+        foreach (ItemData item in items)
+        {
+            var actions = item.Actions;
+            foreach (ItemAction action in actions)
             {
-                Destroy(cell.ContainedCreature.gameObject);
+                if (action == this)
+                {
+                    GameSession.Items.Remove(item);
+                    break;
+                }
             }
         }
-        foreach(GameObject creature in _creatures)
-        {
-            var creatureComponent = creature.GetComponent<Creature>();
-            creatureComponent.SetCell(creatureComponent.CurrentCell);
-            creature.SetActive(true);
-        }
-
-        manager.OnLose -= Reverse;
-        manager.OnTurn -= UpdateData;
-        Destroy(this);
     }
 
     private void UpdateData()
     {
-        foreach (GameObject creature in _creatures)
-        {
-            Destroy(creature);
-        }
-        _creatures.Clear();
+        _defeatedEnemies = BattleHandler.Instance.DefeatedEnemies;
+
+        List<Creature> creatures = new List<Creature>();
+        List<int> creaturesHealth = new List<int>();
+        List<Cell> creaturesCells = new List<Cell>();
         var cells = Field.Instance.Cells;
         foreach (Cell cell in cells)
         {
-            if (cell.ContainedCreature != null)
+            Creature creature = cell.ContainedCreature;
+            if (creature != null)
             {
-                var creature = Instantiate(_prefab);
-                Creature creatureComponent;
-                if (cell.ContainedCreature.GetType() == typeof(Hero))
+                if (creature.Health.Current < 1)
                 {
-                    creatureComponent = creature.AddComponent<Hero>();
+                    Reverse();
                 }
-                else
-                {
-                    creatureComponent = creature.AddComponent<Monster>();
-                }
-                creatureComponent.Init();
-                creature.gameObject.SetActive(false);
-                _creatures.Add(creature.gameObject);
+                creatures.Add(creature);
+                creaturesHealth.Add(creature.Health.Current);
+                creaturesCells.Add(creature.CurrentCell);
             }
+        }
+        _lastTurn = new TurnInfo(creatures.ToArray(), creaturesHealth.ToArray(), creaturesCells.ToArray());
+    }
+
+    private struct TurnInfo
+    {
+        public Creature[] Creatures;
+        public int[] Health;
+        public Cell[] Cells;
+
+        public TurnInfo(Creature[] creatures, int[] health, Cell[] cells)
+        {
+            Creatures = creatures;
+            Health = health;
+            Cells = cells;
         }
     }
 }

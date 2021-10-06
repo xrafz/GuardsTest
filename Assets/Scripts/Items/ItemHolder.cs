@@ -53,7 +53,6 @@ public class ItemHolder : MonoBehaviour
     public void Use()
     {
         BattleHandler.Instance.SetSelectedCreature(null);
-
     }
 
     public void Select()

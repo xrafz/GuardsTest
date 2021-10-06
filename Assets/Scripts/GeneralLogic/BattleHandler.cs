@@ -22,7 +22,7 @@ public class BattleHandler : MonoBehaviour
     [SerializeField]
     private YourTurnNotification _yourTurnNotifier;
 
-    private int _defeatedEnemies = 0;
+    public int DefeatedEnemies { get; private set; } = 0;
 
     private Cell[,] _cells;
 
@@ -211,31 +211,46 @@ public class BattleHandler : MonoBehaviour
     
     public void AddDefeatedEnemy()
     {
-        _defeatedEnemies++;
-        print("defeated " + _defeatedEnemies + " enemies");
-
-        if (_defeatedEnemies > _enemiesToDefeat)
+        DefeatedEnemies++;
+        if (DefeatedEnemies > _enemiesToDefeat)
         {
             _objective.Output("0");
         }
         else
         {
-            _objective.Output((_enemiesToDefeat - _defeatedEnemies).ToString());
+            _objective.Output((_enemiesToDefeat - DefeatedEnemies).ToString());
         }
     }
 
-    public void DefeatHero(Hero hero)
+    public void SetDefeatedEnemies(int value)
     {
-        StopAllCoroutines();
+        DefeatedEnemies = value;
+        if (DefeatedEnemies > _enemiesToDefeat)
+        {
+            _objective.Output("0");
+        }
+        else
+        {
+            _objective.Output((_enemiesToDefeat - DefeatedEnemies).ToString());
+        }
+    }
+
+    public IEnumerator DefeatHero(Hero hero)
+    {
         OnHeroDefeat?.Invoke(hero);
+        print(hero.Health.Current);
+        print("bruh");
+        yield return new WaitForSeconds(0.3f);
         if (hero.Health.Current < 1)
         {
+            StopAllCoroutines();
             OnLose?.Invoke();
+            Debug.Log("what");
         }
     }
 
     private bool WinConditionFullfilled()
     {
-        return _defeatedEnemies >= _enemiesToDefeat;
+        return DefeatedEnemies >= _enemiesToDefeat;
     }
 }

@@ -88,8 +88,11 @@ public class Creature : MonoBehaviour
 
     public void SetData(CreatureData data)
     {
+        if (_data)
+        {
+            Destroy(_data);
+        }
         _data = data;
-        Init();
     }
 
     public void SetCell(Cell cell)
@@ -133,5 +136,10 @@ public class Creature : MonoBehaviour
     public void SetCastingStatus(bool status)
     {
         _castingAbility = status;
+    }
+
+    public void Play(string state)
+    {
+        _animator.Play(state);
     }
 }
