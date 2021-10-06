@@ -83,7 +83,8 @@ public class HeroAttack : Ability
     private void Shake()
     {
         _enemy.Animator.SetTrigger("Hit");
-        _enemy.Health.Change(-_creature.Data.Damage);
+        int damage = (int)((1 - (_enemy.Data.Resistance[(int)_creature.Data.DamageType] * 0.01f)) * _creature.Data.Damage);
+        _enemy.Health.Change(-damage);
     }
 
     private void Ranged()

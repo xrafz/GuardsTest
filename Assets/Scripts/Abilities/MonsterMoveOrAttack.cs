@@ -124,16 +124,17 @@ public class MonsterMoveOrAttack : Ability
             }
             else
             {
-                Shake();
+                Hit();
             }
         });
         MonoBehaviour.print(_creature.name + " attacked " + _enemy.name + ", dealing " + _creature.Data.Damage + " damage");
     }
 
-    private void Shake()
+    private void Hit()
     {
         _enemy.Animator.SetTrigger("Hit");
-        _enemy.Health.Change(-_creature.Data.Damage);
+        int damage = (int)((1 - (_enemy.Data.Resistance[(int)_creature.Data.DamageType] * 0.01f)) * _creature.Data.Damage);
+        _enemy.Health.Change(-damage);
     }
 
     private void Ranged()
@@ -144,7 +145,7 @@ public class MonsterMoveOrAttack : Ability
         _projectile.DOMove(position, 0.2f).OnComplete(() =>
         {
             _projectile.gameObject.SetActive(false);
-            Shake();
+            Hit();
         });
     }
 }

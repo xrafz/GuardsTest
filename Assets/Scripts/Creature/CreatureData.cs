@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public abstract class CreatureData : ScriptableObject
     private int _damage;
     public int Damage => _damage;
 
+    [Tooltip("Slashing, Piercing, Blunt, DarkMagic, ElementalMagic, AstralMagic")]
+    [SerializeField]
+    private int _damageType;
+    public int DamageType => _damageType;
+
     [SerializeField]
     private int _attackRange;
     public int AttackRange => _attackRange;
@@ -26,6 +32,19 @@ public abstract class CreatureData : ScriptableObject
     [SerializeField]
     private Ability[] _abilities;
     public Ability[] Abilities  => _abilities;
+
+    [Tooltip("Slashing, Piercing, Blunt, DarkMagic, ElementalMagic, AstralMagic")]
+    [SerializeField]
+    private int[] _resistance = 
+    {
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    };
+    public int[] Resistance => _resistance;
 
     #region Appearance
     [SerializeField, Header("Appearance")]
@@ -62,5 +81,11 @@ public abstract class CreatureData : ScriptableObject
     public void ChangeAbilityPower(int value)
     {
         _abilityPower += value;
+    }
+
+    private void OnValidate()
+    {
+        var maxLength = Enum.GetNames(typeof(Constants.DamageTypes)).Length - 1;
+        _damageType = Mathf.Clamp(_damageType, 0, maxLength);
     }
 }

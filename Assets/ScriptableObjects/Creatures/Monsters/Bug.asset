@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 25
   _damage: 50
+  _damageType: 0
   _attackRange: 5
   _abilityPower: 5
   _abilities:
   - {fileID: 11400000, guid: ae1d84bc9a31a414b91e87340b9fb66c, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
+  _resistance: 000000000000000000000000000000000000000000000000
   _body: {fileID: 919132149155446097, guid: 84623c1626027e446af697c4fd430a73, type: 3}
   _sprite: {fileID: 0}
   _animator: {fileID: 22100000, guid: ee6ea4a713a252d44ab374f1e80cbad7, type: 2}

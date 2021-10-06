@@ -12,4 +12,14 @@ public class Constants
         "Runes_Resurrect",
         "Runes_Restart"
     };
+
+    public enum DamageTypes
+    {
+        Slashing,
+        Piercing,
+        Blunt,
+        DarkMagic,
+        ElementalMagic,
+        AstralMagic
+    }
 }
