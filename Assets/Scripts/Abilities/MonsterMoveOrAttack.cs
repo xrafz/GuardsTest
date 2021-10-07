@@ -36,8 +36,6 @@ public class MonsterMoveOrAttack : Ability
                 _attackTime = clip.length;
             }
         }
-
-        _creature.OnTurn += Action;
     }
 
     private void Action()
@@ -147,5 +145,16 @@ public class MonsterMoveOrAttack : Ability
             _projectile.gameObject.SetActive(false);
             Hit();
         });
+    }
+
+    public override void Sub()
+    {
+        Unsub();
+        _creature.OnTurn += Action;
+    }
+
+    public override void Unsub()
+    {
+        _creature.OnTurn -= Action;
     }
 }

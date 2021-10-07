@@ -18,9 +18,7 @@ public class MonsterTeammateBuff : Ability
         _monster = mono.GetComponent<Monster>();
         _abilityPower = _monster.Data.AbilityPower;
         _turnsBeforeBuff = ((MonsterData)_monster.Data).CastTime;
-        _monster.OnTurn += Action;
         _turnsAfterBuff = 1;
-        BattleHandler.Instance.OnTurn += UpdateTurns;
     }
 
     private void Action()
@@ -61,8 +59,16 @@ public class MonsterTeammateBuff : Ability
         }
     }
 
-    private void OnDestroy()
+    public override void Sub()
+    {
+        Unsub();
+        BattleHandler.Instance.OnTurn += UpdateTurns;
+        _monster.OnTurn += Action;
+    }
+
+    public override void Unsub()
     {
         BattleHandler.Instance.OnTurn -= UpdateTurns;
+        _monster.OnTurn -= Action;
     }
 }

@@ -38,6 +38,8 @@ public class Creature : MonoBehaviour
 
     private float _turnTime;
 
+    private Ability[] _abilities;
+
     public event UnityAction OnTurn;
 
     protected virtual void Awake()
@@ -67,12 +69,11 @@ public class Creature : MonoBehaviour
             _projectile.SetActive(false);
         }
 
-        var abilities = _data.Abilities;
-        for (int i = 0; i < abilities.Length; i++)
+        _abilities = _data.Abilities;
+        for (int i = 0; i < _abilities.Length; i++)
         {
-            var ability = abilities[i];
-            ability = Instantiate(ability);
-            ability.Init(this);
+            _abilities[i] = Instantiate(_abilities[i]);
+            _abilities[i].Init(this);
         }
 
         SpawnAnimation();
@@ -141,5 +142,13 @@ public class Creature : MonoBehaviour
     public void Play(string state)
     {
         _animator.Play(state);
+    }
+
+    private void OnDestroy()
+    {
+        foreach (Ability ability in _abilities)
+        {
+            ability.Unsub();
+        }
     }
 }

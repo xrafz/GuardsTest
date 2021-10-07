@@ -30,7 +30,11 @@ public class HeroAttack : Ability
                 _attackTime = clip.length;
             }
         }
+    }
 
+    public override void Sub()
+    {
+        Unsub();
         _creature.OnTurn += Action;
     }
 
@@ -77,7 +81,6 @@ public class HeroAttack : Ability
                 Shake();
             }
         });
-        
     }
 
     private void Shake()
@@ -97,5 +100,10 @@ public class HeroAttack : Ability
             _projectile.gameObject.SetActive(false);
             Shake();
         });
+    }
+
+    public override void Unsub()
+    {
+        _creature.OnTurn -= Action;
     }
 }

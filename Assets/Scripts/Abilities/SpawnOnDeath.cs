@@ -12,7 +12,6 @@ public class SpawnOnDeath : Ability
     public override void Init(MonoBehaviour mono)
     {
         _creature = mono.GetComponent<Creature>();
-        _creature.Health.OnDeath += AddToTurn;
     }
 
     private void AddToTurn()
@@ -44,5 +43,16 @@ public class SpawnOnDeath : Ability
             cell = cells[Random.Range(0, cells.GetLength(0)), Random.Range(_minimumX, cells.GetLength(1))];
         } while (cell.ContainedCreature != null);
         return cell;
+    }
+
+    public override void Sub()
+    {
+        Unsub();
+        _creature.Health.OnDeath += AddToTurn;
+    }
+
+    public override void Unsub()
+    {
+        _creature.Health.OnDeath -= AddToTurn;
     }
 }

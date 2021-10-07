@@ -20,8 +20,13 @@ public class BashLine : Ability
         _hero = mono.GetComponent<Hero>();
         _stunnedMonsters = new List<Creature>();
         _stunDamage = _hero.Data.AbilityPower;
-        _hero.OnTurn += Action;
         _cells = Field.Instance.Cells;
+    }
+
+    public override void Sub()
+    {
+        Unsub();
+        _hero.OnTurn += Action;
     }
 
     public void Action()
@@ -84,7 +89,7 @@ public class BashLine : Ability
         BattleHandler.Instance.OnTurn -= UpdateStunDuration;
     }
 
-    private void OnDestroy()
+    public override void Unsub()
     {
         BattleHandler.Instance.OnTurn -= UpdateStunDuration;
     }
