@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bug
   m_EditorClassIdentifier: 
   _health: 25
-  _damage: 50
+  _damage: 5
   _damageType: 0
   _attackRange: 5
   _abilityPower: 5

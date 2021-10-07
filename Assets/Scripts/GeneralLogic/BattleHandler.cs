@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(-1)]
 public class BattleHandler : MonoBehaviour
 {
     [SerializeField]
@@ -95,6 +96,10 @@ public class BattleHandler : MonoBehaviour
         {
             print("swapp");
             Swap(creature);
+        }
+        else if (SelectedCreature == creature && creature?.GetType() == typeof(Hero))
+        {
+            ((Hero)creature).ChangeMode();
         }
         else
         {
@@ -238,7 +243,6 @@ public class BattleHandler : MonoBehaviour
     public IEnumerator DefeatHero(Hero hero)
     {
         OnHeroDefeat?.Invoke(hero);
-        print(hero.Health.Current);
         yield return new WaitForSeconds(0.3f);
         if (hero.Health.Current < 1)
         {

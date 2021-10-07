@@ -38,7 +38,7 @@ public class Creature : MonoBehaviour
 
     private float _turnTime;
 
-    private Ability[] _abilities;
+    protected Ability[] _abilities;
 
     public event UnityAction OnTurn;
 
@@ -47,7 +47,7 @@ public class Creature : MonoBehaviour
         _transform = transform;
     }
 
-    public void Init()
+    public virtual void Init()
     {
         gameObject.name = _data.name;
         _data = Instantiate(_data);
@@ -74,6 +74,7 @@ public class Creature : MonoBehaviour
         {
             _abilities[i] = Instantiate(_abilities[i]);
             _abilities[i].Init(this);
+            _abilities[i].Sub();
         }
 
         SpawnAnimation();
@@ -148,7 +149,7 @@ public class Creature : MonoBehaviour
     {
         foreach (Ability ability in _abilities)
         {
-            ability.Unsub();
+            ability.Destroy();
         }
     }
 }

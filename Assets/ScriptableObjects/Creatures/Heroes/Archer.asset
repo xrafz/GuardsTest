@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _damage: 5
+  _damageType: 0
   _attackRange: 5
   _abilityPower: 20
   _abilities:
   - {fileID: 11400000, guid: 6ea896b4d4597f84d96ed7242923e173, type: 2}
-  - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   - {fileID: 11400000, guid: e8216bb17febfff4abb62d02d94c220c, type: 2}
+  _resistance: 000000000000000000000000000000000000000000000000
   _body: {fileID: 919132149155446097, guid: 72eb2e7f657229b43843ba376c1a31ff, type: 3}
   _sprite: {fileID: -7823085291801108195, guid: 8d82bf4f2be4b0441934a2ad5f7d6b7a, type: 3}
   _animator: {fileID: 22100000, guid: 2a616d94649831e4b9c9b2ae0faab208, type: 2}
@@ -27,3 +28,12 @@ MonoBehaviour:
   _projectile: {fileID: 919132149155446097, guid: fd736c3076ad3bd4e83dd72125d90f88, type: 3}
   _upgradeValues: 0a0000000500000005000000
   _upgradeCosts: 640000006400000064000000
+  _firstModeAbilities:
+  - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
+  _secondModeAbilities:
+  - {fileID: 11400000, guid: b05097a1d20e71f4a8ea92865a604627, type: 2}
+  _firstModeDamageValue: 0
+  _firstModeDamageType: 0
+  _secondModeDamageType: 0
+  _secondModeDamageValue: 0
+  _secondModeAnimator: {fileID: 22100000, guid: 2a616d94649831e4b9c9b2ae0faab208, type: 2}

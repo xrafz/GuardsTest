@@ -16,6 +16,34 @@ public class HeroData : CreatureData
     public int[] UpgradeCosts => _upgradeCosts;
 
     [SerializeField]
+    private Ability[] _firstModeAbilities;
+    public Ability[] FirstModeAbilities => _firstModeAbilities;
+
+    [SerializeField]
+    private Ability[] _secondModeAbilities;
+    public Ability[] SecondModeAbilities => _secondModeAbilities;
+
+    [SerializeField]
+    private int _firstModeDamageValue;
+    public int FirstModeDamageValue => _firstModeDamageValue;
+
+    [SerializeField]
+    private int _firstModeDamageType;
+    public int FirstModeDamageType => _firstModeDamageType;
+
+    [SerializeField]
+    private int _secondModeDamageValue;
+    public int SecondModeDamageValue => _secondModeDamageValue;
+
+    [SerializeField]
+    private int _secondModeDamageType;
+    public int SecondModeDamageType => _secondModeDamageType;
+
+    [SerializeField]
+    private AnimatorOverrideController _secondModeAnimator;
+    public AnimatorOverrideController SecondModeAnimator => _secondModeAnimator;
+
+    [SerializeField]
     public enum UpgradeTypes
     {
         Health,

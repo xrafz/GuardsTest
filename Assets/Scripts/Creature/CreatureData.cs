@@ -83,6 +83,16 @@ public abstract class CreatureData : ScriptableObject
         _abilityPower += value;
     }
 
+    public void SetDamage(int value)
+    {
+        _damage = value;
+    }
+
+    public void SetDamageType(int value)
+    {
+        _damageType = value;
+    }
+
     private void OnValidate()
     {
         var maxLength = Enum.GetNames(typeof(Constants.DamageTypes)).Length - 1;

@@ -5,9 +5,6 @@ using System.Collections;
 [CreateAssetMenu(menuName = "Abilities/MonsterMoveOrAttack")]
 public class MonsterMoveOrAttack : Ability
 {
-    [SerializeField]
-    private int _moveDistance = 1;
-
     private Creature _creature;
     private Creature _enemy;
     private Cell[,] _cells;
@@ -15,9 +12,11 @@ public class MonsterMoveOrAttack : Ability
     private Transform _projectile;
     private Animator _animator;
     private float _attackTime;
-    private int _passedSteps;
 
+    [SerializeField]
+    private int _moveDistance = 1;
     private int _currentCellX, _currentCellY;
+    private int _passedSteps;
 
     public override void Init(MonoBehaviour mono)
     {
@@ -26,7 +25,11 @@ public class MonsterMoveOrAttack : Ability
         _projectile = _creature.Projectile?.transform;
         _cells = Field.Instance.Cells;
         _moveDistance = ((MonsterData)_creature.Data).MovementDistance;
+        SetAttackType();
+    }
 
+    private void SetAttackType()
+    {
         _attackTime = 1f;
         var clips = _animator.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
