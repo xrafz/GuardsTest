@@ -92,18 +92,21 @@ public class BattleHandler : MonoBehaviour
     public void SetSelectedCreature(Creature creature)
     {
         _unitSelector.Select(creature);
-        if (SelectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && Interactable && SelectedCreature != creature)
+        if (Interactable)
         {
-            print("swapp");
-            Swap(creature);
-        }
-        else if (SelectedCreature == creature && creature?.GetType() == typeof(Hero))
-        {
-            ((Hero)creature).ChangeMode();
-        }
-        else
-        {
-            SelectedCreature = creature;
+            if (SelectedCreature?.GetType() == typeof(Hero) && creature?.GetType() == typeof(Hero) && Interactable && SelectedCreature != creature)
+            {
+                print("swapp");
+                Swap(creature);
+            }
+            else if (SelectedCreature == creature && creature?.GetType() == typeof(Hero))
+            {
+                ((Hero)creature).ChangeMode();
+            }
+            else
+            {
+                SelectedCreature = creature;
+            }
         }
     }
 

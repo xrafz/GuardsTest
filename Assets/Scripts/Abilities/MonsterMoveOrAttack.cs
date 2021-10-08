@@ -134,7 +134,7 @@ public class MonsterMoveOrAttack : Ability
     private void Hit()
     {
         _enemy.Animator.SetTrigger("Hit");
-        int damage = (int)((1 - (_enemy.Data.Resistance[(int)_creature.Data.DamageType] * 0.01f)) * _creature.Data.Damage);
+        int damage = (int)((1 - (_enemy.Data.Resistance[_creature.Data.DamageType] * 0.01f)) * (_creature.Data.Damage + _creature.Data.AdditionalDamage));
         _enemy.Health.Change(-damage);
     }
 

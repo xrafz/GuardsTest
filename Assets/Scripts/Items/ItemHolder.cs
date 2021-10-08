@@ -37,6 +37,11 @@ public class ItemHolder : MonoBehaviour
                     _button.onClick.AddListener(Select);
                     break;
                 }
+            case Types.SimpleUse:
+                {
+                    _button.onClick.AddListener(Use);
+                    break;
+                }
         }
     }
 
@@ -52,7 +57,10 @@ public class ItemHolder : MonoBehaviour
 
     public void Use()
     {
+        _item.Use(this);
         BattleHandler.Instance.SetSelectedCreature(null);
+        GameSession.Items.Remove(_item);
+        Destroy(gameObject);
     }
 
     public void Select()
@@ -63,9 +71,10 @@ public class ItemHolder : MonoBehaviour
     public void TargetedUse(MonoBehaviour target)
     {
         _item.Use(target);
-        Destroy(gameObject);
+        GameSession.Items.Remove(_item);
         BattleHandler.Instance.SetSelectedCreature(null);
         BattleHandler.Instance.SetItemUsed(true);
+        Destroy(gameObject);
     }
 
     public enum Types
@@ -73,6 +82,6 @@ public class ItemHolder : MonoBehaviour
         Buying,
         Selling,
         SelectAndUse,
-        Use
+        SimpleUse
     }
 }

@@ -68,9 +68,18 @@ public abstract class CreatureData : ScriptableObject
     private GameObject _projectile;
     public GameObject Projectile => _projectile;
 
+    [SerializeField]
+    private int _additionalDamage = 0;
+    public int AdditionalDamage => _additionalDamage;
+
     public void ChangeDamage(int value)
     {
         _damage += value;
+    }
+
+    public void BuffDamage(int value)
+    {
+        _additionalDamage += value;
     }
 
     public void ChangeHealth(int value)

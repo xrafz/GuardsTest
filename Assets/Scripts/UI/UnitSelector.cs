@@ -26,7 +26,7 @@ public class UnitSelector : MonoBehaviour
             _highlightTransform.position = creature.Transform.position;
 
             _hp.Output(creature.Health.Current.ToString());
-            _damage.Output(creature.Data.Damage.ToString());
+            _damage.Output($"{creature.Data.Damage + creature.Data.AdditionalDamage}");
             _attackRange.Output(creature.Data.AttackRange.ToString());
         }
         else

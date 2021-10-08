@@ -13,7 +13,6 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
 
     [SerializeField]
     protected List<T> _createdCreatures = new List<T>();
-
     public List<T> CreatedCreatures => _createdCreatures;
 
     private Transform _transform;
@@ -44,8 +43,8 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
     {
         var creature = Instantiate(_prefab, _transform);
         var creatureComponent = creature.AddComponent<T>();
-        _createdCreatures.Add(creatureComponent);
         SetData(creatureComponent);
+        _createdCreatures.Add(creatureComponent);
         return creatureComponent;
     }
 

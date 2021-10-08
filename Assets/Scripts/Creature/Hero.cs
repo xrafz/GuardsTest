@@ -46,10 +46,6 @@ public class Hero : Creature
 
     public void ChangeMode()
     {
-        foreach (Ability ability in _abilities)
-        {
-            print(ability.name);
-        }
         _inFirstMode = !_inFirstMode;
         var data = (HeroData)_data;
         var firstMode = data.FirstModeAbilities;

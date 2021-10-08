@@ -10,7 +10,9 @@ public class Constants
         "DamagePotionTest",
         "Runes_Reverse",
         "Runes_Resurrect",
-        "Runes_Restart"
+        "Runes_Restart",
+        "Treasures_Add200Gold",
+        "Treasures_RefreshUpgrades"
     };
 
     public enum DamageTypes

@@ -89,8 +89,13 @@ public class BaseAttack : Ability
     protected virtual void Hit()
     {
         _enemy.Animator.SetTrigger("Hit");
-        int damage = (int)((1 - (_enemy.Data.Resistance[_creature.Data.DamageType] * 0.01f)) * _creature.Data.Damage);
-        _enemy.Health.Change(-damage);
+        _enemy.Health.Change(-CalculateDamage());
+    }
+
+    protected virtual int CalculateDamage()
+    {
+        int damage = (int)((1 - (_enemy.Data.Resistance[_creature.Data.DamageType] * 0.01f)) * (_creature.Data.Damage + _creature.Data.AdditionalDamage));
+        return damage;
     }
 
     protected void Ranged()

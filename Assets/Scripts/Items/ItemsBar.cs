@@ -18,7 +18,6 @@ public class ItemsBar : MonoBehaviour
     private List<Type> _passiveItems = new List<Type>
     {
         typeof(Rune),
-        typeof(Treasure)
     };
 
     public static ItemsBar Instance;

@@ -6,6 +6,8 @@ public class HeroUpgradeHolder : MonoBehaviour
 {
     [SerializeField]
     private HeroData _hero;
+    public HeroData Hero => _hero;
+
     [SerializeField]
     private TMP_Text _valueText, _costText;
     [SerializeField]
@@ -27,7 +29,10 @@ public class HeroUpgradeHolder : MonoBehaviour
 
     public void Upgrade()
     {
-        _hero.Upgrade(_statIndex);
-        GameSession.ChangeGold(-_cost);
+        if (GameSession.Gold - _cost >= 0)
+        {
+            _hero.Upgrade(_statIndex);
+            GameSession.ChangeGold(-_cost);
+        }
     }
 }

@@ -68,7 +68,7 @@ public class HeroData : CreatureData
                 }
             case UpgradeTypes.Damage:
                 {
-                    ChangeDamage(value);
+                    BuffDamage(value);
                     break;
                 }
             case UpgradeTypes.AbilityPower:

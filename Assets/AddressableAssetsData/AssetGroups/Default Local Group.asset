@@ -37,6 +37,14 @@ MonoBehaviour:
     m_Address: Runes_Resurrect
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 87e1ed57533a7c9499466da781526d4b
+    m_Address: Treasures_Add200Gold
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6c8765ccad83f19479429f0cbd6e60d9
+    m_Address: Treasures_RefreshUpgrades
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3d5ca111e012adc4ea8137403c681a86, type: 2}
   m_SchemaSet:
