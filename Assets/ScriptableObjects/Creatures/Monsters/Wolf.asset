@@ -18,7 +18,7 @@ MonoBehaviour:
   _attackRange: 1
   _abilityPower: 5
   _abilities:
-  - {fileID: 11400000, guid: ae1d84bc9a31a414b91e87340b9fb66c, type: 2}
+  - {fileID: 11400000, guid: dc2deb72f1c514c469a9b20ec7e574cb, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
   _resistance: 000000000000000000000000000000000000000000000000
   _body: {fileID: 919132149155446097, guid: 1e999c2e7a0e0c1419f2a828c9de4abf, type: 3}
@@ -26,5 +26,6 @@ MonoBehaviour:
   _animator: {fileID: 22100000, guid: 08f25c60074a2344b9135c26023b7535, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}
+  _additionalDamage: 0
   _movementDistance: 2
   _castTime: 2

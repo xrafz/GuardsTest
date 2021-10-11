@@ -14,18 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: 20b07e5e224f4224b96d0addcfba2c34, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 06fea1e58b6125d4f9f87d58bc66ef65, type: 2}
   m_Metadata:
-    m_Items:
-    - id: 0
+    m_Items: []
   m_TableData:
-  - m_Id: 104976089088
-    m_Localized: Village
+  - m_Id: 13720616960
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1380040310784
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423543631872
+    m_Localized: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445358206976
+    m_Localized: Ability Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1971877576704
+    m_Localized: Attack Range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2846956191744
+    m_Localized: Next Location
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555114090496
+    m_Localized: Your turn!
     m_Metadata:
       m_Items: []
   references:
     version: 1
-    00000000:
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 000010582b000000

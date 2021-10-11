@@ -18,12 +18,17 @@ MonoBehaviour:
   m_GUID: 957e18f4ec835e047bf4de8c20305d3f
   m_SerializeEntries:
   - m_GUID: 3cfa412a6683f9c47bf56f34031e65b4
-    m_Address: UI_ru
+    m_Address: Locations_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
   - m_GUID: 2da6adb4807b8cf4ebcc15241cbf1f1a
     m_Address: Mobs_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+  - m_GUID: e26cd4786bea23748bbc0d279bd0f6a6
+    m_Address: UI_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

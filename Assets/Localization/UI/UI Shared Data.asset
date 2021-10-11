@@ -13,10 +13,34 @@ MonoBehaviour:
   m_Name: UI Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: UI
-  m_TableCollectionNameGuidString: 20b07e5e224f4224b96d0addcfba2c34
+  m_TableCollectionNameGuidString: 06fea1e58b6125d4f9f87d58bc66ef65
   m_Entries:
-  - m_Id: 104976089088
-    m_Key: Village
+  - m_Id: 13720616960
+    m_Key: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1380040310784
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423543631872
+    m_Key: Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445358206976
+    m_Key: AbilityDamage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1971877576704
+    m_Key: AttackRange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2846956191744
+    m_Key: NextLocation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555114090496
+    m_Key: YourTurnNotification
     m_Metadata:
       m_Items: []
   m_Metadata:
@@ -28,4 +52,4 @@ MonoBehaviour:
     00000000:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1632744054018
+        m_CustomEpoch: 1633963329440

@@ -35,13 +35,7 @@ public class BaseAttack : Ability
         }
     }
 
-    public override void Sub()
-    {
-        Unsub();
-        _creature.OnTurn += Action;
-    }
-
-    protected void Action()
+    protected virtual void Action()
     {
         if (!_creature.CastingAbility && _creature.AbleToMove)
         {
@@ -108,6 +102,12 @@ public class BaseAttack : Ability
             _projectile.gameObject.SetActive(false);
             Hit();
         });
+    }
+
+    public override void Sub()
+    {
+        Unsub();
+        _creature.OnTurn += Action;
     }
 
     public override void Unsub()
