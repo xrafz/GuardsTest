@@ -65,6 +65,7 @@ public class BaseAttack : Ability
 
     protected virtual void Attack()
     {
+        _creature.Attack();
         _creature.SetTurnTime(_attackTime);
         _animator.SetTrigger("Attack");
         _creature.Transform.DOScale(1f, _attackTime).OnComplete(() =>
@@ -82,8 +83,13 @@ public class BaseAttack : Ability
 
     protected virtual void Hit()
     {
+        _enemy.Hit(_creature);
         _enemy.Animator.SetTrigger("Hit");
         _enemy.Health.Change(-CalculateDamage());
+        if (_enemy.Health.Current < 1)
+        {
+            _creature.EnemyKilled();
+        }
     }
 
     protected virtual int CalculateDamage()

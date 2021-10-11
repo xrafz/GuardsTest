@@ -41,6 +41,9 @@ public class Creature : MonoBehaviour
     protected Ability[] _abilities;
 
     public event UnityAction OnTurn;
+    public event UnityAction<Creature> OnHit;
+    public event UnityAction OnEnemyKilled;
+    public event UnityAction OnAttack;
 
     protected virtual void Awake()
     {
@@ -143,6 +146,21 @@ public class Creature : MonoBehaviour
     public void Play(string state)
     {
         _animator.Play(state);
+    }
+
+    public void Attack()
+    {
+        OnAttack?.Invoke();
+    }
+
+    public void Hit(Creature attacker)
+    {
+        OnHit?.Invoke(attacker);
+    }
+
+    public void EnemyKilled()
+    {
+        OnEnemyKilled?.Invoke();
     }
 
     private void OnDestroy()
