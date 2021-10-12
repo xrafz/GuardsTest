@@ -37,6 +37,7 @@ public class DamageStack : Ability
         if (_currentAttacks >= _attacksBeforeBuff)
         { 
             BattleHandler.Instance.OnTurn += Buff;
+            _currentAttacks = 0;
         }
     }
 

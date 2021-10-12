@@ -31,7 +31,6 @@ public class SpawnOnDeath : Ability
         MobGenerator.Instance.CreatedCreatures.Remove((Monster)_creature);
         _creature.Health.OnDeath -= Action;
         BattleHandler.Instance.OnTurn -= AddToTurn;
-        Destroy(_creature.gameObject);
     }
 
     private Cell RandomCell()
