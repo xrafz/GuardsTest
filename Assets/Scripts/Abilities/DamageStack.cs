@@ -41,8 +41,6 @@ public class DamageStack : Ability
         }
     }
 
-   
-
     public override void Sub()
     {
         _currentAttacks = 0;

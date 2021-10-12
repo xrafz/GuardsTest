@@ -93,10 +93,6 @@ public class Creature : MonoBehaviour
 
     public void SetData(CreatureData data)
     {
-        if (_data)
-        {
-            Destroy(_data);
-        }
         _data = data;
     }
 

@@ -48,6 +48,14 @@ public abstract class CreatureGenerator<T> : MonoBehaviour where T : Creature
         return creatureComponent;
     }
 
+    public Creature GenerateCreature(CreatureData data)
+    {
+        var creature = Instantiate(_prefab, _transform);
+        var creatureComponent = creature.AddComponent<T>();
+        creatureComponent.SetData(data);
+        return creatureComponent;
+    }
+
     protected void CheckQuantity()
     {
         if (_defaultQuantity == 0)

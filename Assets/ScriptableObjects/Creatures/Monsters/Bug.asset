@@ -20,11 +20,13 @@ MonoBehaviour:
   _abilities:
   - {fileID: 11400000, guid: ae1d84bc9a31a414b91e87340b9fb66c, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
+  - {fileID: 11400000, guid: 6587077cc0421dc4daafc76635fba972, type: 2}
   _resistance: 000000000000000000000000000000000000000000000000
   _body: {fileID: 919132149155446097, guid: 84623c1626027e446af697c4fd430a73, type: 3}
   _sprite: {fileID: 0}
   _animator: {fileID: 22100000, guid: ee6ea4a713a252d44ab374f1e80cbad7, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 919132149155446097, guid: 0b25e311cda5f464f806bd205beb1ac9, type: 3}
+  _additionalDamage: 0
   _movementDistance: 1
-  _castTime: 2
+  _castTime: 1
