@@ -10,4 +10,8 @@ public abstract class Ability : ScriptableObject
         Unsub();
         Destroy(this);
     }
+    private void OnDestroy()
+    {
+        Unsub();
+    }
 }

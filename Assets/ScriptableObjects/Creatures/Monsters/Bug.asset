@@ -20,7 +20,7 @@ MonoBehaviour:
   _abilities:
   - {fileID: 11400000, guid: ae1d84bc9a31a414b91e87340b9fb66c, type: 2}
   - {fileID: 11400000, guid: 757e5b05aeec3a24f83f838d2f1c85b0, type: 2}
-  - {fileID: 11400000, guid: 6587077cc0421dc4daafc76635fba972, type: 2}
+  - {fileID: 11400000, guid: 3f717b3a18979724cb277d188a6bd18f, type: 2}
   _resistance: 000000000000000000000000000000000000000000000000
   _body: {fileID: 919132149155446097, guid: 84623c1626027e446af697c4fd430a73, type: 3}
   _sprite: {fileID: 0}

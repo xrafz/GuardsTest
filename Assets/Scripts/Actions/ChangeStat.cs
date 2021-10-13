@@ -7,7 +7,7 @@ public class ChangeStat : ItemAction
 {
     [SerializeField]
     [Tooltip("0 - хп, 1 - урон, 2 - сила способности")]
-    private int _statIndex;
+    private CreatureData.UpgradeTypes _stat;
     [SerializeField]
     private int _duration;
 
@@ -19,7 +19,7 @@ public class ChangeStat : ItemAction
     {
         _hero = mono.GetComponent<Hero>();
         _buffValue = value;
-        ((HeroData)_hero.Data).Upgrade(_statIndex, _buffValue);
+        ((HeroData)_hero.Data).Upgrade(_stat, _buffValue);
         BattleHandler.Instance.OnTurn += UpdateTurns;
         BattleHandler.Instance.OnWin += Debuff;
         Debug.Log($"Buffed {_hero.name} for {_buffValue}");
@@ -36,14 +36,16 @@ public class ChangeStat : ItemAction
 
     private void Debuff()
     {
-        ((HeroData)_hero.Data).Upgrade(_statIndex, -_buffValue);
+        ((HeroData)_hero.Data).Upgrade(_stat, -_buffValue);
         BattleHandler.Instance.OnWin -= Debuff;
         BattleHandler.Instance.OnTurn -= UpdateTurns;
     }
 
     private void OnValidate()
     {
-        var maxLength = Enum.GetNames(typeof(HeroData.UpgradeTypes)).Length - 1;
-        _statIndex = Mathf.Clamp(_statIndex, 1, maxLength);
+        if (_stat == CreatureData.UpgradeTypes.Health)
+        {
+            _stat = CreatureData.UpgradeTypes.Damage;
+        }
     }
 }

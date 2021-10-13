@@ -102,9 +102,54 @@ public abstract class CreatureData : ScriptableObject
         _damageType = value;
     }
 
+    public void Upgrade(UpgradeTypes type, int value)
+    {
+        switch (type)
+        {
+            case UpgradeTypes.Health:
+                {
+                    ChangeHealth(value);
+                    break;
+                }
+            case UpgradeTypes.Damage:
+                {
+                    BuffDamage(value);
+                    break;
+                }
+            case UpgradeTypes.AbilityPower:
+                {
+                    ChangeAbilityPower(value);
+                    break;
+                }
+        }
+    }
+
+    public void Upgrade(ResistanceType type, int value)
+    {
+        var index = (int)type;
+        _resistance[index] += value;
+    }
+
     private void OnValidate()
     {
         var maxLength = Enum.GetNames(typeof(Constants.DamageTypes)).Length - 1;
         _damageType = Mathf.Clamp(_damageType, 0, maxLength);
+    }
+
+    public enum UpgradeTypes
+    {
+        Health,
+        Damage,
+        AbilityPower
+    }
+
+    public enum ResistanceType
+    { 
+        Slashing,
+        Piercing,
+        Blunt,
+        DarkMagic,
+        ElementalMagic,
+        AstralMagic
     }
 }

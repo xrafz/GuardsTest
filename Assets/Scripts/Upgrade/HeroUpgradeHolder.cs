@@ -31,7 +31,7 @@ public class HeroUpgradeHolder : MonoBehaviour
     {
         if (GameSession.Gold - _cost >= 0)
         {
-            _hero.Upgrade(_statIndex);
+            _hero.Upgrade((CreatureData.UpgradeTypes)_statIndex);
             GameSession.ChangeGold(-_cost);
         }
     }
