@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc47bc20e752374c9f9df237c7b94cf, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 50
   _damage: 5
   _damageType: 0
   _attackRange: 5
@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   _secondModeAbilities:
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
-  _firstModeDamageValue: 7
+  _firstModeDamageValue: 10
   _firstModeDamageType: 0
   _secondModeDamageValue: 50
   _secondModeDamageType: 0
