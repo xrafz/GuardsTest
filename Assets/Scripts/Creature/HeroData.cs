@@ -40,6 +40,10 @@ public class HeroData : CreatureData
     public int SecondModeDamageType => _secondModeDamageType;
 
     [SerializeField]
+    private AnimatorOverrideController _firstModeAnimator;
+    public AnimatorOverrideController FirstModeAnimator => _firstModeAnimator;
+
+    [SerializeField]
     private AnimatorOverrideController _secondModeAnimator;
     public AnimatorOverrideController SecondModeAnimator => _secondModeAnimator;
 

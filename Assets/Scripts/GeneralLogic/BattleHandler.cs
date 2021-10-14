@@ -102,6 +102,8 @@ public class BattleHandler : MonoBehaviour
             else if (SelectedCreature == creature && creature?.GetType() == typeof(Hero))
             {
                 ((Hero)creature).ChangeMode();
+                SelectedCreature = null;
+                _unitSelector.Select(null);
             }
             else
             {

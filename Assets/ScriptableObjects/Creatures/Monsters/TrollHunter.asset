@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrollHunter
   m_EditorClassIdentifier: 
   _health: 40
-  _damage: 10
+  _damage: 1
   _damageType: 0
   _attackRange: 2
   _abilityPower: 5
@@ -26,5 +26,6 @@ MonoBehaviour:
   _animator: {fileID: 22100000, guid: 87e931b0ac0bfba44946e4b8abf8ca8a, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}
+  _additionalDamage: 0
   _movementDistance: 1
   _castTime: 2

@@ -32,9 +32,10 @@ MonoBehaviour:
   _firstModeAbilities:
   - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   _secondModeAbilities:
-  - {fileID: 11400000, guid: b05097a1d20e71f4a8ea92865a604627, type: 2}
+  - {fileID: 11400000, guid: 91f00cb1567122e459c21904e32c3e4d, type: 2}
   _firstModeDamageValue: 7
   _firstModeDamageType: 0
   _secondModeDamageValue: 50
   _secondModeDamageType: 0
+  _firstModeAnimator: {fileID: 22100000, guid: 2a616d94649831e4b9c9b2ae0faab208, type: 2}
   _secondModeAnimator: {fileID: 22100000, guid: 2a616d94649831e4b9c9b2ae0faab208, type: 2}

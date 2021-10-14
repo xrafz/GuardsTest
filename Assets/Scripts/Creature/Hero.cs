@@ -6,6 +6,7 @@ using System.Linq;
 public class Hero : Creature
 {
     private bool _inFirstMode = false;
+    public bool InFirstMode => _inFirstMode;
 
     protected override void Awake()
     {

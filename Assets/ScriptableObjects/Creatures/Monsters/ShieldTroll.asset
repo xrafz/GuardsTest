@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShieldTroll
   m_EditorClassIdentifier: 
   _health: 100
-  _damage: 15
+  _damage: 1
   _damageType: 0
   _attackRange: 1
   _abilityPower: 5
@@ -26,5 +26,6 @@ MonoBehaviour:
   _animator: {fileID: 22100000, guid: 63bd9a050247a5345b1a31095f053f15, type: 2}
   _healthBarOffset: {x: 0, y: 2.2, z: 0}
   _projectile: {fileID: 0}
+  _additionalDamage: 0
   _movementDistance: 1
   _castTime: 2

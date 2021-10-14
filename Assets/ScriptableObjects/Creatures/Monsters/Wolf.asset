@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wolf
   m_EditorClassIdentifier: 
   _health: 60
-  _damage: 10
+  _damage: 1
   _damageType: 0
   _attackRange: 1
   _abilityPower: 5

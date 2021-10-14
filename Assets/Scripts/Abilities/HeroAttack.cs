@@ -9,8 +9,18 @@ public class HeroAttack : BaseAttack
     public override void Sub()
     {
         base.Sub();
-        _creature.Animator.runtimeAnimatorController = _creature.Data.Animator;
-        _creature.Data.SetDamage(((HeroData)_creature.Data).FirstModeDamageValue);
-        _creature.Data.SetDamageType(((HeroData)_creature.Data).FirstModeDamageType);
+        HeroData data = (HeroData)_creature.Data;
+        if (((Hero)_creature).InFirstMode)
+        {
+            _creature.Animator.runtimeAnimatorController = data.FirstModeAnimator;
+            _creature.Data.SetDamage(data.FirstModeDamageValue);
+            _creature.Data.SetDamageType(data.FirstModeDamageType);
+        }
+        else
+        {
+            _creature.Animator.runtimeAnimatorController = data.SecondModeAnimator;
+            _creature.Data.SetDamage(data.SecondModeDamageValue);
+            _creature.Data.SetDamageType(data.SecondModeDamageType);
+        }
     }
 }
